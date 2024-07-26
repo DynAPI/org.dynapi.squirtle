@@ -1,0 +1,19 @@
+package org.dynapi.squirtle.core.terms.criterion;
+
+import org.dynapi.squirtle.core.Utils;
+import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
+import org.dynapi.squirtle.core.terms.Term;
+
+public class Index extends Term {
+    private final String name;
+
+    public Index(String alias, String name) {
+        super(alias);
+        this.name = name;
+    }
+
+    @Override
+    public String getSql(SqlAbleConfig config) {
+        return Utils.formatQuotes(name, config.getQuoteChar());
+    }
+}
