@@ -4,12 +4,13 @@ import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Order;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
+import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.criterion.Field;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 import java.util.*;
 
-public class SetOperation extends Selectable, Term implements SqlAble {
+public class SetOperation extends Term implements Selectable, SqlAble {
     protected final QueryBuilder baseQuery;
     protected final List<SetOperationEntry> setOperations;
     protected final List<OrderByEntry> orderBys;
@@ -111,7 +112,7 @@ public class SetOperation extends Selectable, Term implements SqlAble {
             Field field = orderBy.field;
             Order orient = orderBy.orient;
             String termSql = selectedAliases.contains(field.getAlias())
-                    ? Utils.formatQuotes(field.getAlias())
+                    ? Utils.formatQuotes(field.getAlias(), config.getQuoteChar())
                     : field.getSql(config);
 
             clauses.add(

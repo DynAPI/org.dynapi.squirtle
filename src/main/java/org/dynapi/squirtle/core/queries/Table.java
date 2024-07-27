@@ -1,5 +1,7 @@
 package org.dynapi.squirtle.core.queries;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -9,7 +11,7 @@ import org.dynapi.squirtle.core.terms.criterion.PeriodCriterion;
 
 import java.util.Objects;
 
-public class Table extends Selectable implements SqlAble {
+public class Table implements Selectable, SqlAble {
     protected static Schema initSchema(String... names) {
         Schema schema =  new Schema(names[0], null);
         for (int i = 1; i < names.length; i++) {
@@ -18,11 +20,13 @@ public class Table extends Selectable implements SqlAble {
         return schema;
     }
 
-    private final String tableName;
-    private final Schema schema;
-    private final Class<?> queryClass;
-    private SqlAble for_;
-    private SqlAble forPortion;
+    @Getter @Setter
+    private String alias;
+    protected final String tableName;
+    protected final Schema schema;
+    protected final Class<?> queryClass;
+    protected SqlAble for_;
+    protected SqlAble forPortion;
 
     public Table(String alias, String name) {
         this(alias, name, null, null);
@@ -33,7 +37,7 @@ public class Table extends Selectable implements SqlAble {
     }
 
     public Table(String alias, String name, Object schema, Class<? extends Query> queryClass) {
-        super(alias);
+        this.alias = alias;
         this.tableName = name;
         this.schema = (schema == null)
                 ? null

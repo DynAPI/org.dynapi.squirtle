@@ -1,16 +1,20 @@
 package org.dynapi.squirtle.core.queries;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
 import java.util.Objects;
 
-public class AliasedQuery extends Selectable implements SqlAble {
+public class AliasedQuery implements Selectable, SqlAble {
+    @Getter @Setter
+    private String alias;
     private final String name;
     private final Selectable query;
 
     public AliasedQuery(String name, Selectable query) {
-        super(name);
+        this.alias = name;
         this.name = name;
         this.query = query;
     }

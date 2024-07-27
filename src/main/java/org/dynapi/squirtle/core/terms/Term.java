@@ -1,5 +1,7 @@
 package org.dynapi.squirtle.core.terms;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Arithmetic;
 import org.dynapi.squirtle.core.enums.Enumerator;
@@ -27,7 +29,9 @@ public class Term implements Node, SqlAble {
     }
     public Enumerator getOperator() { return null; }
 
-    protected final String alias;
+    @Getter
+    @Setter
+    protected String alias;
 
     public Term(String alias) {
         this.alias = alias;
@@ -212,7 +216,7 @@ public class Term implements Node, SqlAble {
     }
 
     public ContainsCriterion isIn(List<?> args) {
-        List<SqlAble> wrapped = args.stream().map(Term::wrapConstant).toList();
+        List<Term> wrapped = args.stream().map(Term::wrapConstant).toList();
         return new ContainsCriterion(null, this, new Tuple(wrapped));
     }
 

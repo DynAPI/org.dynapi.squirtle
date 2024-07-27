@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class QueryBuilder extends Selectable, Term implements FinalSqlAble {
+public class QueryBuilder extends Term implements Selectable, FinalSqlAble {
     public static String QUOTE_CHAR = "\"";
     public static String SECONDARY_QUOTE_CHAR = "'";
     public static String ALIAS_QUOTE_CHAR = null;
