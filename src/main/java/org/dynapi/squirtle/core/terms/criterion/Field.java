@@ -12,13 +12,13 @@ import org.dynapi.squirtle.core.terms.values.JSON;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Field extends Criterion, JSON implements SqlAble {
+public class Field extends JSON implements CriterionOperations, SqlAble {
     @Getter
     protected Selectable table;
     protected final String name;
 
     public Field(String alias, String name, Selectable table) {
-        super(alias);
+        super(alias, null);
         this.name = name;
         this.table = table;
     }
