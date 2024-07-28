@@ -13,8 +13,8 @@ import org.dynapi.squirtle.errors.QueryException;
 import java.util.*;
 
 public class MySQLQueryBuilder extends QueryBuilder {
-    public static String QUOTE_CHAR = "`";
-    public static Class<? extends Query> QUERY_CLASS = MySQLQuery.class;
+    public String sqlAbleQuoteChar() { return "`"; }
+    public Class<? extends Query> sqlAbleQueryClass() { return MySQLQuery.class; }
 
     protected List<DuplicateUpdateEntry> duplicateUpdates = new ArrayList<>();
     protected boolean ignoreDuplicates = false;

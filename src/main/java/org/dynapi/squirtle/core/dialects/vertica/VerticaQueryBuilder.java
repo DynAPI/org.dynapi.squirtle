@@ -7,7 +7,7 @@ import org.dynapi.squirtle.core.queries.QueryBuilder;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class VerticaQueryBuilder extends QueryBuilder {
-    public static Class<? extends Query> QUERY_CLASS = VerticaQuery.class;
+    public Class<? extends Query> sqlAbleQueryClass() { return VerticaQuery.class; }
 
     protected String hint = null;
 

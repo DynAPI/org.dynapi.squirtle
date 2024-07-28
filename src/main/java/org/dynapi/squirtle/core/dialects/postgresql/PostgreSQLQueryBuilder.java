@@ -12,8 +12,8 @@ import org.dynapi.squirtle.errors.QueryException;
 import java.util.*;
 
 public class PostgreSQLQueryBuilder extends QueryBuilder {
-    public static String ALIAS_QUOTE_CHAR = "\"";
-    public static Class<? extends Query> QUERY_CLASS = PostgreSQLQuery.class;
+    public String sqlAbleAliasQuoteChar() { return "\""; }
+    public Class<? extends Query> sqlAbleQueryClass() { return PostgreSQLQuery.class; }
 
     protected List<Term> returns = new ArrayList<>();
     protected boolean returnStar = false;

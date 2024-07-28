@@ -7,8 +7,8 @@ import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class OracleQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
-    public static String QUOTE_CHAR = null;
-    public static Class<? extends Query> QUERY_CLASS = OracleQuery.class;
+    public String sqlAbleQuoteChar() { return null; }
+    public Class<? extends Query> sqlAbleQueryClass() { return OracleQuery.class; }
 
     public OracleQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.ORACLE, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);

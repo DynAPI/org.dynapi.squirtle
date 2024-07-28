@@ -8,12 +8,12 @@ import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class SQLiteQueryBuilder extends QueryBuilder {
-    public static Class<? extends Query> QUERY_CLASS = SQLiteQuery.class;
+    public Class<? extends Query> sqlAbleQueryClass() { return SQLiteQuery.class; }
 
     protected boolean insertOrReplace = false;
 
     public SQLiteQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.SQLITE, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+        super(Dialects.SQLITE, wrapSetOperationQueries, wrapperClass == null ? SQLiteValueWrapper.class : wrapperClass, immutable, asKeyword);
     }
 
     public SQLiteQueryBuilder insertOrReplace(Term... terms) {

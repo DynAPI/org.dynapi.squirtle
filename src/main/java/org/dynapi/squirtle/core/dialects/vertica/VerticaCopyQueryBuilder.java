@@ -6,7 +6,7 @@ import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.Table;
 
 public class VerticaCopyQueryBuilder implements SqlAble {
-    public static Class<? extends Query> QUERY_CLASS = VerticaQuery.class;
+    public Class<? extends Query> sqlAbleQueryClass() { return VerticaQuery.class; }
 
     protected Table copyTable = null;
     protected String fromFile = null;

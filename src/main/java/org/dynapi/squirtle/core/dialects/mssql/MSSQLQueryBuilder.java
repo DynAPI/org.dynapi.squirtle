@@ -8,7 +8,7 @@ import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 import org.dynapi.squirtle.errors.QueryException;
 
 public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
-    public static Class<? extends Query> QUERY_CLASS = MSSQLQuery.class;
+    public Class<? extends Query> sqlAbleQueryClass() { return MSSQLQuery.class; }
 
     protected Integer top = null;
     protected boolean topWithTies = false;

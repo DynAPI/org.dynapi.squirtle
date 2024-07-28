@@ -2,8 +2,8 @@ package org.dynapi.squirtle.core.queries;
 
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.FinalSqlAble;
+import org.dynapi.squirtle.core.interfaces.QueryBuilderAttributes;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
-import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
@@ -12,12 +12,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class QueryBuilder extends Term implements Selectable, FinalSqlAble {
-    public static String QUOTE_CHAR = "\"";
-    public static String SECONDARY_QUOTE_CHAR = "'";
-    public static String ALIAS_QUOTE_CHAR = null;
-    public static String QUERY_ALIAS_QUOTE_CHAR = null;
-    public static Class<? extends Query> QUERY_CLASS = Query.class;
+public class QueryBuilder extends Term implements QueryBuilderAttributes, Selectable, FinalSqlAble {
+    public String sqlAbleQuoteChar() { return "\""; }
+    public String sqlAbleSecondaryQuoteChar() { return "'"; }
 
     protected List<Selectable> from = new ArrayList<>();
     protected Selectable insertTable = null;
@@ -75,13 +72,6 @@ public class QueryBuilder extends Term implements Selectable, FinalSqlAble {
         this.wrapSetOperationQueries = wrapSetOperationQueries == null ? true : wrapSetOperationQueries;
         this.wrapperClass = wrapperClass;
         this.immutable = immutable == null ? true : immutable;
-    }
-
-    protected SqlAbleConfig getSqlAbleConfigWithDefaults(SqlAbleConfig config) {
-        SqlAbleConfig.SqlAbleConfigBuilder builder = config.toBuilder();
-        if (config.getQuoteChar() == null) builder.quoteChar(QUOTE_CHAR);
-        if (config.getSecondaryQuoteChar() == null) builder.secondaryQuoteChar(SECONDARY_QUOTE_CHAR);
-        return builder.build();
     }
 
     // xxx: __copy__

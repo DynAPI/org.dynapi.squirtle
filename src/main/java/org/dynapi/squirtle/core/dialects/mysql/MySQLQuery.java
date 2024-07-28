@@ -7,7 +7,7 @@ import org.dynapi.squirtle.core.queries.Table;
 
 public class MySQLQuery extends Query {
     protected static QueryBuilder newBuilder(Object... args) {
-        return Utils.newInstance(MySQLQueryBuilder.clss, args);
+        return Utils.newInstance(MySQLQueryBuilder.class, args);
     }
 
     public static MySQLLoadQueryBuilder load(String file) {

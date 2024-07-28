@@ -6,7 +6,7 @@ import org.dynapi.squirtle.core.queries.QueryBuilder;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class RedshiftQueryBuilder extends QueryBuilder {
-    public static Class<? extends Query> QUERY_CLASS = RedshiftQuery.class;
+    public Class<? extends Query> sqlAbleQueryClass() { return RedshiftQuery.class; }
 
     public RedshiftQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.REDSHIFT, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);

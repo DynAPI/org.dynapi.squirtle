@@ -6,6 +6,6 @@ import org.dynapi.squirtle.core.queries.QueryBuilder;
 
 public class MSSQLQuery extends Query {
     protected static QueryBuilder newBuilder(Object... args) {
-        return Utils.newInstance(MSSQLQueryBuilder.clss, args);
+        return Utils.newInstance(MSSQLQueryBuilder.class, args);
     }
 }

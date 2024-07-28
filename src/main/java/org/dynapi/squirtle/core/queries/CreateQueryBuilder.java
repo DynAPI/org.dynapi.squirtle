@@ -2,6 +2,7 @@ package org.dynapi.squirtle.core.queries;
 
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.enums.ReferenceOption;
+import org.dynapi.squirtle.core.interfaces.QueryBuilderAttributes;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
@@ -10,11 +11,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class CreateQueryBuilder implements SqlAble {
-    public static final String QUOTE_CHAR = "\"";
-    public static final String SECONDARY_QUOTE_CHAR = "'";
-    public static final String ALIAS_QUOTE_CHAR = null;
-    public static final Class<? extends Query> QUERY_CLASS = Query.class;
+public class CreateQueryBuilder implements QueryBuilderAttributes, SqlAble {
+    public String sqlAbleQuoteChar() { return "\""; }
+    public String sqlAbleSecondaryQuoteChar() { return "'"; }
 
     protected Table createTable = null;
     protected boolean temporary = false;
@@ -39,14 +38,6 @@ public class CreateQueryBuilder implements SqlAble {
 
     public CreateQueryBuilder(Dialects dialect) {
         this.dialect = dialect;
-    }
-
-    public SqlAbleConfig.SqlAbleConfigBuilder setSqlAbleConfigDefaults(SqlAbleConfig.SqlAbleConfigBuilder builder) {
-        SqlAbleConfig currentConfig = builder.build();
-        if (currentConfig.getQuoteChar() == null) builder.quoteChar(QUOTE_CHAR);
-        if (currentConfig.getSecondaryQuoteChar() == null) builder.secondaryQuoteChar(SECONDARY_QUOTE_CHAR);
-        if (currentConfig.getDialect() == null) builder.dialect(dialect);
-        return builder;
     }
 
     public CreateQueryBuilder createTable(String tableName) {
@@ -161,7 +152,7 @@ public class CreateQueryBuilder implements SqlAble {
 
     @Override
     public String getSql(SqlAbleConfig config) {
-        config = setSqlAbleConfigDefaults(config.toBuilder()).build();
+        config = getSqlAbleConfigWithDefaults(config);
 
         if (createTable == null)
             return "";

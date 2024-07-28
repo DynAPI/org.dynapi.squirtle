@@ -1,12 +1,13 @@
 package org.dynapi.squirtle.core.dialects.mysql;
 
+import org.dynapi.squirtle.core.interfaces.QueryBuilderAttributes;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.Table;
 
-public class MySQLLoadQueryBuilder implements SqlAble {
-    public static Class<? extends Query> QUERY_CLASS = MySQLQuery.class;
+public class MySQLLoadQueryBuilder implements QueryBuilderAttributes, SqlAble {
+    public Class<? extends Query> sqlAbleQueryClass() { return MySQLQuery.class; }
 
     protected String loadFile = null;
     protected Table intoTable = null;

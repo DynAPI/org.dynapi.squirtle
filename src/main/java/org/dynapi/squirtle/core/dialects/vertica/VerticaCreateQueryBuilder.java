@@ -6,7 +6,7 @@ import org.dynapi.squirtle.core.queries.CreateQueryBuilder;
 import org.dynapi.squirtle.core.queries.Query;
 
 public class VerticaCreateQueryBuilder extends CreateQueryBuilder {
-    public static final Class<? extends Query> QUERY_CLASS = VerticaQuery.class;
+    public Class<? extends Query> sqlAbleQueryClass() { return VerticaQuery.class; }
 
     protected boolean local = false;
     protected boolean preserveRows = false;
