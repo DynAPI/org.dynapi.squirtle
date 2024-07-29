@@ -26,7 +26,7 @@ public class NullCriterion extends Criterion {
     }
 
     @Override
-    public Term replaceTable(Table currentTable, Table newTable) {
+    public NullCriterion replaceTable(Table currentTable, Table newTable) {
         term = term.replaceTable(currentTable, newTable);
         return this;
     }

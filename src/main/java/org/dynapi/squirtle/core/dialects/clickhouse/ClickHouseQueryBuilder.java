@@ -55,8 +55,8 @@ public class ClickHouseQueryBuilder extends QueryBuilder {
                 String.join(",", updates.stream().map(
                         entry -> String.format(
                                 "%s=%s",
-                                entry.field.getSql(config.withWithNamespace(true)),
-                                entry.value.getSql(config))
+                                entry.field().getSql(config.withWithNamespace(true)),
+                                entry.value().getSql(config))
                 ).toList())
         );
     }

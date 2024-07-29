@@ -14,7 +14,7 @@ public class VerticaQuery extends Query {
         return new VerticaCopyQueryBuilder().fromFile(file);
     }
 
-    public VerticaCreateQueryBuilder createTable(Table table) {
-        return new VerticaCreateQueryBuilder().createTable(table);
+    public static VerticaCreateQueryBuilder createTable(Table table) {
+        return (VerticaCreateQueryBuilder) new VerticaCreateQueryBuilder().createTable(table);
     }
 }

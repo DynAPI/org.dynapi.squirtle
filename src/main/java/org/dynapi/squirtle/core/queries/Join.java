@@ -3,15 +3,14 @@ package org.dynapi.squirtle.core.queries;
 import org.dynapi.squirtle.core.enums.JoinType;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
-import org.dynapi.squirtle.core.terms.Node;
 
 import java.util.Collection;
 
 public class Join implements SqlAble {
-    protected Node item;
+    protected Selectable item;
     protected JoinType how;
 
-    public Join(Node item, JoinType how) {
+    public Join(Selectable item, JoinType how) {
         this.item = item;
         this.how = how;
     }
@@ -25,10 +24,10 @@ public class Join implements SqlAble {
         return sql;
     }
 
-    public void validate(Collection<Table> from, Collection<Table> joins) {}
+    public void validate(Collection<Selectable> from, Collection<Join> joins) {}
 
     public Join replaceTable(Table currentTable, Table newTable) {
-        item = item.replaceTable(currentTable, newTable);
+//        item = item.replaceTable(currentTable, newTable);
         return this;
     }
 }

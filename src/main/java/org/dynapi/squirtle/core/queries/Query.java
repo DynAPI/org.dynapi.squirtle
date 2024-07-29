@@ -84,7 +84,7 @@ public class Query {
     }
 
     public static QueryBuilder select(Collection<Term> terms, Object... args) {
-        return newBuilder(args).select(terms.toArray(new Term[0]));
+        return newBuilder(args).select(terms.toArray());
     }
 
     public static QueryBuilder update(String tableName, Object... args) {

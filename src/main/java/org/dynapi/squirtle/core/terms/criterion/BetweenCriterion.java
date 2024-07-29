@@ -11,7 +11,7 @@ public class BetweenCriterion extends RangeCriterion {
     }
 
     @Override
-    public Term replaceTable(Table currentTable, Table newTable) {
+    public BetweenCriterion replaceTable(Table currentTable, Table newTable) {
         term = term.replaceTable(currentTable, newTable);
         return this;
     }

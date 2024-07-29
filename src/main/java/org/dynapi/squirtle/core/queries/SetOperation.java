@@ -2,6 +2,7 @@ package org.dynapi.squirtle.core.queries;
 
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Order;
+import org.dynapi.squirtle.core.enums.SetOperations;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
@@ -18,11 +19,11 @@ public class SetOperation extends Term implements Selectable, SqlAble {
     protected Integer offset;
     protected final Class<? extends ValueWrapper> wrapperClass;
 
-    public SetOperation(String alias, QueryBuilder baseQuery, QueryBuilder setOperationQuery, org.dynapi.squirtle.core.enums.SetOperation setOperation, Class<? extends ValueWrapper> wrapperClass) {
+    public SetOperation(String alias, QueryBuilder baseQuery, QueryBuilder setOperationQuery, SetOperations setOperations, Class<? extends ValueWrapper> wrapperClass) {
         super(alias);
         this.baseQuery = baseQuery;
         this.setOperations = new ArrayList<>();
-        this.setOperations.add(new SetOperationEntry(setOperation, setOperationQuery));
+        this.setOperations.add(new SetOperationEntry(setOperations, setOperationQuery));
 
         this.orderBys = new ArrayList<>();
         this.limit = null;
@@ -51,36 +52,36 @@ public class SetOperation extends Term implements Selectable, SqlAble {
     }
 
     public SetOperation union(Selectable other) {
-        this.setOperations.add(new OrderByEntry(org.dynapi.squirtle.core.enums.SetOperation.UNION, other));
+        this.setOperations.add(new SetOperationEntry(SetOperations.UNION, other));
         return this;
     }
 
     public SetOperation union_all(Selectable other) {
-        this.setOperations.add(new OrderByEntry(org.dynapi.squirtle.core.enums.SetOperation.UNION, other));
+        this.setOperations.add(new SetOperationEntry(SetOperations.UNION, other));
         return this;
     }
 
     public SetOperation intersect(Selectable other) {
-        this.setOperations.add(new OrderByEntry(org.dynapi.squirtle.core.enums.SetOperation.UNION, other));
+        this.setOperations.add(new SetOperationEntry(SetOperations.UNION, other));
         return this;
     }
 
     public SetOperation exceptOf(Selectable other) {
-        this.setOperations.add(new OrderByEntry(org.dynapi.squirtle.core.enums.SetOperation.UNION, other));
+        this.setOperations.add(new SetOperationEntry(SetOperations.UNION, other));
         return this;
     }
 
     public SetOperation minus(Selectable other) {
-        this.setOperations.add(new OrderByEntry(org.dynapi.squirtle.core.enums.SetOperation.UNION, other));
+        this.setOperations.add(new SetOperationEntry(SetOperations.UNION, other));
         return this;
     }
 
     @Override
     public String getSql(SqlAbleConfig config) {
         if (config.getDialect() == null)
-            config = config.withDialect(baseQuery.dialect);
+            config = config.withDialect(baseQuery.getDialect());
         if (config.getQuoteChar() == null)
-            config = config.withQuoteChar(baseQuery.QUOTE_CHAR);
+            config = config.withQuoteChar(baseQuery.sqlAbleQuoteChar());
 
         String querySql = baseQuery.getSql(config.withSubQuery(baseQuery.wrapSetOperationQueries));
 
@@ -134,5 +135,5 @@ public class SetOperation extends Term implements Selectable, SqlAble {
     }
 
     public record OrderByEntry(Field field, Order orient) {}
-    public record SetOperationEntry(org.dynapi.squirtle.core.enums.SetOperation setOperation, QueryBuilder setOperationQuery) {}
+    public record SetOperationEntry(SetOperations setOperations, Selectable setOperationQuery) {}
 }

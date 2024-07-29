@@ -17,6 +17,10 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
     protected Selectable table;
     protected final String name;
 
+    public Field(String alias, String name) {
+        this(alias, name, null);
+    }
+
     public Field(String alias, String name, Selectable table) {
         super(alias, null);
         this.name = name;

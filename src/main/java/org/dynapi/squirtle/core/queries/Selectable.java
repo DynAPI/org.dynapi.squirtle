@@ -1,10 +1,11 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.terms.Node;
 import org.dynapi.squirtle.core.terms.criterion.Field;
 import org.dynapi.squirtle.core.terms.criterion.Star;
 
-public interface Selectable extends Node {
+public interface Selectable extends SqlAble, Node {
     default Field field(String name) {
         return new Field(null, name, this);
     }

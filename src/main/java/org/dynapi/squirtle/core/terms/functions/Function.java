@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Function extends Criterion implements SpecialParamsSqlAble, FunctionSqlAble {
     protected final String name;
-    protected List<Node> args;
+    protected List<Term> args;
     protected final Schema schema;
 
     public Function(String alias, @NonNull String name, Object... args) {

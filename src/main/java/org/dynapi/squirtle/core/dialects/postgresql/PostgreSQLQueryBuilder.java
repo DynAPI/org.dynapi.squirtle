@@ -66,7 +66,7 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
 
     public PostgreSQLQueryBuilder where(Criterion criterion) {
         if (!onConflict)
-            return super.where(criterion);
+            return (PostgreSQLQueryBuilder) super.where(criterion);
 
         if (criterion instanceof EmptyCriterion)
             return this;
@@ -205,13 +205,17 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
 
             boolean tableIsInsertOrUpdateTable = Objects.equals(field.getTable(), insertTable) || Objects.equals(field.getTable(), updateTable);
             Set<Table> joinTables = new HashSet<>();
-            for (Join join : joins)
-                joinTables.addAll(join.criterion.tables);
+            for (Join join : joins) {
+                if (join instanceof JoinOn joinOn)
+                    joinTables.addAll(joinOn.getCriterion().getTables());
+                else
+                    System.err.println("Bad Join " + join);
+            }
 
             Set<Table> joinAndBaseTables = new HashSet<>();
             joinAndBaseTables.addAll(joinTables);
             joinAndBaseTables.addAll(joinTables);
-            Set<Table> diff = new HashSet<>(List.of(term.getTables()));
+            Set<Table> diff = new HashSet<>(term.getTables());
             diff.removeAll(joinAndBaseTables);
             boolean tableNotBaseOrJoin = !diff.isEmpty();
             if (!tableIsInsertOrUpdateTable && tableNotBaseOrJoin)
@@ -220,7 +224,8 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
     }
 
     protected void setReturnsForStar() {
-        this.returns = returns.stream().filter(returning -> returning.hasTable()).toList();
+        // xxx: not sure with this as replacement for `hasattr(obj, 'table')`
+        this.returns = returns.stream().filter(returning -> returning instanceof Field).toList();
         this.returnStar = true;
     }
 

@@ -10,6 +10,7 @@ import java.util.Objects;
 public class AliasedQuery implements Selectable, SqlAble {
     @Getter @Setter
     private String alias;
+    @Getter
     private final String name;
     private final Selectable query;
 

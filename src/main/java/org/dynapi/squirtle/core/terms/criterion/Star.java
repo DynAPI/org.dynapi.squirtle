@@ -15,7 +15,7 @@ public class Star extends Field {
     }
 
     public Star(String tableName) {
-        super(null, "*", new Table(tableName, null, null, null));
+        super(null, "*", new Table(null, tableName));
     }
 
     public Star(Selectable table) {

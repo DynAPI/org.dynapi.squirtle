@@ -9,6 +9,7 @@ import org.dynapi.squirtle.core.terms.criterion.BasicCriterion;
 
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class JSON extends Term {
     private Object value;
@@ -19,25 +20,37 @@ public class JSON extends Term {
     }
 
     private String getRecursiveSql(Object value, SqlAbleConfig config) {
-        if (value instanceof Map<?,?>)
-            return getMappingSql(value, config);
-        if (value instanceof List<?>)
-            return getListSql(value, config);
-        if (value instanceof String)
-            return getStringSql(value, config);
+        if (value instanceof Map<?,?> map)
+            return getMappingSql(map, config);
+        if (value instanceof List<?> list)
+            return getListSql(list, config);
+        if (value instanceof String string)
+            return getStringSql(string, config);
         return value.toString();
     }
 
-    private String getMappingSql(Object value, SqlAbleConfig config) {
-
+    private String getMappingSql(Map<?, ?> map, SqlAbleConfig config) {
+        StringJoiner joiner = new StringJoiner(",", "{", "}");
+        for (Map.Entry<?, ?> item : map.entrySet()) {
+            joiner.add(String.format(
+                    "%s:%s",
+                    getRecursiveSql(item.getKey(), config),
+                    getRecursiveSql(item.getValue(), config)
+            ));
+        }
+        return joiner.toString();
     }
 
-    private String getListSql(Object value, SqlAbleConfig config) {
-
+    private String getListSql(List<?> list, SqlAbleConfig config) {
+        StringJoiner joiner = new StringJoiner(",", "[", "]");
+        for (Object item : list) {
+            joiner.add(getRecursiveSql(item, config));
+        }
+        return joiner.toString();
     }
 
-    private String getStringSql(Object value, SqlAbleConfig config) {
-
+    private String getStringSql(String value, SqlAbleConfig config) {
+        return Utils.formatQuotes(value, config.getQuoteChar());
     }
 
     @Override

@@ -2,8 +2,11 @@ package org.dynapi.squirtle.core.queries;
 
 import lombok.NonNull;
 import org.dynapi.squirtle.core.enums.JoinType;
+import org.dynapi.squirtle.core.terms.criterion.BasicCriterion;
 import org.dynapi.squirtle.core.terms.criterion.Criterion;
 import org.dynapi.squirtle.core.terms.criterion.Field;
+
+import java.util.List;
 
 public class Joiner {
     protected final QueryBuilder query;
@@ -19,25 +22,29 @@ public class Joiner {
     }
 
     public QueryBuilder on(@NonNull Criterion criterion, String collate) {
-        return query.doJoin(new JoinOn(item, how, criterion, collate));
+        query.doJoin(new JoinOn(item, how, criterion, collate));
+        return this.query;
     }
 
     public QueryBuilder onField(String... fields) {
 
         Criterion criterion = null;
         for (String fieldName : fields) {
-            boolean constituent = (new Field(null, fieldName, query.from.get(0)).equals(new Field(null, fieldName, item)));
-            criterion = criterion == null ? constituent : (criterion & constituent);
+            BasicCriterion constituent = (new Field(null, fieldName, query.from.get(0)).eq(new Field(null, fieldName, item)));
+            criterion = criterion == null ? constituent : criterion.and(constituent);
         }
 
-        return query.doJoin(new JoinOn(item, how, criterion));
+        query.doJoin(new JoinOn(item, how, criterion, null));
+        return this.query;
     }
 
     public QueryBuilder using(Field... fields) {
-        return query.doJoin(new JoinUsing(item, how, fields));
+        query.doJoin(new JoinUsing(item, how, List.of(fields)));
+        return this.query;
     }
 
     public QueryBuilder cross() {
-        return query.doJoin(new Join(item, JoinType.CROSS));
+        query.doJoin(new Join(item, JoinType.CROSS));
+        return this.query;
     }
 }

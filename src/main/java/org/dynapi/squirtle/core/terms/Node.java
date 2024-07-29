@@ -14,7 +14,7 @@ public interface Node {
     }
 
     /** @apiNote internal usage only */
-    default Node[] find(Class<? extends Node> type) {
-        return (Node[]) nodes().stream().filter(type::isInstance).toArray();
+    default<T extends Node> List<T> find(Class<T> type) {
+        return (List<T>) nodes().stream().filter(type::isInstance).toList();
     }
 }

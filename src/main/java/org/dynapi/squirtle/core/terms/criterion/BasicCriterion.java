@@ -37,7 +37,7 @@ public class BasicCriterion extends Criterion {
     }
 
     @Override
-    public Term replaceTable(Table currentTable, Table newTable) {
+    public BasicCriterion replaceTable(Table currentTable, Table newTable) {
         left = left.replaceTable(currentTable, newTable);
         right = right.replaceTable(currentTable, newTable);
         return this;

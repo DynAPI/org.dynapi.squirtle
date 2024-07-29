@@ -29,9 +29,9 @@ public class BitwiseAndCriterion extends Criterion {
     }
 
     @Override
-    public Term replaceTable(Table currentTable, Table newTable) {
+    public BitwiseAndCriterion replaceTable(Table currentTable, Table newTable) {
         term = term.replaceTable(currentTable, newTable);
-        return term;
+        return this;
     }
 
     @Override

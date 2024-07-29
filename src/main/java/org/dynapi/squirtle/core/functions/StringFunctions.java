@@ -26,7 +26,7 @@ public class StringFunctions {
 
     public static class Concat extends Function {
         public Concat(String alias, Term... terms) {
-            super(alias, "CONCAT", terms);
+            super(alias, "CONCAT", (Object[]) terms);
         }
     }
 

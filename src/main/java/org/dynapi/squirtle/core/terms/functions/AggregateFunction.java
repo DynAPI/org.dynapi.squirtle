@@ -4,6 +4,7 @@ import org.dynapi.squirtle.core.interfaces.FunctionSqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.criterion.Criterion;
+import org.dynapi.squirtle.core.terms.criterion.CriterionOperations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class AggregateFunction extends Function implements FunctionSqlAble {
 
     protected String getFilterSql(SqlAbleConfig config) {
         if (include_filter) {
-            return String.format("WHERE %s", Criterion.all(filters).getSql(config));
+            return String.format("WHERE %s", CriterionOperations.all(filters).getSql(config));
         }
         return null;
     }

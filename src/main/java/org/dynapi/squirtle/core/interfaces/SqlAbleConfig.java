@@ -20,6 +20,7 @@ public class SqlAbleConfig {
     private final boolean subCriterion;
     private final boolean subQuery;
     private final boolean groupByAlias;
+    private final boolean orderByAlias;
     private final Dialects dialect;
     private final Class<? extends Query> queryClass;
 }

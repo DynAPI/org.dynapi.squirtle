@@ -7,6 +7,8 @@ import org.dynapi.squirtle.core.queries.QueryBuilder;
 import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
+import java.util.List;
+
 public class SQLiteQueryBuilder extends QueryBuilder {
     public Class<? extends Query> sqlAbleQueryClass() { return SQLiteQuery.class; }
 
@@ -17,7 +19,7 @@ public class SQLiteQueryBuilder extends QueryBuilder {
     }
 
     public SQLiteQueryBuilder insertOrReplace(Term... terms) {
-        applyTerms(terms);
+        applyTerms(List.of(terms));
         this.replace = true;
         this.insertOrReplace = true;
         return this;

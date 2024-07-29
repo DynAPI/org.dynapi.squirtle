@@ -9,6 +9,7 @@ import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.criterion.Criterion;
 import org.dynapi.squirtle.core.terms.criterion.PeriodCriterion;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Table implements Selectable, SqlAble {
@@ -24,7 +25,7 @@ public class Table implements Selectable, SqlAble {
     private String alias;
     protected final String tableName;
     protected final Schema schema;
-    protected final Class<?> queryClass;
+    protected final Class<? extends Query> queryClass;
     protected SqlAble for_;
     protected SqlAble forPortion;
 
@@ -105,15 +106,15 @@ public class Table implements Selectable, SqlAble {
         return getSql(config).hashCode();
     }
 
-    public Query select(Term... terms) {
-        return Utils.newInstance(queryClass, this).select(terms);
+    public QueryBuilder select(Term... terms) {
+        return Utils.newInstance(queryClass, this).select(List.of(terms));
     }
 
-    public Query update(Term... terms) {
-        return Utils.newInstance(queryClass, this).update(terms);
+    public QueryBuilder update(Term... terms) {
+        return Utils.newInstance(queryClass, this).update(this);
     }
 
-    public Query insert(Term... terms) {
-        return Utils.newInstance(queryClass, this).insert(terms);
+    public QueryBuilder insert(Term... terms) {
+        return Utils.newInstance(queryClass, this).into(this).insert(terms);
     }
 }

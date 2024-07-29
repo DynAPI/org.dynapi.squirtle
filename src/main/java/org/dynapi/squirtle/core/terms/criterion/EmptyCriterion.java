@@ -3,6 +3,9 @@ package org.dynapi.squirtle.core.terms.criterion;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Term;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmptyCriterion extends Criterion {
     @Override
     public Boolean isAggregate() {return null; }
@@ -12,13 +15,13 @@ public class EmptyCriterion extends Criterion {
     }
 
     @Override
-    public Table[] getTables() {
-        return new Table[0];
+    public List<Table> getTables() {
+        return new ArrayList<>();
     }
 
     @Override
-    public Field[] getFields() {
-        return new Field[0];
+    public List<Field> getFields() {
+        return new ArrayList<>();
     }
 
     @Override

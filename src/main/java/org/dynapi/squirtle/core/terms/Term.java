@@ -41,12 +41,12 @@ public class Term implements Node, SqlAble {
         return new Term(alias);
     }
 
-    public Table[] getTables() {
-        return (Table[]) find(Table.class);
+    public List<Table> getTables() {
+        return find(Table.class);
     }
 
-    public Field[] getFields() {
-        return (Field[]) find(Field.class);
+    public List<Field> getFields() {
+        return find(Field.class);
     }
 
     public static Term wrapConstant(Object value) {

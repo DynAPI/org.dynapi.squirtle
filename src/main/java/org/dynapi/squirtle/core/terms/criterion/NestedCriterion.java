@@ -44,7 +44,7 @@ public class NestedCriterion extends Criterion {
     }
 
     @Override
-    public Term replaceTable(Table currentTable, Table newTable) {
+    public NestedCriterion replaceTable(Table currentTable, Table newTable) {
         left = left.replaceTable(currentTable, newTable);
         right = right.replaceTable(currentTable, newTable);
         nested = nested.replaceTable(currentTable, newTable);

@@ -7,8 +7,8 @@ import org.dynapi.squirtle.core.terms.criterion.Field;
 public class Values extends Term {
     private final Field field;
 
-    public Values(String field) {
-        this(new Field(field));
+    public Values(String fieldName) {
+        this(new Field(null, fieldName));
     }
 
     public Values(Field field) {
