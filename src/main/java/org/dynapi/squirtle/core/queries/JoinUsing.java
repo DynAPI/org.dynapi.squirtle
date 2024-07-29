@@ -4,6 +4,7 @@ import org.dynapi.squirtle.core.enums.JoinType;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.criterion.Field;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class JoinUsing extends Join {
@@ -17,7 +18,7 @@ public class JoinUsing extends Join {
     @Override
     public JoinUsing replaceTable(Table currentTable, Table newTable) {
         item = (currentTable.equals(item)) ? newTable : item;
-        fields = fields.stream().map(field -> field.replaceTable(currentTable, newTable)).toList();
+        fields = new ArrayList<>(fields.stream().map(field -> field.replaceTable(currentTable, newTable)).toList());
         return this;
     }
 

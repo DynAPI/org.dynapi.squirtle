@@ -26,7 +26,8 @@ public class Star extends Field {
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();
         nodes.add(this);
-        nodes.addAll(table.nodes());
+        if (table != null)
+            nodes.addAll(table.nodes());
         return nodes;
     }
 
