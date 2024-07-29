@@ -56,7 +56,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     protected List<UpdateEntry> updates = new ArrayList<>();
 
     protected boolean selectStar = false;
-    protected Set<Object> selectStarTables = new HashSet<>();
+    protected Set<Selectable> selectStarTables = new HashSet<>();
     protected boolean mySqlRollup = false;
     protected boolean selectInto = false;
 
@@ -183,7 +183,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder insert(Object... terms) {
-        applyTerms(List.of(terms));
+        applyTerm(List.of(terms));
         replace = false;
         return this;
     }
@@ -426,12 +426,12 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
 
         if (selectStarTables.contains(term.getTable())) return;
 
-        if (term instanceof Star) {
+        if (term instanceof Star star) {
             this.selects = selects.stream()
                             // todo: verify if field is only with table
-                            .filter(select -> select instanceof Field field && term.getTable() != field.getTable())
+                            .filter(select -> select instanceof Field field && star.getTable() != field.getTable())
                             .toList();
-            selectStarTables.add(term.getTable());
+            selectStarTables.add(star.getTable());
         } else {
             this.selects.add(term);
         }
@@ -490,13 +490,11 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         subqueryCount += 1;
     }
 
-    protected void applyTerms(List<Object>... terms) {
+    protected void applyTerm(List<Object> values) {
         if (insertTable == null)
             throw new RuntimeException("this is currently not available");
 
-        for (List<Object> values : terms) {
-            this.values.add(values.stream().map(value -> (value instanceof Term term) ? term : wrapConstant(value)).toList());
-        }
+        this.values.add(values.stream().map(value -> (value instanceof Term term) ? term : wrapConstant(value)).toList());
     }
 
     @Override
@@ -559,7 +557,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
             return queryString;
         }
 
-        if (deleteFrom) {
+        if (deleteFrom != null) {
             queryString = deleteSql(config);
         } else if (!selectInto && insertTable != null) {
             if (!with.isEmpty())
@@ -597,7 +595,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         if (!forceIndexes.isEmpty())
             queryString += forceIndexSql(config);
 
-        if (useIndexes != null)
+        if (!useIndexes.isEmpty())
             queryString += useIndexSql(config);
 
         if (!joins.isEmpty()) {

@@ -83,7 +83,7 @@ public class Query {
         return newBuilder(args).with(table, name);
     }
 
-    public static QueryBuilder select(Collection<Term> terms, Object... args) {
+    public static QueryBuilder select(Collection<Object> terms, Object... args) {
         return newBuilder(args).select(terms.toArray());
     }
 

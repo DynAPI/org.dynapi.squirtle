@@ -106,15 +106,15 @@ public class Table implements Selectable, SqlAble {
         return getSql(config).hashCode();
     }
 
-    public QueryBuilder select(Term... terms) {
+    public QueryBuilder select(Object... terms) {
         return Utils.newInstance(queryClass, this).select(List.of(terms));
     }
 
-    public QueryBuilder update(Term... terms) {
+    public QueryBuilder update() {
         return Utils.newInstance(queryClass, this).update(this);
     }
 
-    public QueryBuilder insert(Term... terms) {
+    public QueryBuilder insert(Object... terms) {
         return Utils.newInstance(queryClass, this).into(this).insert(terms);
     }
 }

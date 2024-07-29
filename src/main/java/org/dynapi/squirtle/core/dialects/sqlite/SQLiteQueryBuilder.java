@@ -18,8 +18,8 @@ public class SQLiteQueryBuilder extends QueryBuilder {
         super(Dialects.SQLITE, wrapSetOperationQueries, wrapperClass == null ? SQLiteValueWrapper.class : wrapperClass, immutable, asKeyword);
     }
 
-    public SQLiteQueryBuilder insertOrReplace(Term... terms) {
-        applyTerms(List.of(terms));
+    public SQLiteQueryBuilder insertOrReplace(Object... terms) {
+        applyTerm(List.of(terms));
         this.replace = true;
         this.insertOrReplace = true;
         return this;
