@@ -29,6 +29,10 @@ public class Table implements Selectable, SqlAble {
     protected SqlAble for_;
     protected SqlAble forPortion;
 
+    public Table(String name) {
+        this(null, name);
+    }
+
     public Table(String alias, String name) {
         this(alias, name, null, null);
     }

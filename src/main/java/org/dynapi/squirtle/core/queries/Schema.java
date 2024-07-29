@@ -10,6 +10,10 @@ public class Schema implements SqlAble {
     private final String name;
     private final Schema parent;
 
+    public Schema(String name) {
+        this(name, null);
+    }
+
     public Schema(String name, Schema parent) {
         this.name = name;
         this.parent = parent;
