@@ -81,8 +81,8 @@ public class Term implements Node, SqlAble {
             return new NullValue();
         if (value instanceof Term term)
             return term;
-        if (value instanceof QueryBuilder builder)
-            return builder;
+//        if (value instanceof QueryBuilder builder)
+//            return builder;
         if (value instanceof Interval interval)
             return interval;
         if (value instanceof String || value instanceof Integer || value instanceof Boolean)

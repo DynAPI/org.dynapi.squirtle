@@ -6,31 +6,35 @@ import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Node;
 import org.dynapi.squirtle.core.terms.Term;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Tuple extends Criterion {
-    protected Term[] values;
+    protected List<Term> values;
+
+    public Tuple(List<?> values) {
+        super(null);
+        this.values = values.stream().map(Tuple::wrapConstant).toList();
+    }
 
     public Tuple(Object... values) {
-        super(null);
-        this.values = (Term[]) Arrays.stream(values).map(Tuple::wrapConstant).toArray();
+        this(List.of(values));
     }
 
     @Override
     public String getSql(SqlAbleConfig config) {
-        String argList = String.join(",", Arrays.stream(values).map(value -> value.getSql(config)).toList());
+        String argList = String.join(",", values.stream().map(value -> value.getSql(config)).toList());
         String sql = String.format("(%s)", argList);
         return Utils.formatAliasSql(sql, alias, config);
     }
 
     @Override
     public Boolean isAggregate() {
-        return Utils.resolveIsAggregate(Arrays.stream(values).map(Node::isAggregate).toList());
+        return Utils.resolveIsAggregate(values.stream().map(Node::isAggregate).toList());
     }
 
     @Override
     public Tuple replaceTable(Table currentTable, Table newTable) {
-        values = (Term[]) Arrays.stream(values).map(value -> value.replaceTable(currentTable, newTable)).toArray();
+        values = values.stream().map(value -> value.replaceTable(currentTable, newTable)).toList();
         return this;
     }
 }
