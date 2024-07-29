@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Node;
 import org.dynapi.squirtle.core.terms.Term;
@@ -42,5 +43,15 @@ public class ContainsCriterion extends Criterion {
     public ContainsCriterion negated() {
         isNegated = true;
         return this;
+    }
+
+    @Override
+    public String getSql(SqlAbleConfig config) {
+        return String.format(
+                "%s %sIN %s",
+                term.getSql(config),
+                isNegated ? "NOT " : "",
+                container.getSql(config.withSubQuery(true))
+        );
     }
 }
