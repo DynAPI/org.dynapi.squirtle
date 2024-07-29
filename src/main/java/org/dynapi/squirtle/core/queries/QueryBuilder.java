@@ -333,27 +333,35 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     public Joiner innerJoin(Selectable selectable) {
         return join(selectable, JoinType.INNER);
     }
+
     public Joiner leftJoin(Selectable selectable) {
         return join(selectable, JoinType.LEFT);
     }
+
     public Joiner leftOuterJoin(Selectable selectable) {
         return join(selectable, JoinType.LEFT_OUTER);
     }
+
     public Joiner rightJoin(Selectable selectable) {
         return join(selectable, JoinType.RIGHT);
     }
+
     public Joiner rightOuterJoin(Selectable selectable) {
         return join(selectable, JoinType.RIGHT_OUTER);
     }
+
     public Joiner outerJoin(Selectable selectable) {
         return join(selectable, JoinType.OUTER);
     }
+
     public Joiner fullOuterJoin(Selectable selectable) {
         return join(selectable, JoinType.FULL_OUTER);
     }
+
     public Joiner crossJoin(Selectable selectable) {
         return join(selectable, JoinType.CROSS);
     }
+
     public Joiner hashJoin(Selectable selectable) {
         return join(selectable, JoinType.HASH);
     }
