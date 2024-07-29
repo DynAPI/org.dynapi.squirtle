@@ -78,10 +78,21 @@ public class Utils {
      * @param initArgs arguments to pass to the class
      * @return instance of {@code type}
      */
-    public static<T> T newInstance(Class<T> type, Object... initArgs) {
+    public static<T> T newInstance(Class<T> type, Object[] initArgs) {
+        Class<?>[] argTypes = (Class<?>[]) Arrays.stream(initArgs).map(Object::getClass).toList().toArray(new Class[0]);
+        return newInstance(type, initArgs, argTypes);
+    }
+
+    /**
+     *
+     * @param type class to instantiate
+     * @param initArgs arguments to pass to the class
+     * @param signature signature of the constructor if initArgs classes don't match
+     * @return instance of {@code type}
+     */
+    public static<T> T newInstance(Class<T> type, Object[] initArgs, Class<?>[] signature) {
         try {
-            Class<?>[] argTypes = (Class<?>[]) Arrays.stream(initArgs).map(Object::getClass).toList().toArray(new Class[0]);
-            return type.getConstructor(argTypes).newInstance(initArgs);
+            return type.getConstructor(signature).newInstance(initArgs);
         } catch (Exception e) {
             String argsString = String.join(", ", Arrays.stream(initArgs).map(Object::toString).toList());
             String errorMessage = String.format("Can't instantiate %s(%s) because %s (%s)", type.getCanonicalName(), argsString, e.getClass().getSimpleName(), e.getMessage());

@@ -400,7 +400,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return set(new Field(null, fieldName, null), value);
     }
     public QueryBuilder set(Field field, Objects value) {
-        updates.add(new UpdateEntry(field, Utils.newInstance(wrapperClass, null, value)));
+        updates.add(new UpdateEntry(field, Utils.newInstance(wrapperClass, new Object[]{ null, value})));
         return this;
     }
 

@@ -111,14 +111,14 @@ public class Table implements Selectable, SqlAble {
     }
 
     public QueryBuilder select(Object... terms) {
-        return Utils.newInstance(queryClass, this).select(List.of(terms));
+        return Utils.newInstance(queryClass, new Object[]{ this }).select(List.of(terms));
     }
 
     public QueryBuilder update() {
-        return Utils.newInstance(queryClass, this).update(this);
+        return Utils.newInstance(queryClass, new Object[]{ this }).update(this);
     }
 
     public QueryBuilder insert(Object... terms) {
-        return Utils.newInstance(queryClass, this).into(this).insert(terms);
+        return Utils.newInstance(queryClass, new Object[]{ this }).into(this).insert(terms);
     }
 }

@@ -69,7 +69,7 @@ public class Term implements Node, SqlAble {
 
         if (wrapperClass == null)
             wrapperClass = ValueWrapper.class;
-        return Utils.newInstance(wrapperClass, value);
+        return Utils.newInstance(wrapperClass, new Object[]{ value }, new Class<?>[] { Object.class });
     }
 
     public static Node wrapJson(Object value) {
@@ -86,7 +86,7 @@ public class Term implements Node, SqlAble {
         if (value instanceof Interval interval)
             return interval;
         if (value instanceof String || value instanceof Integer || value instanceof Boolean)
-            return Utils.newInstance(wrapperClass, value);
+            return Utils.newInstance(wrapperClass, new Object[]{ value });
 
         return new JSON(null, value);
     }
