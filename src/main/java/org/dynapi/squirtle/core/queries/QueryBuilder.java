@@ -427,14 +427,13 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         if (selectStarTables.contains(term.getTable())) return;
 
         if (term instanceof Star star) {
-            this.selects = selects.stream()
+            this.selects = new ArrayList<>(selects.stream()
                             // todo: verify if field is only with table
-                            .filter(select -> select instanceof Field field && star.getTable() != field.getTable())
-                            .toList();
+                            .filter(select -> !(select instanceof Field field) || star.getTable() != field.getTable())
+                            .toList());
             selectStarTables.add(star.getTable());
-        } else {
-            this.selects.add(term);
         }
+        this.selects.add(term);
     }
 
     protected void selectOther(Term term) {
