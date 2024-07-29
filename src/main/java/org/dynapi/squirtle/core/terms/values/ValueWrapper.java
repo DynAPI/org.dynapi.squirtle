@@ -16,6 +16,10 @@ public class ValueWrapper extends Term implements SqlAble {
 
     private final Object value;
 
+    public ValueWrapper(Object value) {
+        this(null, value);
+    }
+
     public ValueWrapper(String alias, Object value) {
         super(alias);
         this.value = value;
