@@ -27,7 +27,7 @@ tasks.test {
 
 publishing {
     publications {
-        jsonSchemaGen(MavenPublication) {
+        squirtle(MavenPublication) {
             from components.java
         }
     }
