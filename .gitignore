@@ -1,6 +1,7 @@
 # Prject
 /.idea/
 /tmp/
+/src/test/java/Testing.java
 
 .gradle
 build/
