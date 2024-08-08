@@ -3,17 +3,17 @@ package org.dynapi.squirtle.core.enums;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
-public class SqlTypes extends Enumerator {
-    public final static SqlTypes BOOLEAN = new SqlTypes("BOOLEAN");
-    public final static SqlTypes INTEGER = new SqlTypes("INTEGER");
-    public final static SqlTypes FLOAT = new SqlTypes("FLOAT");
-    public final static SqlTypes NUMERIC = new SqlTypes("NUMERIC");
-    public final static SqlTypes SIGNED = new SqlTypes("SIGNED");
-    public final static SqlTypes UNSIGNED = new SqlTypes("UNSIGNED");
+public class SqlType extends Enumerator {
+    public final static SqlType BOOLEAN = new SqlType("BOOLEAN");
+    public final static SqlType INTEGER = new SqlType("INTEGER");
+    public final static SqlType FLOAT = new SqlType("FLOAT");
+    public final static SqlType NUMERIC = new SqlType("NUMERIC");
+    public final static SqlType SIGNED = new SqlType("SIGNED");
+    public final static SqlType UNSIGNED = new SqlType("UNSIGNED");
 
-    public final static SqlTypes DATE = new SqlTypes("DATE");
-    public final static SqlTypes TIME = new SqlTypes("TIME");
-    public final static SqlTypes TIMESTAMP = new SqlTypes("TIMESTAMP");
+    public final static SqlType DATE = new SqlType("DATE");
+    public final static SqlType TIME = new SqlType("TIME");
+    public final static SqlType TIMESTAMP = new SqlType("TIMESTAMP");
 
     public final static SqlTypesLengthAble CHAR = new SqlTypesLengthAble("CHAR");
     public final static SqlTypesLengthAble VARCHAR = new SqlTypesLengthAble("VARCHAR");
@@ -22,11 +22,11 @@ public class SqlTypes extends Enumerator {
     public final static SqlTypesLengthAble VARBINARY = new SqlTypesLengthAble("VARBINARY");
     public final static SqlTypesLengthAble LONG_VARBINARY = new SqlTypesLengthAble("LONG VARBINARY");
 
-    public SqlTypes(String value) {
+    public SqlType(String value) {
         super(value);
     }
 
-    public static class SqlTypesLengthAble extends SqlTypes implements SqlAble {
+    public static class SqlTypesLengthAble extends SqlType implements SqlAble {
         public SqlTypesLengthAble(String value) {
             super(value);
         }
@@ -42,7 +42,7 @@ public class SqlTypes extends Enumerator {
     }
 
 
-    public static class SqlTypeWithLength extends SqlTypes implements SqlAble {
+    public static class SqlTypeWithLength extends SqlType implements SqlAble {
         protected final int length;
 
         public SqlTypeWithLength(String name, int length) {

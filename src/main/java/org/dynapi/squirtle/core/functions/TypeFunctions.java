@@ -1,6 +1,6 @@
 package org.dynapi.squirtle.core.functions;
 
-import org.dynapi.squirtle.core.enums.SqlTypes;
+import org.dynapi.squirtle.core.enums.SqlType;
 import org.dynapi.squirtle.core.interfaces.SpecialParamsSqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -11,9 +11,9 @@ import org.dynapi.squirtle.core.terms.values.LiteralValue;
 
 public class TypeFunctions {
     public static class Cast extends Function implements SpecialParamsSqlAble {
-        private final SqlTypes asType;
+        private final SqlType asType;
 
-        public Cast(String alias, Term term, SqlTypes asType) {
+        public Cast(String alias, Term term, SqlType asType) {
             super(alias, "CAST", term);
             this.asType = asType;
         }
@@ -49,13 +49,13 @@ public class TypeFunctions {
 
     public static class Signed extends Cast {
         public Signed(String alias, Term term) {
-            super(alias, term, SqlTypes.SIGNED);
+            super(alias, term, SqlType.SIGNED);
         }
     }
 
     public static class UnSigned extends Cast {
         public UnSigned(String alias, Term term) {
-            super(alias, term, SqlTypes.UNSIGNED);
+            super(alias, term, SqlType.UNSIGNED);
         }
     }
 

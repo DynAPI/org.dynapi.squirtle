@@ -9,7 +9,6 @@ import org.dynapi.squirtle.core.enums.Equality;
 import org.dynapi.squirtle.core.enums.Matching;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
-import org.dynapi.squirtle.core.queries.QueryBuilder;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.criterion.*;
 import org.dynapi.squirtle.core.terms.functions.Mod;
