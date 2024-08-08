@@ -10,6 +10,10 @@ public interface Selectable extends SqlAble, Node {
         return new Field(null, name, this);
     }
 
+    default Field field(String name, String alias) {
+        return new Field(alias, name, this);
+    }
+
     default Star asStar() {
         return new Star(this);
     }

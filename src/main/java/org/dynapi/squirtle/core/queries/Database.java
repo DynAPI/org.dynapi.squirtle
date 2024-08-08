@@ -9,7 +9,7 @@ public class Database extends Schema {
         super(name, parent);
     }
 
-    public Schema getSchema(String name) {
+    public Schema schema(String name) {
         return new Schema(name, this);
     }
 }

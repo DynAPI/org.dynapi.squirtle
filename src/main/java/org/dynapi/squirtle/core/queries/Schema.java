@@ -31,8 +31,12 @@ public class Schema implements SqlAble {
         return Objects.hash(name, parent);
     }
 
-    public Table getTable(String name) {
+    public Table table(String name) {
         return new Table(null, name, this);
+    }
+
+    public Table table(String name, String alias) {
+        return new Table(alias, name, this);
     }
 
     @Override
