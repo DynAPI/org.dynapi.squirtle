@@ -1,3 +1,5 @@
+[![Publish Build to Github Releases](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-release.yaml/badge.svg)](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-release.yaml)
+[![Publish package to GitHub Packages](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-package.yaml/badge.svg)](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-package.yaml)
 # Squirtle - Java SQL Query Builder
 
 ```java
