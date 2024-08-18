@@ -1,7 +1,7 @@
 # Prject
 /.idea/
 /tmp/
-/src/test/java/Testing.java
+/src/test/java/DevTester.java
 
 .gradle
 build/
