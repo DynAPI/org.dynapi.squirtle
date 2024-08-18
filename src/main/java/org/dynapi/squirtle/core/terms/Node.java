@@ -15,6 +15,7 @@ public interface Node {
 
     /** @apiNote internal usage only */
     default<T extends Node> List<T> find(Class<T> type) {
+        //noinspection unchecked
         return (List<T>) nodes().stream().filter(type::isInstance).toList();
     }
 }

@@ -34,15 +34,16 @@ public class Term implements Node, SqlAble {
     }
 
     public Term as(String alias) {
-        return new Term(alias);
+        this.alias = alias;
+        return this;
     }
 
-    public List<Table> getTables() {
-        return find(Table.class);
+    public Set<Table> getTables() {
+        return new HashSet<>(find(Table.class));
     }
 
-    public List<Field> getFields() {
-        return find(Field.class);
+    public Set<Field> getFields() {
+        return new HashSet<>(find(Field.class));
     }
 
     public static Term wrapConstant(Object value) {
