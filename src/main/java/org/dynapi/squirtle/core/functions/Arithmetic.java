@@ -12,6 +12,18 @@ public class Arithmetic {
         }
     }
 
+    public static class Pow extends Function {
+        public Pow(String alias, Term term, float exponent) {
+            super(alias, "POW", term, exponent);
+        }
+    }
+
+    public static class Mod extends Function {
+        public Mod(String alias, Term term, float modulus) {
+            super(alias, "MOD", term, modulus);
+        }
+    }
+
     public static class Avg extends AggregateFunction {
         public Avg(String alias, Object term) {
             super(alias, "AVG", term);
