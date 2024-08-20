@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.dialects.postgresql;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.*;
@@ -30,6 +31,25 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
     protected boolean forUpdateNowait = false;
     protected boolean forUpdateSkipLocked = false;
     protected Set<String> forUpdateOf = new HashSet<>();
+
+    public PostgreSQLQueryBuilder(PostgreSQLQueryBuilder original) {
+        super(original);
+        this.returns = CloneUtils.copyConstructorCloneCollection(original.returns);
+        this.returnStar = original.returnStar;
+
+        this.onConflict = original.onConflict;
+        this.onConflictFields = CloneUtils.copyConstructorCloneCollection(original.onConflictFields);
+        this.onConflictDoNothing = original.onConflictDoNothing;
+        this.onConflictDoUpdates = new ArrayList<>(original.onConflictDoUpdates);
+        this.onConflictWheres = CloneUtils.copyConstructorClone(original.onConflictWheres);
+        this.onConflictDoUpdatesWheres = CloneUtils.copyConstructorClone(original.onConflictDoUpdatesWheres);
+
+        this.distinctOn = CloneUtils.copyConstructorCloneCollection(original.distinctOn);
+
+        this.forUpdateNowait = original.forUpdateNowait;
+        this.forUpdateSkipLocked = original.forUpdateSkipLocked;
+        this.forUpdateOf = new HashSet<>(original.forUpdateOf);
+    }
 
     public PostgreSQLQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.POSTGRESQL, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);

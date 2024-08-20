@@ -14,6 +14,13 @@ public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
     protected boolean topWithTies = false;
     protected boolean topPercent = false;
 
+    public MSSQLQueryBuilder(MSSQLQueryBuilder original) {
+        super(original);
+        this.top = original.top;
+        this.topWithTies = original.topWithTies;
+        this.topPercent = original.topPercent;
+    }
+
     public MSSQLQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.MSSQL, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
     }

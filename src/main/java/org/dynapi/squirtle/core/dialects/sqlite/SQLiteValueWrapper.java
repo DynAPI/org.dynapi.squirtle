@@ -4,6 +4,10 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class SQLiteValueWrapper extends ValueWrapper {
+    public SQLiteValueWrapper(SQLiteValueWrapper original) {
+        super(original);
+    }
+
     public SQLiteValueWrapper(Object value) {
         this(null, value);
     }

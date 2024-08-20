@@ -11,6 +11,10 @@ public class SnowflakeQueryBuilder extends QueryBuilder {
     public String sqlAbleQueryAliasQuoteChar() { return ""; }
     public Class<? extends Query> sqlAbleQueryClass() { return SnowflakeQuery.class; }
 
+    public SnowflakeQueryBuilder(SnowflakeQueryBuilder original) {
+        super(original);
+    }
+
     public SnowflakeQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.SNOWFLAKE, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
     }
