@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.values;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.JSONOperator;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -16,7 +17,7 @@ public class JSON extends Term {
 
     public JSON(JSON original) {
         super(original);
-        this.value = Utils.copyConstructorClone(original.value);
+        this.value = CloneUtils.copyConstructorClone(original.value);
     }
 
     public JSON(String alias, Object value) {
