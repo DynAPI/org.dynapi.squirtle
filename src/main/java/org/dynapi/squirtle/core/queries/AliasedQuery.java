@@ -2,6 +2,7 @@ package org.dynapi.squirtle.core.queries;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
@@ -14,6 +15,12 @@ public class AliasedQuery implements Selectable, SqlAble {
     private final String name;
     private final Selectable query;
 
+    public AliasedQuery(AliasedQuery original) {
+        this.alias = original.alias;
+        this.name = original.name;
+        this.query = CloneUtils.copyConstructorClone(original.query);
+    }
+
     public AliasedQuery(String name, Selectable query) {
         this.alias = name;
         this.name = name;
@@ -24,7 +31,7 @@ public class AliasedQuery implements Selectable, SqlAble {
     public String getSql(SqlAbleConfig config) {
         if (query == null)
             return name;
-        return ((SqlAble) query).getSql(config);
+        return query.getSql(config);
     }
 
     @Override

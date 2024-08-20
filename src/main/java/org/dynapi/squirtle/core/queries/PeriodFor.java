@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -8,6 +9,12 @@ public class PeriodFor implements SqlAble {
     private final String name;
     public final Column startColumn;
     public final Column endColumn;
+
+    public PeriodFor(PeriodFor original) {
+        this.name = original.name;
+        this.startColumn = CloneUtils.copyConstructorClone(original.startColumn);
+        this.endColumn = CloneUtils.copyConstructorClone(original.endColumn);
+    }
 
     public PeriodFor(String name, String startColumn, String endColumn) {
         this(name, new Column(startColumn), new Column(endColumn));

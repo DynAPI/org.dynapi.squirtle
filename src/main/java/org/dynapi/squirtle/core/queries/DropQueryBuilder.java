@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.QueryBuilderAttributes;
@@ -16,8 +17,15 @@ public class DropQueryBuilder implements QueryBuilderAttributes, SqlAble {
     protected Boolean ifExists = null;
     protected Dialects dialect;
 
+    public DropQueryBuilder(DropQueryBuilder original) {
+        this.dropTargetKind = CloneUtils.copyConstructorCloneNoFail(original.dropTargetKind);
+        this.dropTarget = CloneUtils.copyConstructorCloneNoFail(original.dropTarget);
+        this.ifExists = original.ifExists;
+        this.dialect = original.dialect;
+    }
+
     public DropQueryBuilder() {
-        this(null);
+        this((Dialects) null);
     }
 
     public DropQueryBuilder(Dialects dialect) {

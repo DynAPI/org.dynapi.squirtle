@@ -2,6 +2,7 @@ package org.dynapi.squirtle.core.queries;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -28,6 +29,15 @@ public class Table implements Selectable, SqlAble {
     protected final Class<? extends Query> queryClass;
     protected SqlAble for_;
     protected SqlAble forPortion;
+
+    public Table(Table original) {
+        this.alias = original.alias;
+        this.tableName = original.tableName;
+        this.schema = CloneUtils.copyConstructorClone(original.schema);
+        this.queryClass = original.queryClass;
+        this.for_ = CloneUtils.copyConstructorCloneNoFail(original.for_);
+        this.forPortion = CloneUtils.copyConstructorCloneNoFail(original.forPortion);
+    }
 
     public Table(String name) {
         this(null, name);

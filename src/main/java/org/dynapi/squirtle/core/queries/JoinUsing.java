@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.JoinType;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.criterion.Field;
@@ -9,6 +10,11 @@ import java.util.Collection;
 
 public class JoinUsing extends Join {
     private Collection<Field> fields;
+
+    public JoinUsing(JoinUsing original) {
+        super(original);
+        this.fields = CloneUtils.copyConstructorCloneCollection(original.fields);
+    }
 
     public JoinUsing(Selectable item, JoinType how, Collection<Field> fields) {
         super(item, how);
