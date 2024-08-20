@@ -1,6 +1,7 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
 import lombok.Getter;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -16,6 +17,12 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
     @Getter
     protected Selectable table;
     protected final String name;
+
+    public Field(Field original) {
+        super(original);
+        this.table = CloneUtils.copyConstructorClone(original.table);
+        this.name = original.name;
+    }
 
     public Field(String name) {
         this(null, name);

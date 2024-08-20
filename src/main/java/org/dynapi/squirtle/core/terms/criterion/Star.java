@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Star extends Field {
+    public Star(Star original) {
+        super(original);
+    }
+
     public Star() {
         super(null, "*", null);
     }

@@ -10,6 +10,10 @@ public class EmptyCriterion extends Criterion {
     @Override
     public Boolean isAggregate() {return null; }
 
+    public EmptyCriterion(EmptyCriterion original) {
+        super(original);
+    }
+
     public EmptyCriterion(String alias) {
         super(alias);
     }

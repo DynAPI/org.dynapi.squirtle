@@ -7,6 +7,10 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import java.util.List;
 
 public class Array extends Tuple {
+    public Array(Array original) {
+        super(original);
+    }
+
     public Array(List<?> values) {
         super(values);
     }

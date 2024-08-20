@@ -1,6 +1,7 @@
 package org.dynapi.squirtle.core.queries;
 
 import lombok.Getter;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.JoinType;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
@@ -14,6 +15,12 @@ public class JoinOn extends Join {
     @Getter
     protected Term criterion;
     protected final String collate;
+
+    public JoinOn(JoinOn original) {
+        super(original);
+        this.criterion = CloneUtils.copyConstructorClone(original.criterion);
+        this.collate = original.collate;
+    }
 
     public JoinOn(Selectable item, JoinType how, Term criteria, String collate) {
         super(item, how);

@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.dialects.vertica;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Query;
@@ -10,6 +11,15 @@ public class VerticaCopyQueryBuilder implements SqlAble {
 
     protected Table copyTable = null;
     protected String fromFile = null;
+
+    public VerticaCopyQueryBuilder(VerticaCopyQueryBuilder original) {
+        this.copyTable = CloneUtils.copyConstructorClone(original.copyTable);
+        this.fromFile = original.fromFile;
+    }
+
+    public VerticaCopyQueryBuilder() {
+
+    }
 
     public VerticaCopyQueryBuilder fromFile(String file) {
         this.fromFile = file;

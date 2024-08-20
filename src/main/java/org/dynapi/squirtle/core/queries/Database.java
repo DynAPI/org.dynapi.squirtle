@@ -1,6 +1,10 @@
 package org.dynapi.squirtle.core.queries;
 
 public class Database extends Schema {
+    public Database(Database original) {
+        super(original);
+    }
+
     public Database(String name) {
         this(name, null);
     }

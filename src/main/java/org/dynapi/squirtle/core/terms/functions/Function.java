@@ -1,6 +1,7 @@
 package org.dynapi.squirtle.core.terms.functions;
 
 import lombok.NonNull;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.FunctionSqlAble;
 import org.dynapi.squirtle.core.interfaces.SpecialParamsSqlAble;
@@ -20,6 +21,13 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
     protected final String name;
     protected List<Term> args;
     protected final Schema schema;
+
+    public Function(Function original) {
+        super(original);
+        this.name = original.name;
+        this.args = CloneUtils.copyConstructorCloneCollection(original.args);
+        this.schema = CloneUtils.copyConstructorClone(original.schema);
+    }
 
     public Function(String alias, @NonNull String name, Object... args) {
         this(alias, name, null, args);

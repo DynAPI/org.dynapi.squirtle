@@ -6,6 +6,10 @@ import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Term;
 
 public class BetweenCriterion extends RangeCriterion {
+    public BetweenCriterion(BetweenCriterion original) {
+        super(original);
+    }
+
     public BetweenCriterion(String alias, Term term, Term start, Term end) {
         super(alias, term, start, end);
     }

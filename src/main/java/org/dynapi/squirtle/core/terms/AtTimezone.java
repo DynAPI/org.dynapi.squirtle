@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -9,6 +10,13 @@ public class AtTimezone extends Term implements SqlAble {
     private final Field field;
     private final String zone;
     private final boolean interval;
+
+    public AtTimezone(AtTimezone original) {
+        super(original);
+        this.field = CloneUtils.copyConstructorClone(original.field);
+        this.zone = original.zone;
+        this.interval = original.interval;
+    }
 
     public AtTimezone(Field field, String zone, boolean interval, String alias) {
         super(alias);

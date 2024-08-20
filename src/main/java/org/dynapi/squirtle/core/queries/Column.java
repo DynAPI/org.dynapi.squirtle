@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -11,6 +12,13 @@ public class Column implements SqlAble {
     private final String columnType;
     private final Boolean nullable;
     private final Term defaultValue;
+
+    public Column(Column original) {
+        this.name = original.name;
+        this.columnType = original.columnType;
+        this.nullable = original.nullable;
+        this.defaultValue = CloneUtils.copyConstructorClone(original.defaultValue);
+    }
 
     public Column(String name) {
         this(name, null, null, null);

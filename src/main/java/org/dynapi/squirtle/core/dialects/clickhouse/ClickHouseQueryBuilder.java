@@ -16,6 +16,12 @@ public class ClickHouseQueryBuilder extends QueryBuilder {
     protected Integer sample = null;
     protected Integer sampleOffset = null;
 
+    public ClickHouseQueryBuilder(ClickHouseQueryBuilder original) {
+        super(original);
+        this.sample = original.sample;
+        this.sampleOffset = original.sampleOffset;
+    }
+
     public ClickHouseQueryBuilder(Boolean ignoredWrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean ignoredAsKeyword) {
         super(Dialects.CLICKHOUSE, false, wrapperClass, immutable, true);
     }

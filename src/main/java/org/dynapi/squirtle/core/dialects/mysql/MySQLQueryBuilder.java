@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.dialects.mysql;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -23,6 +24,17 @@ public class MySQLQueryBuilder extends QueryBuilder {
     protected boolean forUpdateNoWait = false;
     protected boolean forUpdateSkipLocked = false;
     protected Set<String> forUpdateOf = new HashSet<>();
+
+    public MySQLQueryBuilder(MySQLQueryBuilder original) {
+        super(original);
+        this.duplicateUpdates = new ArrayList<>(original.duplicateUpdates);
+        this.ignoreDuplicates = original.ignoreDuplicates;
+        this.modifiers = new ArrayList<>(original.modifiers);
+
+        this.forUpdateNoWait = original.forUpdateNoWait;
+        this.forUpdateSkipLocked = original.forUpdateSkipLocked;
+        this.forUpdateOf = new HashSet<>(original.forUpdateOf);
+    }
 
     public MySQLQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.MYSQL, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);

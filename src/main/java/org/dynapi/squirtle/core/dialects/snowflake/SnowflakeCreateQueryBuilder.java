@@ -8,6 +8,10 @@ public class SnowflakeCreateQueryBuilder extends CreateQueryBuilder {
     public String sqlAbleQuoteChar() { return null; }
     public Class<? extends Query> sqlAbleQueryClass() { return SnowflakeQuery.class; }
 
+    public SnowflakeCreateQueryBuilder(SnowflakeCreateQueryBuilder original) {
+        super(original);
+    }
+
     public SnowflakeCreateQueryBuilder() {
         super(Dialects.SNOWFLAKE);
     }

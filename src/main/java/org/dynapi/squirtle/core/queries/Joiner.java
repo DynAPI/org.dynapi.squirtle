@@ -1,6 +1,7 @@
 package org.dynapi.squirtle.core.queries;
 
 import lombok.NonNull;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.JoinType;
 import org.dynapi.squirtle.core.terms.criterion.BasicCriterion;
 import org.dynapi.squirtle.core.terms.criterion.Criterion;
@@ -13,6 +14,13 @@ public class Joiner {
     protected Selectable item;
     protected JoinType how;
     protected String typeLabel;
+
+    public Joiner(Joiner original) {
+        this.query = CloneUtils.copyConstructorClone(original.query);
+        this.item = CloneUtils.copyConstructorClone(original.item);
+        this.how = original.how;
+        this.typeLabel = original.typeLabel;
+    }
 
     public Joiner(QueryBuilder query, Selectable item, JoinType how, String typeLabel) {
         this.query = query;

@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.criterion.Criterion;
@@ -16,6 +17,15 @@ public class CreateIndexBuilder implements SqlAble {
     protected Criterion wheres = null;
     protected boolean isUnique = false;
     protected boolean ifNotExists = false;
+
+    public CreateIndexBuilder(CreateIndexBuilder original) {
+        this.index = CloneUtils.copyConstructorClone(original.index);
+        this.columns = CloneUtils.copyConstructorCloneCollection(original.columns);
+        this.table = CloneUtils.copyConstructorClone(original.table);
+        this.wheres = CloneUtils.copyConstructorClone(original.wheres);
+        this.isUnique = original.isUnique;
+        this.ifNotExists = original.ifNotExists;
+    }
 
     public CreateIndexBuilder() {}
 

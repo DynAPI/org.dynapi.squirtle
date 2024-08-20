@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.values;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.JSONOperator;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -12,7 +13,12 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 public class JSON extends Term {
-    private Object value;
+    private final Object value;
+
+    public JSON(JSON original) {
+        super(original);
+        this.value = CloneUtils.copyConstructorClone(original.value);
+    }
 
     public JSON(String alias, Object value) {
         super(alias);

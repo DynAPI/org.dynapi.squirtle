@@ -7,6 +7,11 @@ import org.dynapi.squirtle.core.terms.Term;
 public class Index extends Term {
     private final String name;
 
+    public Index(Index original) {
+        super(original);
+        this.name = original.name;
+    }
+
     public Index(String alias, String name) {
         super(alias);
         this.name = name;

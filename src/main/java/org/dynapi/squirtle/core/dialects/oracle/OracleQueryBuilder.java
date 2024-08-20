@@ -10,6 +10,10 @@ public class OracleQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
     public String sqlAbleQuoteChar() { return null; }
     public Class<? extends Query> sqlAbleQueryClass() { return OracleQuery.class; }
 
+    public OracleQueryBuilder(OracleQueryBuilder original) {
+        super(original);
+    }
+
     public OracleQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
         super(Dialects.ORACLE, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
     }

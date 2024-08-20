@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.JoinType;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -9,6 +10,11 @@ import java.util.Collection;
 public class Join implements SqlAble {
     protected Selectable item;
     protected JoinType how;
+
+    public Join(Join original) {
+        this.item = CloneUtils.copyConstructorClone(original.item);
+        this.how = original.how;
+    }
 
     public Join(Selectable item, JoinType how) {
         this.item = item;

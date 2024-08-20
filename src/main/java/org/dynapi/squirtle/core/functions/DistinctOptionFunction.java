@@ -7,6 +7,11 @@ import org.dynapi.squirtle.core.terms.functions.AggregateFunction;
 public class DistinctOptionFunction extends AggregateFunction implements FunctionSqlAble {
     protected boolean distinct;
 
+    public DistinctOptionFunction(DistinctOptionFunction original) {
+        super(original);
+        this.distinct = original.distinct;
+    }
+
     public DistinctOptionFunction(String alias, String name, Object... args) {
         super(alias, name, args);
         this.distinct = false;

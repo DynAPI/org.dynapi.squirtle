@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.enums.ReferenceOption;
 import org.dynapi.squirtle.core.interfaces.QueryBuilderAttributes;
@@ -32,8 +33,28 @@ public class CreateQueryBuilder implements QueryBuilderAttributes, SqlAble {
     protected ReferenceOption foreignKeyOnUpdate = null;
     protected ReferenceOption foreignKeyOnDelete = null;
 
+    public CreateQueryBuilder(CreateQueryBuilder original) {
+        this.createTable = CloneUtils.copyConstructorClone(original.createTable);
+        this.temporary = original.temporary;
+        this.unlogged = original.unlogged;
+        this.asSelect = CloneUtils.copyConstructorClone(original.asSelect);
+        this.columns = CloneUtils.copyConstructorCloneCollection(original.columns);
+        this.periodFors = CloneUtils.copyConstructorCloneCollection(original.periodFors);
+        this.withSystemVersioning = original.withSystemVersioning;
+        this.primaryKey = CloneUtils.copyConstructorCloneCollection(original.primaryKey);
+        // todo: better nested clone
+        this.uniques = new ArrayList<>(original.uniques.stream().map(CloneUtils::copyConstructorCloneCollection).toList());
+        this.ifNotExists = original.ifNotExists;
+        this.dialect = original.dialect;
+        this.foreignKey = CloneUtils.copyConstructorCloneCollection(original.foreignKey);
+        this.foreignKeyReference = original.foreignKeyReference;
+        this.foreignKeyReferenceTable = CloneUtils.copyConstructorClone(original.foreignKeyReferenceTable);
+        this.foreignKeyOnUpdate = original.foreignKeyOnUpdate;
+        this.foreignKeyOnDelete = original.foreignKeyOnDelete;
+    }
+
     public CreateQueryBuilder() {
-        this(null);
+        this((Dialects) null);
     }
 
     public CreateQueryBuilder(Dialects dialect) {

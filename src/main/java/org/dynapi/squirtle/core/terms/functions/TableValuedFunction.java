@@ -11,6 +11,10 @@ import org.dynapi.squirtle.core.queries.Selectable;
  * @see <a href="https://www.sqlite.org/pragma.html">https://www.sqlite.org/pragma.html</a>
  */
 public class TableValuedFunction extends Function implements Selectable {
+    public TableValuedFunction(TableValuedFunction original) {
+        super(original);
+    }
+
     public TableValuedFunction(String alias, @NonNull String name, Object... args) {
         super(alias, name, args);
     }
