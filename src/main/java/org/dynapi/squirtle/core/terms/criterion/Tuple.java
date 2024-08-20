@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
@@ -11,8 +12,13 @@ import java.util.List;
 public class Tuple extends Criterion {
     protected List<Term> values;
 
+    public Tuple(Tuple original) {
+        super(original);
+        this.values = CloneUtils.copyConstructorCloneCollection(original.values);
+    }
+
     public Tuple(List<?> values) {
-        super(null);
+        super((String) null);
         this.values = values.stream().map(Tuple::wrapConstant).toList();
     }
 

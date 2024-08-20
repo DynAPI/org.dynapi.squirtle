@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Node;
@@ -12,6 +13,13 @@ public class ContainsCriterion extends Criterion {
     protected Term term;
     protected final Term container;
     protected boolean isNegated;
+
+    public ContainsCriterion(ContainsCriterion original) {
+        super(original);
+        this.term = CloneUtils.copyConstructorClone(original.term);
+        this.container = CloneUtils.copyConstructorClone(original.container);
+        this.isNegated = original.isNegated;
+    }
 
     public ContainsCriterion(String alias, Term term, Term container) {
         super(alias);

@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Order;
 import org.dynapi.squirtle.core.enums.SetOperations;
@@ -18,6 +19,16 @@ public class SetOperation extends Term implements Selectable, SqlAble {
     protected Integer limit;
     protected Integer offset;
     protected final Class<? extends ValueWrapper> wrapperClass;
+
+    public SetOperation(SetOperation original) {
+        super(original);
+        this.baseQuery = CloneUtils.copyConstructorClone(original.baseQuery);
+        this.setOperations = CloneUtils.copyConstructorCloneCollection(original.setOperations);
+        this.orderBys = CloneUtils.copyConstructorCloneCollection(original.orderBys);
+        this.limit = original.limit;
+        this.offset = original.offset;
+        this.wrapperClass = original.wrapperClass;
+    }
 
     public SetOperation(String alias, QueryBuilder baseQuery, QueryBuilder setOperationQuery, SetOperations setOperations, Class<? extends ValueWrapper> wrapperClass) {
         super(alias);

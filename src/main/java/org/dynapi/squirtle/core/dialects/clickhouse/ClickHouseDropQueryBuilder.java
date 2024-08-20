@@ -11,6 +11,11 @@ public class ClickHouseDropQueryBuilder extends DropQueryBuilder {
 
     protected String clusterName = null;
 
+    public ClickHouseDropQueryBuilder(ClickHouseDropQueryBuilder original) {
+        super(original);
+        this.clusterName = original.clusterName;
+    }
+
     public ClickHouseDropQueryBuilder() {
         super(Dialects.CLICKHOUSE);
     }

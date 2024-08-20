@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -9,6 +10,11 @@ import java.util.Objects;
 public class Schema implements SqlAble {
     private final String name;
     private final Schema parent;
+
+    public Schema(Schema original) {
+        this.name = original.name;
+        this.parent = CloneUtils.copyConstructorClone(original.parent);
+    }
 
     public Schema(String name) {
         this(name, null);

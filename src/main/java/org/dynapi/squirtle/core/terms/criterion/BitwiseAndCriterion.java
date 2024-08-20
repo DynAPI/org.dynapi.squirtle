@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
@@ -12,6 +13,12 @@ import java.util.List;
 public class BitwiseAndCriterion extends Criterion {
     protected Term term;
     protected Node value;
+
+    public BitwiseAndCriterion(BitwiseAndCriterion original) {
+        super(original);
+        this.term = CloneUtils.copyConstructorClone(original.term);
+        this.value = CloneUtils.copyConstructorCloneNoFail(original.value);
+    }
 
     public BitwiseAndCriterion(String alias, Term term, Node value) {
         super(alias);

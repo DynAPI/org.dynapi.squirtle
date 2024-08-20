@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.dialects.mysql;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.QueryBuilderAttributes;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -11,6 +12,15 @@ public class MySQLLoadQueryBuilder implements QueryBuilderAttributes, SqlAble {
 
     protected String loadFile = null;
     protected Table intoTable = null;
+
+    public MySQLLoadQueryBuilder(MySQLLoadQueryBuilder original) {
+        this.loadFile = original.loadFile;
+        this.intoTable = CloneUtils.copyConstructorClone(original.intoTable);
+    }
+
+    public MySQLLoadQueryBuilder() {
+
+    }
 
     public MySQLLoadQueryBuilder load(String file) {
         this.loadFile = file;

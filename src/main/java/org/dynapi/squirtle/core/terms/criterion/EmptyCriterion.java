@@ -3,25 +3,29 @@ package org.dynapi.squirtle.core.terms.criterion;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Term;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EmptyCriterion extends Criterion {
     @Override
     public Boolean isAggregate() {return null; }
+
+    public EmptyCriterion(EmptyCriterion original) {
+        super(original);
+    }
 
     public EmptyCriterion(String alias) {
         super(alias);
     }
 
     @Override
-    public List<Table> getTables() {
-        return new ArrayList<>();
+    public Set<Table> getTables() {
+        return new HashSet<>();
     }
 
     @Override
-    public List<Field> getFields() {
-        return new ArrayList<>();
+    public Set<Field> getFields() {
+        return new HashSet<>();
     }
 
     @Override

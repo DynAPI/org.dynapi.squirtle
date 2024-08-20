@@ -5,6 +5,10 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
 
 public class PeriodCriterion extends RangeCriterion {
+    public PeriodCriterion(PeriodCriterion original) {
+        super(original);
+    }
+
     public PeriodCriterion(String alias, Term term, Term start, Term end) {
         super(alias, term, start, end);
     }

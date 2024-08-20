@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
@@ -13,6 +14,12 @@ import java.util.List;
 public class Case extends Criterion {
     protected List<Entry> cases;
     protected Term otherwise;
+
+    public Case(Case original) {
+        super(original);
+        this.cases = new ArrayList<>(original.cases);
+        this.otherwise = CloneUtils.copyConstructorClone(otherwise);
+    }
 
     public Case(String alias) {
         super(alias);

@@ -24,7 +24,7 @@ public interface CriterionOperations {
     }
 
     static Criterion any(List<Term> terms) {
-        Criterion criterion = new EmptyCriterion(null);
+        Criterion criterion = new EmptyCriterion((String) null);
         for (Term term : terms) {
             criterion = criterion.or(term);
         }
@@ -36,7 +36,7 @@ public interface CriterionOperations {
     }
 
     static Criterion all(List<Term> terms) {
-        Criterion criterion = new EmptyCriterion(null);
+        Criterion criterion = new EmptyCriterion((String) null);
         for (Term term : terms) {
             criterion = criterion.and(term);
         }

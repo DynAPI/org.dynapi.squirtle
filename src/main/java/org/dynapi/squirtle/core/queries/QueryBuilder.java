@@ -1,6 +1,7 @@
 package org.dynapi.squirtle.core.queries;
 
 import lombok.Getter;
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.enums.JoinType;
@@ -72,12 +73,65 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
 
     protected final boolean immutable;
 
+    public QueryBuilder(QueryBuilder original) {
+        super(original);
+
+        this.from = CloneUtils.copyConstructorCloneCollection(original.from);
+        this.insertTable = CloneUtils.copyConstructorClone(original.insertTable);
+        this.updateTable = CloneUtils.copyConstructorClone(original.updateTable);
+        this.deleteFrom = original.deleteFrom;
+        this.replace = original.replace;
+
+        this.with = CloneUtils.copyConstructorCloneCollection(original.with);
+        this.selects = CloneUtils.copyConstructorCloneCollection(original.selects);
+        this.forceIndexes = CloneUtils.copyConstructorCloneCollection(original.forceIndexes);
+        this.useIndexes = CloneUtils.copyConstructorCloneCollection(original.useIndexes);
+        this.columns = CloneUtils.copyConstructorCloneCollection(original.columns);
+        // todo: better nested clone
+        this.values = new ArrayList<>(original.values.stream().map(CloneUtils::copyConstructorCloneCollection).toList());
+        this.distinct = original.distinct;
+        this.ignore = original.ignore;
+
+        this.forUpdate = original.forUpdate;
+
+        this.wheres = CloneUtils.copyConstructorClone(original.wheres);
+        this.preWheres = CloneUtils.copyConstructorClone(original.preWheres);
+        this.groupBys = CloneUtils.copyConstructorCloneCollection(original.groupBys);
+        this.withTotals = original.withTotals;
+        this.havings = CloneUtils.copyConstructorClone(original.havings);
+        this.orderBys = CloneUtils.copyConstructorCloneCollection(original.orderBys);
+        this.joins = CloneUtils.copyConstructorCloneCollection(original.joins);
+        this.unions = CloneUtils.copyConstructorCloneCollection(original.unions);
+        this.using = CloneUtils.copyConstructorCloneCollection(original.using);
+
+        this.limit = original.limit;
+        this.offset = original.offset;
+
+        this.updates = CloneUtils.copyConstructorCloneCollection(original.updates);
+
+        this.selectStar = original.selectStar;
+        this.selectStarTables = CloneUtils.copyConstructorCloneCollection(original.selectStarTables);
+        this.mySqlRollup = original.mySqlRollup;
+        this.selectInto = original.selectInto;
+
+        this.subqueryCount = original.subqueryCount;
+        this.foreignTable = original.foreignTable;
+
+        this.dialect = original.dialect;
+        this.wrapSetOperationQueries = original.wrapSetOperationQueries;
+        this.asKeyword = original.asKeyword;
+
+        this.wrapperClass = original.wrapperClass;
+
+        this.immutable = original.immutable;
+    }
+
     public QueryBuilder() {
         this(null, null, null, null, null);
     }
 
     public QueryBuilder(Dialects dialect, Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(null);
+        super((String) null);
 
         this.dialect = dialect;
         this.asKeyword = asKeyword == null ? false : asKeyword;

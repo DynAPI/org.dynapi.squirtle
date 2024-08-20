@@ -3,7 +3,7 @@ package org.dynapi.squirtle.core.terms;
 import lombok.Getter;
 import lombok.Setter;
 import org.dynapi.squirtle.core.Utils;
-import org.dynapi.squirtle.core.enums.Arithmetic;
+import org.dynapi.squirtle.core.enums.ArithmeticOperation;
 import org.dynapi.squirtle.core.enums.Enumerator;
 import org.dynapi.squirtle.core.enums.Equality;
 import org.dynapi.squirtle.core.enums.Matching;
@@ -11,41 +11,43 @@ import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.criterion.*;
-import org.dynapi.squirtle.core.terms.functions.Mod;
-import org.dynapi.squirtle.core.terms.functions.Pow;
+import org.dynapi.squirtle.core.functions.Arithmetic;
 import org.dynapi.squirtle.core.terms.values.JSON;
 import org.dynapi.squirtle.core.terms.values.NullValue;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Term implements Node, SqlAble {
     @Override
     public Boolean isAggregate() {
         return false;
     }
-    public Enumerator getOperator() { return null; }
+    public Enumerator getArithmeticOperation() { return null; }
 
     @Getter
     @Setter
     protected String alias;
+
+    public Term(Term original) {
+        this.alias = original.alias;
+    }
 
     public Term(String alias) {
         this.alias = alias;
     }
 
     public Term as(String alias) {
-        return new Term(alias);
+        this.alias = alias;
+        return this;
     }
 
-    public List<Table> getTables() {
-        return find(Table.class);
+    public Set<Table> getTables() {
+        return new HashSet<>(find(Table.class));
     }
 
-    public List<Field> getFields() {
-        return find(Field.class);
+    public Set<Field> getFields() {
+        return new HashSet<>(find(Field.class));
     }
 
     public static Term wrapConstant(Object value) {
@@ -53,18 +55,26 @@ public class Term implements Node, SqlAble {
     }
 
     public static Term wrapConstant(Object value, Class<? extends ValueWrapper> wrapperClass) {
-        if (value == null)
-            return new NullValue();
-        if (value instanceof Node)
-            return (Term) value;
-        // kinda confusing that List=>Array and array=>Tuple
-        if (value instanceof List<?> list)  // mutable
-            return new Array(list);
-        if (value instanceof Collection<?> tuple)
-            return new Array(tuple);
+        switch (value) {
+            case null -> {
+                return new NullValue();
+            }
+            case Node node -> {
+                return (Term) value;
+            }
+            // kinda confusing that List=>Array and array=>Tuple
+            case List<?> list -> {  // List -> mutable -> Array
+                return new Array(list);
+            }
+            case Collection<?> tuple -> {
+                return new Array(tuple);
+            }
 //        value.getClass().isArray()  // marked
-        if (value instanceof Object[] tuple)  // immutable
-            return new Tuple(tuple);
+            case Object[] tuple -> {  // array -> immutable -> Tuple
+                return new Tuple(tuple);
+            }
+            default -> {}
+        }
 
         if (wrapperClass == null)
             wrapperClass = ValueWrapper.class;
@@ -76,14 +86,21 @@ public class Term implements Node, SqlAble {
     }
 
     public static Node wrapJson(Object value, Class<? extends ValueWrapper> wrapperClass) {
-        if (value == null)
-            return new NullValue();
-        if (value instanceof Term term)
-            return term;
-//        if (value instanceof QueryBuilder builder)
-//            return builder;
-        if (value instanceof Interval interval)
-            return interval;
+        switch (value) {
+            case null -> {
+                return new NullValue();
+            }
+            case Term term -> {
+                return term;
+            }
+//            case QueryBuilder builder -> {
+//                return builder;
+//            }
+            case Interval interval -> {
+                return interval;
+            }
+            default -> {}
+        }
         if (value instanceof String || value instanceof Integer || value instanceof Boolean)
             return Utils.newInstance(wrapperClass, new Object[]{ value });
 
@@ -115,27 +132,27 @@ public class Term implements Node, SqlAble {
     }
 
     public ArithmeticExpression add(Object other) {
-        return new ArithmeticExpression(null, Arithmetic.ADD, this, wrapConstant(other));
+        return new ArithmeticExpression(null, ArithmeticOperation.ADD, this, wrapConstant(other));
     }
 
     public ArithmeticExpression sub(Object other) {
-        return new ArithmeticExpression(null, Arithmetic.SUB, this, wrapConstant(other));
+        return new ArithmeticExpression(null, ArithmeticOperation.SUB, this, wrapConstant(other));
     }
 
     public ArithmeticExpression mul(Object other) {
-        return new ArithmeticExpression(null, Arithmetic.MUL, this, wrapConstant(other));
+        return new ArithmeticExpression(null, ArithmeticOperation.MUL, this, wrapConstant(other));
     }
 
     public ArithmeticExpression div(Object other) {
-        return new ArithmeticExpression(null, Arithmetic.DIV, this, wrapConstant(other));
+        return new ArithmeticExpression(null, ArithmeticOperation.DIV, this, wrapConstant(other));
     }
 
-    public Pow pow(float other) {
-        return new Pow(null, this, other);
+    public Arithmetic.Pow pow(float other) {
+        return new Arithmetic.Pow(null, this, other);
     }
 
-    public Mod mod(float other) {
-        return new Mod(null, this, other);
+    public Arithmetic.Mod mod(float other) {
+        return new Arithmetic.Mod(null, this, other);
     }
 
     public BasicCriterion eq(Object other) {
@@ -236,11 +253,11 @@ public class Term implements Node, SqlAble {
     }
 
     public ArithmeticExpression lshift(Object other) {
-        return new ArithmeticExpression(null, Arithmetic.LSHIFT, this, wrapConstant(other));
+        return new ArithmeticExpression(null, ArithmeticOperation.LSHIFT, this, wrapConstant(other));
     }
 
     public ArithmeticExpression rshift(Object other) {
-        return new ArithmeticExpression(null, Arithmetic.RSHIFT, this, wrapConstant(other));
+        return new ArithmeticExpression(null, ArithmeticOperation.RSHIFT, this, wrapConstant(other));
     }
 
     @Override

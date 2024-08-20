@@ -7,6 +7,11 @@ import org.dynapi.squirtle.core.terms.Term;
 public class LiteralValue extends Term {
     private final String literalValue;
 
+    public LiteralValue(LiteralValue original) {
+        super(original);
+        this.literalValue = original.literalValue;
+    }
+
     public LiteralValue(String alias, String literalValue) {
         super(alias);
         this.literalValue = literalValue;

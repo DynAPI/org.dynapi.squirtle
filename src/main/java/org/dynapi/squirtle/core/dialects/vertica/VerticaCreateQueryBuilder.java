@@ -11,6 +11,12 @@ public class VerticaCreateQueryBuilder extends CreateQueryBuilder {
     protected boolean local = false;
     protected boolean preserveRows = false;
 
+    public VerticaCreateQueryBuilder(VerticaCreateQueryBuilder original) {
+        super(original);
+        this.local = original.local;
+        this.preserveRows = original.preserveRows;
+    }
+
     public VerticaCreateQueryBuilder() {
         super(Dialects.VERTICA);
     }

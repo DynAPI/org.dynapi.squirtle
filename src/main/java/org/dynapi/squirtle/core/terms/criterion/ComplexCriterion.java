@@ -7,6 +7,10 @@ import org.dynapi.squirtle.core.terms.Term;
 import java.util.Objects;
 
 public class ComplexCriterion extends BasicCriterion {
+    public ComplexCriterion(ComplexCriterion original) {
+        super(original);
+    }
+
     public ComplexCriterion(String alias, Comparator comparator, Term left, Term right) {
         super(alias, comparator, left, right);
     }

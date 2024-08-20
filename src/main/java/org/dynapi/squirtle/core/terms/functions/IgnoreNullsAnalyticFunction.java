@@ -5,6 +5,11 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 public class IgnoreNullsAnalyticFunction extends AnalyticFunction {
     protected boolean ignoreNulls;
 
+    public IgnoreNullsAnalyticFunction(IgnoreNullsAnalyticFunction original) {
+        super(original);
+        this.ignoreNulls = original.ignoreNulls;
+    }
+
     public IgnoreNullsAnalyticFunction(String alias, String name, Object... values) {
         super(alias, name, values);
         this.ignoreNulls = false;

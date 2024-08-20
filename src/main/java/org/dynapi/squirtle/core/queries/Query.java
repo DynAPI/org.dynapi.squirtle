@@ -1,7 +1,6 @@
 package org.dynapi.squirtle.core.queries;
 
 import org.dynapi.squirtle.core.Utils;
-import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.criterion.Index;
 
 import java.util.Collection;

@@ -1,7 +1,8 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
-import org.dynapi.squirtle.core.enums.Arithmetic;
+import org.dynapi.squirtle.core.enums.ArithmeticOperation;
 import org.dynapi.squirtle.core.enums.Enumerator;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
@@ -12,13 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArithmeticExpression extends Term {
-    protected static List<Arithmetic> ADD_ORDER = List.of(Arithmetic.ADD, Arithmetic.SUB);
+    protected static List<ArithmeticOperation> ADD_ORDER = List.of(ArithmeticOperation.ADD, ArithmeticOperation.SUB);
 
-    public final Arithmetic operator;
+    public final ArithmeticOperation operator;
     protected Term left;
     protected Term right;
 
-    public ArithmeticExpression(String alias, Arithmetic operator, Term left, Term right) {
+    public ArithmeticExpression(ArithmeticExpression original) {
+        super(original);
+        this.operator = original.operator;
+        this.left = CloneUtils.copyConstructorClone(original.left);
+        this.right = CloneUtils.copyConstructorClone(original.right);
+    }
+
+    public ArithmeticExpression(String alias, ArithmeticOperation operator, Term left, Term right) {
         super(alias);
         this.operator = operator;
         this.left = left;
@@ -40,7 +48,7 @@ public class ArithmeticExpression extends Term {
     }
 
     @Override
-    public Arithmetic getOperator() {
+    public ArithmeticOperation getArithmeticOperation() {
         return operator;
     }
 
@@ -51,28 +59,28 @@ public class ArithmeticExpression extends Term {
         return this;
     }
 
-    protected boolean leftNeedsParens(Arithmetic currentOperator, Enumerator leftOperator) {
+    protected boolean leftNeedsParens(ArithmeticOperation currentOperator, Enumerator leftOperator) {
         if (leftOperator == null)
             return false;
         if (ADD_ORDER.contains(currentOperator))
             return false;
-        return leftOperator instanceof Arithmetic && ADD_ORDER.contains((Arithmetic) leftOperator);
+        return leftOperator instanceof ArithmeticOperation && ADD_ORDER.contains((ArithmeticOperation) leftOperator);
     }
 
-    protected boolean rightNeedsParens(Arithmetic currentOperator, Enumerator rightOperator) {
+    protected boolean rightNeedsParens(ArithmeticOperation currentOperator, Enumerator rightOperator) {
         if (rightOperator == null)
             return false;
-        if (currentOperator == Arithmetic.ADD)
+        if (currentOperator == ArithmeticOperation.ADD)
             return false;
-        if (currentOperator == Arithmetic.DIV)
+        if (currentOperator == ArithmeticOperation.DIV)
             return true;
-        return rightOperator instanceof Arithmetic && ADD_ORDER.contains((Arithmetic) rightOperator);
+        return rightOperator instanceof ArithmeticOperation && ADD_ORDER.contains((ArithmeticOperation) rightOperator);
     }
 
     @Override
     public String getSql(SqlAbleConfig config) {
-        Enumerator leftOperator = left.getOperator();
-        Enumerator rightOperator = right.getOperator();
+        Enumerator leftOperator = left.getArithmeticOperation();
+        Enumerator rightOperator = right.getArithmeticOperation();
 
         String leftSql = String.format(
                 leftNeedsParens(operator, leftOperator) ? "(%s)" : "%s",

@@ -1,3 +1,5 @@
+[![Publish Build to Github Releases](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-release.yaml/badge.svg)](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-release.yaml)
+[![Publish package to GitHub Packages](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-package.yaml/badge.svg)](https://github.com/DynAPI/org.dynapi.squirtle/actions/workflows/publish-package.yaml)
 # Squirtle - Java SQL Query Builder
 
 ```java
@@ -7,7 +9,7 @@ import org.dynapi.squirtle.core.queries.Database;
 import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.Table;
 
-public class Testing {
+public class Example {
     public static void main(String[] args) {
         Table table = new Database("dynapi").getSchema("dynapi").getTable("test");
         String sql = Query

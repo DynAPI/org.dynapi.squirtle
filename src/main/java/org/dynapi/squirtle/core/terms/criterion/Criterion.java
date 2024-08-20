@@ -7,6 +7,10 @@ import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Term;
 
 public class Criterion extends Term implements CriterionOperations, SqlAble {
+    public Criterion(Criterion original) {
+        super(original);
+    }
+
     public Criterion(String alias) {
         super(alias);
     }

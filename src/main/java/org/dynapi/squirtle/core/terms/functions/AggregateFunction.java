@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.functions;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.interfaces.FunctionSqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
@@ -17,6 +18,12 @@ public class AggregateFunction extends Function implements FunctionSqlAble {
 
     private boolean include_filter;
     private final List<Term> filters;
+
+    public AggregateFunction(AggregateFunction original) {
+        super(original);
+        this.include_filter = original.include_filter;
+        this.filters = CloneUtils.copyConstructorCloneCollection(original.filters);
+    }
 
     public AggregateFunction(String alias, String name, Object... args) {
         super(alias, name, args);
