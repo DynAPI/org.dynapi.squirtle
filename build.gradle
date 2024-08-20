@@ -25,6 +25,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile).each {
+    it.options.compilerArgs.add("--enable-preview")
+}
+
 publishing {
     publications {
         squirtle(MavenPublication) {
