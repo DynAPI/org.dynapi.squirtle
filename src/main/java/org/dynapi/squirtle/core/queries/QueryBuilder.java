@@ -87,7 +87,8 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         this.forceIndexes = CloneUtils.copyConstructorCloneCollection(original.forceIndexes);
         this.useIndexes = CloneUtils.copyConstructorCloneCollection(original.useIndexes);
         this.columns = CloneUtils.copyConstructorCloneCollection(original.columns);
-        this.values = CloneUtils.copyConstructorCloneCollection(original.values);  // todo: fixme
+        // todo: better nested clone
+        this.values = new ArrayList<>(original.values.stream().map(CloneUtils::copyConstructorCloneCollection).toList());
         this.distinct = original.distinct;
         this.ignore = original.ignore;
 

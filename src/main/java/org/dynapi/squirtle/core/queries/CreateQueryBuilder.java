@@ -42,7 +42,8 @@ public class CreateQueryBuilder implements QueryBuilderAttributes, SqlAble {
         this.periodFors = CloneUtils.copyConstructorCloneCollection(original.periodFors);
         this.withSystemVersioning = original.withSystemVersioning;
         this.primaryKey = CloneUtils.copyConstructorCloneCollection(original.primaryKey);
-        this.uniques = CloneUtils.copyConstructorCloneCollection(original.uniques);  // todo: better clone
+        // todo: better nested clone
+        this.uniques = new ArrayList<>(original.uniques.stream().map(CloneUtils::copyConstructorCloneCollection).toList());
         this.ifNotExists = original.ifNotExists;
         this.dialect = original.dialect;
         this.foreignKey = CloneUtils.copyConstructorCloneCollection(original.foreignKey);
