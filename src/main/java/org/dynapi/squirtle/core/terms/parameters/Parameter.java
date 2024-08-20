@@ -9,13 +9,18 @@ public class Parameter extends Term implements SqlAble {
 
     protected final String placeholder;
 
+    public Parameter(Parameter original) {
+        super(original);
+        this.placeholder = original.placeholder;
+    }
+
     public Parameter(Integer placeholder) {
-        super(null);
+        super((String) null);
         this.placeholder = placeholder.toString();
     }
 
     public Parameter(String placeholder) {
-        super(null);
+        super((String) null);
         this.placeholder = placeholder;
     }
 

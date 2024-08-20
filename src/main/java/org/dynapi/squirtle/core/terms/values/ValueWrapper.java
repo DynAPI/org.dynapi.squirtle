@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.values;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -15,6 +16,11 @@ public class ValueWrapper extends Term implements SqlAble {
     public Boolean isAggregate() { return null; }
 
     private final Object value;
+
+    public ValueWrapper(ValueWrapper original) {
+        super(original);
+        this.value = CloneUtils.copyConstructorCloneNoFail(original.value);
+    }
 
     public ValueWrapper(Object value) {
         this(null, value);

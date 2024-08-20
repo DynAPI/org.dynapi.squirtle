@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
@@ -11,6 +12,11 @@ import java.util.List;
 
 public class NullCriterion extends Criterion {
     protected Term term;
+
+    public NullCriterion(NullCriterion original) {
+        super(original);
+        this.term = CloneUtils.copyConstructorClone(original.term);
+    }
 
     public NullCriterion(String alias, Term term) {
         super(alias);

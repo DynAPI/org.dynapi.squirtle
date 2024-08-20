@@ -42,6 +42,21 @@ public class Interval implements Node, SqlAble {
     private final Integer seconds;
     private final Integer microseconds;
 
+    public Interval(Interval original) {
+        this.dialect = original.dialect;
+        this.largestLabel = original.largestLabel;
+        this.smallestLabel = original.smallestLabel;
+        this.isNegative = original.isNegative;
+
+        this.years = original.years;
+        this.months = original.months;
+        this.days = original.days;
+        this.hours = original.hours;
+        this.minutes = original.minutes;
+        this.seconds = original.seconds;
+        this.microseconds = original.microseconds;
+    }
+
     public Interval(Integer years, Integer months, Integer days, Integer hours, Integer minutes, Integer seconds, Integer microseconds, Dialects dialect) {
         this.dialect = dialect;
         this.largestLabel = null;

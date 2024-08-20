@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Enumerator;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -14,6 +15,13 @@ public class BasicCriterion extends Criterion {
     protected final Enumerator comparator;
     protected Term left;
     protected Term right;
+
+    public BasicCriterion(BasicCriterion original) {
+        super(original);
+        this.comparator = original.comparator;
+        this.left = CloneUtils.copyConstructorClone(original.left);
+        this.right = CloneUtils.copyConstructorClone(original.right);
+    }
 
     public BasicCriterion(String alias, Enumerator comparator, Term left, Term right) {
         super(alias);

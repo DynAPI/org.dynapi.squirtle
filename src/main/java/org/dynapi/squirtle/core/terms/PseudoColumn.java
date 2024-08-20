@@ -6,8 +6,13 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 public class PseudoColumn extends Term implements SqlAble {
     private final String name;
 
+    public PseudoColumn(PseudoColumn original) {
+        super(original);
+        this.name = original.name;
+    }
+
     public PseudoColumn(String name) {
-        super(null);
+        super((String) null);
         this.name = name;
     }
 

@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.functions;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.Order;
 import org.dynapi.squirtle.core.interfaces.FunctionSqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
@@ -21,6 +22,15 @@ public class AnalyticFunction extends AggregateFunction implements FunctionSqlAb
     protected List<OrderByEntry> orderBys;
     protected boolean includeFilter;
     protected boolean includeOver;
+
+    public AnalyticFunction(AnalyticFunction original) {
+        super(original);
+        this.filters = CloneUtils.copyConstructorCloneCollection(original.filters);
+        this.partition = CloneUtils.copyConstructorCloneCollection(original.partition);
+        this.orderBys = new ArrayList<>(original.orderBys);
+        this.includeFilter = original.includeFilter;
+        this.includeOver = original.includeOver;
+    }
 
     public AnalyticFunction(String alias, String name, Object... args) {
         super(alias, name, args);

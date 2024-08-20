@@ -29,6 +29,10 @@ public class Term implements Node, SqlAble {
     @Setter
     protected String alias;
 
+    public Term(Term original) {
+        this.alias = original.alias;
+    }
+
     public Term(String alias) {
         this.alias = alias;
     }

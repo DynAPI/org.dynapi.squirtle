@@ -5,6 +5,10 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
 
 public class NotNullCriterion extends NullCriterion {
+    public NotNullCriterion(NotNullCriterion original) {
+        super(original);
+    }
+
     public NotNullCriterion(String alias, Term term) {
         super(alias, term);
     }

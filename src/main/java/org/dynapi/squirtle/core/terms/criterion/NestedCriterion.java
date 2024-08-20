@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Comparator;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -16,6 +17,15 @@ public class NestedCriterion extends Criterion {
     protected Term left;
     protected Term right;
     protected Term nested;
+
+    public NestedCriterion(NestedCriterion original) {
+        super(original);
+        this.comparator = original.comparator;
+        this.nestedComparator = CloneUtils.copyConstructorClone(original.nestedComparator);
+        this.left = CloneUtils.copyConstructorClone(original.left);
+        this.right = CloneUtils.copyConstructorClone(original.right);
+        this.nested = CloneUtils.copyConstructorClone(original.nested);
+    }
 
     // xxx: comparator is of type Comparator(enum)
 

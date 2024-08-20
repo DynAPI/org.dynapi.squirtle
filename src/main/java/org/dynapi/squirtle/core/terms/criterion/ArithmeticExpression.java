@@ -1,5 +1,6 @@
 package org.dynapi.squirtle.core.terms.criterion;
 
+import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.ArithmeticOperation;
 import org.dynapi.squirtle.core.enums.Enumerator;
@@ -17,6 +18,13 @@ public class ArithmeticExpression extends Term {
     public final ArithmeticOperation operator;
     protected Term left;
     protected Term right;
+
+    public ArithmeticExpression(ArithmeticExpression original) {
+        super(original);
+        this.operator = original.operator;
+        this.left = CloneUtils.copyConstructorClone(original.left);
+        this.right = CloneUtils.copyConstructorClone(original.right);
+    }
 
     public ArithmeticExpression(String alias, ArithmeticOperation operator, Term left, Term right) {
         super(alias);
