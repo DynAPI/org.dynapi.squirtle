@@ -8,15 +8,15 @@ import java.util.List;
 public interface CriterionOperations {
 
     default ComplexCriterion and(Term other) {
-        return new ComplexCriterion(null, BooleanComparison.AND, (Term) this, other);
+        return new ComplexCriterion(BooleanComparison.AND, (Term) this, other);
     }
 
     default ComplexCriterion or(Term other) {
-        return new ComplexCriterion(null, BooleanComparison.OR, (Term) this, other);
+        return new ComplexCriterion(BooleanComparison.OR, (Term) this, other);
     }
 
     default ComplexCriterion xor(Term other) {
-        return new ComplexCriterion(null, BooleanComparison.XOR,  (Term) this, other);
+        return new ComplexCriterion(BooleanComparison.XOR,  (Term) this, other);
     }
 
     static Criterion any(Term... terms) {
@@ -24,7 +24,7 @@ public interface CriterionOperations {
     }
 
     static Criterion any(List<Term> terms) {
-        Criterion criterion = new EmptyCriterion((String) null);
+        Criterion criterion = new EmptyCriterion();
         for (Term term : terms) {
             criterion = criterion.or(term);
         }
@@ -36,7 +36,7 @@ public interface CriterionOperations {
     }
 
     static Criterion all(List<Term> terms) {
-        Criterion criterion = new EmptyCriterion((String) null);
+        Criterion criterion = new EmptyCriterion();
         for (Term term : terms) {
             criterion = criterion.and(term);
         }

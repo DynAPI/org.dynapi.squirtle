@@ -32,7 +32,7 @@ public class Column implements SqlAble {
         this.name = name;
         this.columnType = columnType;
         this.nullable = nullable;
-        this.defaultValue = (defaultValue instanceof Term) ? (Term) defaultValue : new ValueWrapper(null, defaultValue);
+        this.defaultValue = (defaultValue instanceof Term) ? (Term) defaultValue : new ValueWrapper(defaultValue);
     }
 
     public String getNameSql(SqlAbleConfig config) {

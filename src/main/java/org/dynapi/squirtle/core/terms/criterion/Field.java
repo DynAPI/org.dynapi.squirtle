@@ -25,15 +25,10 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
     }
 
     public Field(String name) {
-        this(null, name);
+        this(name, null);
     }
 
-    public Field(String alias, String name) {
-        this(alias, name, null);
-    }
-
-    public Field(String alias, String name, Selectable table) {
-        super(alias, null);
+    public Field(String name, Selectable table) {
         this.name = name;
         this.table = table;
     }
@@ -62,7 +57,7 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
             fieldSql = String.format(
                     "%s.%s",
                     Utils.formatQuotes(table.getTableName(), config.getQuoteChar()),
-                    name
+                    fieldSql
             );
         }
 

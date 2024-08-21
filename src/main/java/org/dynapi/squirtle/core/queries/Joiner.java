@@ -38,7 +38,7 @@ public class Joiner {
 
         Criterion criterion = null;
         for (String fieldName : fields) {
-            BasicCriterion constituent = (new Field(null, fieldName, query.from.get(0)).eq(new Field(null, fieldName, item)));
+            BasicCriterion constituent = (new Field(fieldName, query.from.get(0)).eq(new Field(fieldName, item)));
             criterion = criterion == null ? constituent : criterion.and(constituent);
         }
 

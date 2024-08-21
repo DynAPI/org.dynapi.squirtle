@@ -6,6 +6,6 @@ public class NullValue extends LiteralValue {
     }
 
     public NullValue() {
-        super(null, "NULL");
+        super("NULL");
     }
 }

@@ -21,8 +21,7 @@ public class ContainsCriterion extends Criterion {
         this.isNegated = original.isNegated;
     }
 
-    public ContainsCriterion(String alias, Term term, Term container) {
-        super(alias);
+    public ContainsCriterion(Term term, Term container) {
         this.term = term;
         this.container = container;
         isNegated = false;

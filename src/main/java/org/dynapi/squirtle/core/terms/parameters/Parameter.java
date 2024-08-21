@@ -15,12 +15,10 @@ public class Parameter extends Term implements SqlAble {
     }
 
     public Parameter(Integer placeholder) {
-        super((String) null);
         this.placeholder = placeholder.toString();
     }
 
     public Parameter(String placeholder) {
-        super((String) null);
         this.placeholder = placeholder;
     }
 

@@ -7,6 +7,7 @@ import org.dynapi.squirtle.core.enums.ArithmeticOperation;
 import org.dynapi.squirtle.core.enums.Enumerator;
 import org.dynapi.squirtle.core.enums.Equality;
 import org.dynapi.squirtle.core.enums.Matching;
+import org.dynapi.squirtle.core.interfaces.AliasAble;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
@@ -18,29 +19,21 @@ import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 import java.util.*;
 
-public class Term implements Node, SqlAble {
+public class Term implements Node, SqlAble, AliasAble {
     @Override
     public Boolean isAggregate() {
         return false;
     }
     public Enumerator getArithmeticOperation() { return null; }
 
-    @Getter
-    @Setter
+    @Getter @Setter
     protected String alias;
 
     public Term(Term original) {
         this.alias = original.alias;
     }
 
-    public Term(String alias) {
-        this.alias = alias;
-    }
-
-    public Term as(String alias) {
-        this.alias = alias;
-        return this;
-    }
+    public Term() {}
 
     public Set<Table> getTables() {
         return new HashSet<>(find(Table.class));
@@ -104,7 +97,7 @@ public class Term implements Node, SqlAble {
         if (value instanceof String || value instanceof Integer || value instanceof Boolean)
             return Utils.newInstance(wrapperClass, new Object[]{ value });
 
-        return new JSON(null, value);
+        return new JSON(value);
     }
 
     /**
@@ -120,7 +113,7 @@ public class Term implements Node, SqlAble {
     }
 
     public NullCriterion isNull() {
-        return new NullCriterion(null, this);
+        return new NullCriterion(this);
     }
 
     public Not notNull() {
@@ -128,116 +121,116 @@ public class Term implements Node, SqlAble {
     }
 
     public NotNullCriterion isNotNull() {
-        return new NotNullCriterion(null, this);
+        return new NotNullCriterion(this);
     }
 
     public ArithmeticExpression add(Object other) {
-        return new ArithmeticExpression(null, ArithmeticOperation.ADD, this, wrapConstant(other));
+        return new ArithmeticExpression(ArithmeticOperation.ADD, this, wrapConstant(other));
     }
 
     public ArithmeticExpression sub(Object other) {
-        return new ArithmeticExpression(null, ArithmeticOperation.SUB, this, wrapConstant(other));
+        return new ArithmeticExpression(ArithmeticOperation.SUB, this, wrapConstant(other));
     }
 
     public ArithmeticExpression mul(Object other) {
-        return new ArithmeticExpression(null, ArithmeticOperation.MUL, this, wrapConstant(other));
+        return new ArithmeticExpression(ArithmeticOperation.MUL, this, wrapConstant(other));
     }
 
     public ArithmeticExpression div(Object other) {
-        return new ArithmeticExpression(null, ArithmeticOperation.DIV, this, wrapConstant(other));
+        return new ArithmeticExpression(ArithmeticOperation.DIV, this, wrapConstant(other));
     }
 
     public Arithmetic.Pow pow(float other) {
-        return new Arithmetic.Pow(null, this, other);
+        return new Arithmetic.Pow(this, other);
     }
 
     public Arithmetic.Mod mod(float other) {
-        return new Arithmetic.Mod(null, this, other);
+        return new Arithmetic.Mod(this, other);
     }
 
     public BasicCriterion eq(Object other) {
-        return new BasicCriterion(null, Equality.EQ, this, wrapConstant(other));
+        return new BasicCriterion(Equality.EQ, this, wrapConstant(other));
     }
 
     public BasicCriterion ne(Object other) {
-        return new BasicCriterion(null, Equality.NE, this, wrapConstant(other));
+        return new BasicCriterion(Equality.NE, this, wrapConstant(other));
     }
 
     public BasicCriterion gt(Object other) {
-        return new BasicCriterion(null, Equality.GT, this, wrapConstant(other));
+        return new BasicCriterion(Equality.GT, this, wrapConstant(other));
     }
 
     public BasicCriterion gte(Object other) {
-        return new BasicCriterion(null, Equality.GTE, this, wrapConstant(other));
+        return new BasicCriterion(Equality.GTE, this, wrapConstant(other));
     }
 
     public BasicCriterion lt(Object other) {
-        return new BasicCriterion(null, Equality.LT, this, wrapConstant(other));
+        return new BasicCriterion(Equality.LT, this, wrapConstant(other));
     }
 
     public BasicCriterion lte(Object other) {
-        return new BasicCriterion(null, Equality.LTE, this, wrapConstant(other));
+        return new BasicCriterion(Equality.LTE, this, wrapConstant(other));
     }
 
     public BasicCriterion glob(String expr) {
-        return new BasicCriterion(null, Matching.GLOB, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.GLOB, this, wrapConstant(expr));
     }
 
     public BasicCriterion like(String expr) {
-        return new BasicCriterion(null, Matching.LIKE, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.LIKE, this, wrapConstant(expr));
     }
 
     public BasicCriterion not_like(String expr) {
-        return new BasicCriterion(null, Matching.NOT_LIKE, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.NOT_LIKE, this, wrapConstant(expr));
     }
 
     public BasicCriterion ilike(String expr) {
-        return new BasicCriterion(null, Matching.ILIKE, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.ILIKE, this, wrapConstant(expr));
     }
 
     public BasicCriterion not_ilike(String expr) {
-        return new BasicCriterion(null, Matching.NOT_ILIKE, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.NOT_ILIKE, this, wrapConstant(expr));
     }
 
     public BasicCriterion rlike(String expr) {
-        return new BasicCriterion(null, Matching.RLIKE, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.RLIKE, this, wrapConstant(expr));
     }
 
     public BasicCriterion regex(String expr) {
-        return new BasicCriterion(null, Matching.REGEX, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.REGEX, this, wrapConstant(expr));
     }
 
     public BasicCriterion regexp(String expr) {
-        return new BasicCriterion(null, Matching.REGEXP, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.REGEXP, this, wrapConstant(expr));
     }
 
     public BasicCriterion binRegex(String pattern) {
-        return new BasicCriterion(null, Matching.BIN_REGEX, this, wrapConstant(pattern));
+        return new BasicCriterion(Matching.BIN_REGEX, this, wrapConstant(pattern));
     }
 
     public BetweenCriterion between(Object lower, Object upper) {
-        return new BetweenCriterion(null, this, wrapConstant(lower), wrapConstant(upper));
+        return new BetweenCriterion(this, wrapConstant(lower), wrapConstant(upper));
     }
 
     public PeriodCriterion fromTo(Object start, Objects end) {
-        return new PeriodCriterion(null, this, wrapConstant(start), wrapConstant(end));
+        return new PeriodCriterion(this, wrapConstant(start), wrapConstant(end));
     }
 
     public BasicCriterion asOf(String expr) {
-        return new BasicCriterion(null, Matching.AS_OF, this, wrapConstant(expr));
+        return new BasicCriterion(Matching.AS_OF, this, wrapConstant(expr));
     }
 
     public All all() {
-        return new All(null, this);
+        return new All(this);
     }
 
     public ContainsCriterion isIn(List<?> args) {
         List<Term> wrapped = args.stream().map(Term::wrapConstant).toList();
-        return new ContainsCriterion(null, this, new Tuple(wrapped));
+        return new ContainsCriterion(this, new Tuple(wrapped));
     }
 
     public ContainsCriterion isIn(Term arg) {
-        return new ContainsCriterion(null, this, arg);
+        return new ContainsCriterion(this, arg);
     }
 
     public ContainsCriterion notIn(List<?> arg) {
@@ -245,19 +238,19 @@ public class Term implements Node, SqlAble {
     }
 
     public Not negate() {
-        return new Not(null, this);
+        return new Not(this);
     }
 
     public BitwiseAndCriterion bitwiseAnd(int value) {
-        return new BitwiseAndCriterion(null, this, wrapConstant(value));
+        return new BitwiseAndCriterion(this, wrapConstant(value));
     }
 
     public ArithmeticExpression lshift(Object other) {
-        return new ArithmeticExpression(null, ArithmeticOperation.LSHIFT, this, wrapConstant(other));
+        return new ArithmeticExpression(ArithmeticOperation.LSHIFT, this, wrapConstant(other));
     }
 
     public ArithmeticExpression rshift(Object other) {
-        return new ArithmeticExpression(null, ArithmeticOperation.RSHIFT, this, wrapConstant(other));
+        return new ArithmeticExpression(ArithmeticOperation.RSHIFT, this, wrapConstant(other));
     }
 
     @Override

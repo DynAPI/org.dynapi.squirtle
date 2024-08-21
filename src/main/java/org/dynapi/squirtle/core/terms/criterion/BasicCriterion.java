@@ -23,8 +23,7 @@ public class BasicCriterion extends Criterion {
         this.right = CloneUtils.copyConstructorClone(original.right);
     }
 
-    public BasicCriterion(String alias, Enumerator comparator, Term left, Term right) {
-        super(alias);
+    public BasicCriterion(Enumerator comparator, Term left, Term right) {
         this.comparator = comparator;
         this.left = left;
         this.right = right;

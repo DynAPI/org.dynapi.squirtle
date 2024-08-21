@@ -20,8 +20,7 @@ public class BitwiseAndCriterion extends Criterion {
         this.value = CloneUtils.copyConstructorCloneNoFail(original.value);
     }
 
-    public BitwiseAndCriterion(String alias, Term term, Node value) {
-        super(alias);
+    public BitwiseAndCriterion(Term term, Node value) {
         this.term = term;
         this.value = value;
     }

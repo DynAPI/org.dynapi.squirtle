@@ -131,8 +131,6 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder(Dialects dialect, Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super((String) null);
-
         this.dialect = dialect;
         this.asKeyword = asKeyword == null ? false : asKeyword;
         this.wrapSetOperationQueries = wrapSetOperationQueries == null ? true : wrapSetOperationQueries;
@@ -143,7 +141,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     // xxx: __copy__
 
     public QueryBuilder from(String tableName) {
-        return from(new Table(null, tableName));
+        return from(new Table(tableName));
     }
 
     public QueryBuilder from(Selectable selectable) {
@@ -174,7 +172,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder into(String tableName) {
-        return into(new Table(null, tableName));
+        return into(new Table(tableName));
     }
 
     public QueryBuilder into(Table table) {
@@ -213,7 +211,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder update(String tableName) {
-        return update(new Table(null, tableName));
+        return update(new Table(tableName));
     }
 
     public QueryBuilder update(Table table) {
@@ -230,7 +228,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
 
         for (Object term : terms) {
             if (term instanceof String fieldName)
-                term = new Field(null, fieldName, insertTable);
+                term = new Field(fieldName, insertTable);
             columns.add((SqlAble) term);
         }
         return this;
@@ -247,7 +245,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
             if (term instanceof Index index) {
                 forceIndexes.add(index);
             } else if (term instanceof String indexName) {
-                forceIndexes.add(new Index(null, indexName));
+                forceIndexes.add(new Index(indexName));
             }
         }
         return this;
@@ -258,7 +256,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
             if (term instanceof Index index) {
                 useIndexes.add(index);
             } else if (term instanceof String indexName) {
-                useIndexes.add(new Index(null, indexName));
+                useIndexes.add(new Index(indexName));
             }
         }
         return this;
@@ -319,7 +317,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     public QueryBuilder groupBy(Object... terms) {
         for (Object term : terms) {
             if (term instanceof String fieldName)
-                term = new Field(null, fieldName, from.get(0));
+                term = new Field(fieldName, from.get(0));
             else if (term instanceof Integer fieldIndex)
                 term = Term.wrapConstant(fieldIndex);
 
@@ -366,7 +364,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return orderBy(
                 Arrays
                         .stream(fields)
-                        .map(field -> field instanceof String fieldName ? new Field(null, fieldName, from.get(0)) : wrapConstant(field))
+                        .map(field -> field instanceof String fieldName ? new Field(fieldName, from.get(0)) : wrapConstant(field))
                         .map(field -> new OrderByEntry(field, order))
                         .toList()
         );
@@ -431,27 +429,27 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public SetOperation union(QueryBuilder other) {
-        return new SetOperation(null, this, other, SetOperations.UNION, wrapperClass);
+        return new SetOperation(this, other, SetOperations.UNION, wrapperClass);
     }
 
     public SetOperation unionAll(QueryBuilder other) {
-        return new SetOperation(null, this, other, SetOperations.UNION_ALL, wrapperClass);
+        return new SetOperation(this, other, SetOperations.UNION_ALL, wrapperClass);
     }
 
     public SetOperation intersect(QueryBuilder other) {
-        return new SetOperation(null, this, other, SetOperations.INTERSECT, wrapperClass);
+        return new SetOperation(this, other, SetOperations.INTERSECT, wrapperClass);
     }
 
     public SetOperation exceptOf(QueryBuilder other) {
-        return new SetOperation(null, this, other, SetOperations.EXCEPT_OF, wrapperClass);
+        return new SetOperation(this, other, SetOperations.EXCEPT_OF, wrapperClass);
     }
 
     public SetOperation minus(QueryBuilder other) {
-        return new SetOperation(null, this, other, SetOperations.MINUS, wrapperClass);
+        return new SetOperation(this, other, SetOperations.MINUS, wrapperClass);
     }
 
     public QueryBuilder set(String fieldName, Objects value) {
-        return set(new Field(null, fieldName, null), value);
+        return set(new Field(fieldName, null), value);
     }
     public QueryBuilder set(Field field, Objects value) {
         updates.add(new UpdateEntry(field, Utils.newInstance(wrapperClass, new Object[]{ null, value})));
@@ -471,7 +469,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
             selectStar = true;
             selects = List.of(new Star());
         } else {
-            selectField(new Field(null, term, from.get(0)));
+            selectField(new Field(term, from.get(0)));
         }
     }
 

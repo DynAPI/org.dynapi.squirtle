@@ -12,8 +12,8 @@ public class DistinctOptionFunction extends AggregateFunction implements Functio
         this.distinct = original.distinct;
     }
 
-    public DistinctOptionFunction(String alias, String name, Object... args) {
-        super(alias, name, args);
+    public DistinctOptionFunction(String name, Object... args) {
+        super(name, args);
         this.distinct = false;
     }
 

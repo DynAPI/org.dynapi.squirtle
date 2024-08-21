@@ -15,15 +15,15 @@ public class Star extends Field {
     }
 
     public Star() {
-        super(null, "*", null);
+        super("*");
     }
 
     public Star(String tableName) {
-        super(null, "*", new Table(null, tableName));
+        super("*", new Table(tableName));
     }
 
     public Star(Selectable table) {
-        super(null, "*", table);
+        super("*", table);
     }
 
     @Override

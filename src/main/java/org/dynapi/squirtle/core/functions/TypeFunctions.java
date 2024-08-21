@@ -18,8 +18,8 @@ public class TypeFunctions {
             this.asType = original.asType;
         }
 
-        public Cast(String alias, Term term, SqlType asType) {
-            super(alias, "CAST", term);
+        public Cast(Term term, SqlType asType) {
+            super("CAST", term);
             this.asType = asType;
         }
 
@@ -40,8 +40,8 @@ public class TypeFunctions {
             this.encoding = original.encoding;
         }
 
-        public Convert(String alias, Term term, String encoding) {
-            super(alias, "CONVERT", term);
+        public Convert(Term term, String encoding) {
+            super("CONVERT", term);
             this.encoding = encoding;
         }
 
@@ -56,8 +56,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public ToChar(String alias, Term term, Object asType) {
-            super(alias, "TO_CHAR", term, asType);
+        public ToChar(Term term, Object asType) {
+            super("TO_CHAR", term, asType);
         }
     }
 
@@ -66,8 +66,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public Signed(String alias, Term term) {
-            super(alias, term, SqlType.SIGNED);
+        public Signed(Term term) {
+            super(term, SqlType.SIGNED);
         }
     }
 
@@ -76,8 +76,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public UnSigned(String alias, Term term) {
-            super(alias, term, SqlType.UNSIGNED);
+        public UnSigned(Term term) {
+            super(term, SqlType.UNSIGNED);
         }
     }
 
@@ -86,8 +86,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public Date(String alias, Term term) {
-            super(alias, "DATE", term);
+        public Date(Term term) {
+            super("DATE", term);
         }
     }
 
@@ -96,8 +96,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public DateDiff(String alias, Interval interval, String startDate, String endDate) {
-            super(alias, "DATEDIFF", interval, startDate, endDate);
+        public DateDiff(Interval interval, String startDate, String endDate) {
+            super("DATEDIFF", interval, startDate, endDate);
         }
     }
 
@@ -106,8 +106,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public TimeDiff(String alias, Interval interval, String startTime, String endTime) {
-            super(alias, "DATEDIFF", interval, startTime, endTime);
+        public TimeDiff(Interval interval, String startTime, String endTime) {
+            super("DATEDIFF", interval, startTime, endTime);
         }
     }
 
@@ -116,8 +116,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public DateAdd(String alias, String datePart, Interval interval, Term term) {
-            super(alias, "DATE_ADD", new LiteralValue(null, datePart), interval, term);
+        public DateAdd(String datePart, Interval interval, Term term) {
+            super("DATE_ADD", new LiteralValue(datePart), interval, term);
         }
     }
 
@@ -126,8 +126,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public ToDate(String alias, Object value, String formatMask) {
-            super(alias, "TO_DATE", value, formatMask);
+        public ToDate(Object value, String formatMask) {
+            super("TO_DATE", value, formatMask);
         }
     }
 
@@ -136,8 +136,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public Timestamp(String alias, Term term) {
-            super(alias, "TIMESTAMP", term);
+        public Timestamp(Term term) {
+            super("TIMESTAMP", term);
         }
     }
 
@@ -146,8 +146,8 @@ public class TypeFunctions {
             super(original);
         }
 
-        public TimestampAdd(String alias, String datePart, Interval interval, String term) {
-            super(alias, "TIMESTAMPADD", new LiteralValue(null, datePart), interval, term);
+        public TimestampAdd(String datePart, Interval interval, String term) {
+            super("TIMESTAMPADD", new LiteralValue(datePart), interval, term);
         }
     }
 }

@@ -10,8 +10,8 @@ public class BetweenCriterion extends RangeCriterion {
         super(original);
     }
 
-    public BetweenCriterion(String alias, Term term, Term start, Term end) {
-        super(alias, term, start, end);
+    public BetweenCriterion(Term term, Term start, Term end) {
+        super(term, start, end);
     }
 
     @Override

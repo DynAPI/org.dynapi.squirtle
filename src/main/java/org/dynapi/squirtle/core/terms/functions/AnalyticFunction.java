@@ -32,8 +32,8 @@ public class AnalyticFunction extends AggregateFunction implements FunctionSqlAb
         this.includeOver = original.includeOver;
     }
 
-    public AnalyticFunction(String alias, String name, Object... args) {
-        super(alias, name, args);
+    public AnalyticFunction(String name, Object... args) {
+        super(name, args);
         this.filters = new ArrayList<>();
         this.partition = new ArrayList<>();
         this.orderBys = new ArrayList<>();
