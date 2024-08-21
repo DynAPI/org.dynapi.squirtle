@@ -58,7 +58,7 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
         args = args
                 .stream()
                 // todo: not sure if this cast breaks something
-                .map(arg -> (arg instanceof Term term) ? term.replaceTable(currentTable, newTable) : arg)
+                .map(term -> term.replaceTable(currentTable, newTable))
                 .toList();
         return this;
     }
@@ -68,9 +68,9 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
         return null;
     }
 
-    private static String getArgSql(Node arg, SqlAbleConfig config) {
-        return arg instanceof SqlAble ? ((SqlAble) arg).getSql(config.withWithAlias(false)) : arg.toString();
-    }
+//    private static String getArgSql(Node arg, SqlAbleConfig config) {
+//        return arg instanceof SqlAble sqlAble ? sqlAble.getSql(config.withWithAlias(false)) : arg.toString();
+//    }
 
     @Override
     public String getFunctionSql(SqlAbleConfig config) {
@@ -80,10 +80,11 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
 
         List<String> mappedArgs = args
                 .stream()
-                .map(arg -> (arg instanceof SqlAble sqlAble)
-                        ? sqlAble.getSql(getSqlConfig)
-                        : getArgSql(arg, config)
-                )
+                .map(term -> term.getSql(getSqlConfig))
+//                .map(arg -> (arg instanceof SqlAble sqlAble)
+//                        ? sqlAble.getSql(getSqlConfig)
+//                        : getArgSql(arg, config)
+//                )
                 .toList();
         String parametersStr = String.join(",", mappedArgs);
         String specialParamsStr = specialParamsSql != null ? " " + specialParamsSql : "";
