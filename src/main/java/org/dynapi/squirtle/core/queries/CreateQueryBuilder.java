@@ -62,7 +62,7 @@ public class CreateQueryBuilder implements QueryBuilderAttributes, SqlAble {
     }
 
     public CreateQueryBuilder createTable(String tableName) {
-        return createTable(new Table(null, tableName));
+        return createTable(new Table(tableName));
     }
 
     public CreateQueryBuilder createTable(Table table) {

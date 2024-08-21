@@ -17,8 +17,7 @@ public class All extends Criterion {
         this.term = CloneUtils.copyConstructorClone(original.term);
     }
 
-    public All(String alias, Term term) {
-        super(alias);
+    public All(Term term) {
         this.term = term;
     }
 

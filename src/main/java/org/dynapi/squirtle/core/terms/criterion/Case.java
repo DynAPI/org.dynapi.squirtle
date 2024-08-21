@@ -21,8 +21,7 @@ public class Case extends Criterion {
         this.otherwise = CloneUtils.copyConstructorClone(otherwise);
     }
 
-    public Case(String alias) {
-        super(alias);
+    public Case() {
         cases = new ArrayList<>();
         otherwise = null;
     }

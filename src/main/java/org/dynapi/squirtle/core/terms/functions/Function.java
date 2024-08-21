@@ -29,12 +29,11 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
         this.schema = CloneUtils.copyConstructorClone(original.schema);
     }
 
-    public Function(String alias, @NonNull String name, Object... args) {
-        this(alias, name, null, args);
+    public Function(@NonNull String name, Object... args) {
+        this(name, null, args);
     }
 
-    public Function(String alias, @NonNull String name, Schema schema, Object... args) {
-        super(alias);
+    public Function(@NonNull String name, Schema schema, Object... args) {
         this.name = name;
         this.args = Arrays.stream(args).map(arg -> wrapConstant(arg, null)).toList();
         this.schema = schema;
@@ -59,7 +58,7 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
         args = args
                 .stream()
                 // todo: not sure if this cast breaks something
-                .map(arg -> (arg instanceof Term) ? ((Term) arg).replaceTable(currentTable, newTable) : arg)
+                .map(arg -> (arg instanceof Term term) ? term.replaceTable(currentTable, newTable) : arg)
                 .toList();
         return this;
     }
@@ -81,8 +80,8 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
 
         List<String> mappedArgs = args
                 .stream()
-                .map(arg -> (arg instanceof SqlAble)
-                        ? ((SqlAble) arg).getSql(getSqlConfig)
+                .map(arg -> (arg instanceof SqlAble sqlAble)
+                        ? sqlAble.getSql(getSqlConfig)
                         : getArgSql(arg, config)
                 )
                 .toList();

@@ -23,7 +23,7 @@ public class Table implements Selectable, SqlAble {
     }
 
     @Getter @Setter
-    private String alias;
+    private String alias = null;
     protected final String tableName;
     protected final Schema schema;
     protected final Class<? extends Query> queryClass;
@@ -40,19 +40,14 @@ public class Table implements Selectable, SqlAble {
     }
 
     public Table(String name) {
-        this(null, name);
+        this(name, null, null);
     }
 
-    public Table(String alias, String name) {
-        this(alias, name, null, null);
+    public Table(String name, Object schema) {
+        this(name, schema, null);
     }
 
-    public Table(String alias, String name, Object schema) {
-        this(alias, name, schema, null);
-    }
-
-    public Table(String alias, String name, Object schema, Class<? extends Query> queryClass) {
-        this.alias = alias;
+    public Table(String name, Object schema, Class<? extends Query> queryClass) {
         this.tableName = name;
         this.schema = (schema == null)
                 ? null

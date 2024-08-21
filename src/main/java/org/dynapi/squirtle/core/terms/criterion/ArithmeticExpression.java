@@ -26,8 +26,7 @@ public class ArithmeticExpression extends Term {
         this.right = CloneUtils.copyConstructorClone(original.right);
     }
 
-    public ArithmeticExpression(String alias, ArithmeticOperation operator, Term left, Term right) {
-        super(alias);
+    public ArithmeticExpression(ArithmeticOperation operator, Term left, Term right) {
         this.operator = operator;
         this.left = left;
         this.right = right;

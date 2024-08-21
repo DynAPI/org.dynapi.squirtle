@@ -14,8 +14,8 @@ public interface Node {
     }
 
     /** @apiNote internal usage only */
+    @SuppressWarnings("unchecked")
     default<T extends Node> List<T> find(Class<T> type) {
-        //noinspection unchecked
         return (List<T>) nodes().stream().filter(type::isInstance).toList();
     }
 }

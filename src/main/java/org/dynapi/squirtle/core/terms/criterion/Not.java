@@ -18,8 +18,7 @@ public class Not extends Criterion {
         this.term = CloneUtils.copyConstructorClone(original.term);
     }
 
-    public Not(String alias, Term term) {
-        super(alias);
+    public Not(Term term) {
         this.term = term;
     }
 

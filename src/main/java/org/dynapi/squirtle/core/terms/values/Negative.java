@@ -13,7 +13,6 @@ public class Negative extends Term {
     }
 
     public Negative(Term term) {
-        super((String) null);
         this.term = term;
     }
 

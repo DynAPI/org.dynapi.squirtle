@@ -11,8 +11,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Sum(String alias, Object term) {
-            super(alias, "SUM", term);
+        public Sum(Object term) {
+            super("SUM", term);
         }
     }
 
@@ -21,8 +21,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Pow(String alias, Term term, float exponent) {
-            super(alias, "POW", term, exponent);
+        public Pow(Term term, float exponent) {
+            super("POW", term, exponent);
         }
     }
 
@@ -31,8 +31,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Mod(String alias, Term term, float modulus) {
-            super(alias, "MOD", term, modulus);
+        public Mod(Term term, float modulus) {
+            super("MOD", term, modulus);
         }
     }
 
@@ -41,8 +41,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Avg(String alias, Object term) {
-            super(alias, "AVG", term);
+        public Avg(Object term) {
+            super("AVG", term);
         }
     }
 
@@ -51,8 +51,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Min(String alias, Object term) {
-            super(alias, "MIN", term);
+        public Min(Object term) {
+            super("MIN", term);
         }
     }
 
@@ -61,8 +61,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Max(String alias, Object term) {
-            super(alias, "MAX", term);
+        public Max(Object term) {
+            super("MAX", term);
         }
     }
 
@@ -71,8 +71,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Std(String alias, Object term) {
-            super(alias, "STD", term);
+        public Std(Object term) {
+            super("STD", term);
         }
     }
 
@@ -81,8 +81,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public StdDev(String alias, Object term) {
-            super(alias, "STDDEV", term);
+        public StdDev(Object term) {
+            super("STDDEV", term);
         }
     }
 
@@ -91,8 +91,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Abs(String alias, Object term) {
-            super(alias, "ABS", term);
+        public Abs(Object term) {
+            super("ABS", term);
         }
     }
 
@@ -101,8 +101,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public First(String alias, Object term) {
-            super(alias, "FIRST", term);
+        public First(Object term) {
+            super("FIRST", term);
         }
     }
 
@@ -111,8 +111,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Last(String alias, Object term) {
-            super(alias, "LAST", term);
+        public Last(Object term) {
+            super("LAST", term);
         }
     }
 
@@ -121,8 +121,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Sqrt(String alias, Object term) {
-            super(alias, "SQRT", term);
+        public Sqrt(Object term) {
+            super("SQRT", term);
         }
     }
 
@@ -131,8 +131,8 @@ public class Arithmetic {
             super(original);
         }
 
-        public Floor(String alias, Object term) {
-            super(alias, "FLOOR", term);
+        public Floor(Object term) {
+            super("FLOOR", term);
         }
     }
 
@@ -144,8 +144,8 @@ public class Arithmetic {
             this.percentile = original.percentile;
         }
 
-        public ApproximatePercentile(String alias, Term term, float percentile) {
-            super(alias, "APPROXIMATE_PERCENTILE", term);
+        public ApproximatePercentile(Term term, float percentile) {
+            super("APPROXIMATE_PERCENTILE", term);
             this.percentile = percentile;
         }
 

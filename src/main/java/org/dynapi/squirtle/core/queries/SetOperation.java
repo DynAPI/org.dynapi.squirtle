@@ -30,8 +30,7 @@ public class SetOperation extends Term implements Selectable, SqlAble {
         this.wrapperClass = original.wrapperClass;
     }
 
-    public SetOperation(String alias, QueryBuilder baseQuery, QueryBuilder setOperationQuery, SetOperations setOperations, Class<? extends ValueWrapper> wrapperClass) {
-        super(alias);
+    public SetOperation(QueryBuilder baseQuery, QueryBuilder setOperationQuery, SetOperations setOperations, Class<? extends ValueWrapper> wrapperClass) {
         this.baseQuery = baseQuery;
         this.setOperations = new ArrayList<>();
         this.setOperations.add(new SetOperationEntry(setOperations, setOperationQuery));

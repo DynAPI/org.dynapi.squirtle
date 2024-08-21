@@ -18,7 +18,6 @@ public class Tuple extends Criterion {
     }
 
     public Tuple(List<?> values) {
-        super((String) null);
         this.values = values.stream().map(Tuple::wrapConstant).toList();
     }
 

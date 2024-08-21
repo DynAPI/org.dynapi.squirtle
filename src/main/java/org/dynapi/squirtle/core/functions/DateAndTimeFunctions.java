@@ -14,8 +14,8 @@ public class DateAndTimeFunctions {
             super(original);
         }
 
-        public Now(String alias) {
-            super(alias, "NOW");
+        public Now() {
+            super("NOW");
         }
     }
 
@@ -24,8 +24,8 @@ public class DateAndTimeFunctions {
             super(original);
         }
 
-        public UtcTimestamp(String alias) {
-            super(alias, "UTC_TIMESTAMP");
+        public UtcTimestamp() {
+            super("UTC_TIMESTAMP");
         }
     }
 
@@ -34,8 +34,8 @@ public class DateAndTimeFunctions {
             super(original);
         }
 
-        public CurrentTimestamp(String alias) {
-            super(alias, "CURRENT_TIMESTAMP");
+        public CurrentTimestamp() {
+            super("CURRENT_TIMESTAMP");
         }
 
         @Override
@@ -49,8 +49,8 @@ public class DateAndTimeFunctions {
             super(original);
         }
 
-        public CurrentDate(String alias) {
-            super(alias, "CURRENT_DATE");
+        public CurrentDate() {
+            super("CURRENT_DATE");
         }
     }
 
@@ -59,8 +59,8 @@ public class DateAndTimeFunctions {
             super(original);
         }
 
-        public CurrentTime(String alias) {
-            super(alias, "CURRENT_TIME");
+        public CurrentTime() {
+            super("CURRENT_TIME");
         }
     }
 
@@ -72,8 +72,8 @@ public class DateAndTimeFunctions {
             this.field = CloneUtils.copyConstructorClone(original.field);
         }
 
-        public Extract(String alias, String datePart, Field field) {
-            super(alias, "EXTRACT", new LiteralValue(null, datePart));
+        public Extract(String datePart, Field field) {
+            super("EXTRACT", new LiteralValue(datePart));
             this.field = field;
         }
 

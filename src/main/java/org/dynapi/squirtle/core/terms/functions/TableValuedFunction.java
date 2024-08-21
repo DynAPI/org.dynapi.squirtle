@@ -15,11 +15,11 @@ public class TableValuedFunction extends Function implements Selectable {
         super(original);
     }
 
-    public TableValuedFunction(String alias, @NonNull String name, Object... args) {
-        super(alias, name, args);
+    public TableValuedFunction(@NonNull String name, Object... args) {
+        super(name, args);
     }
 
-    public TableValuedFunction(String alias, @NonNull String name, Schema schema, Object... args) {
-        super(alias, name, schema, args);
+    public TableValuedFunction(@NonNull String name, Schema schema, Object... args) {
+        super(name, schema, args);
     }
 }

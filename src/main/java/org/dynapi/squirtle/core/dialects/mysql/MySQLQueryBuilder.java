@@ -82,7 +82,7 @@ public class MySQLQueryBuilder extends QueryBuilder {
         if (this.forUpdate) {
             forUpdate = " FOR UPDATE";
             if (!forUpdateOf.isEmpty())
-                forUpdate += String.join(", ", forUpdateOf.stream().map(item -> new Table(null, item).getSql(config)).toList());
+                forUpdate += String.join(", ", forUpdateOf.stream().map(item -> new Table(item).getSql(config)).toList());
             if (forUpdateNoWait)
                 forUpdate += " NOWAIT";
             else if (forUpdateSkipLocked)

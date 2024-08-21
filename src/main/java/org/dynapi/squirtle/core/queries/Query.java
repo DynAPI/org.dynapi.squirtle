@@ -11,7 +11,7 @@ public class Query {
     }
 
     public static QueryBuilder from(String tableName, Object... args) {
-        return from(new Table(null, tableName), args);
+        return from(new Table(tableName), args);
     }
 
     public static QueryBuilder from(Selectable table, Object... args) {
@@ -19,15 +19,15 @@ public class Query {
     }
 
     public static CreateQueryBuilder createTable(String tableName) {
-        return createTable(new Table(null, tableName));
+        return createTable(new Table(tableName));
     }
 
     public static CreateQueryBuilder createTable(Table table) {
         return new CreateQueryBuilder().createTable(table);
     }
 
-    public static CreateIndexBuilder createIndex(String index) {
-        return createIndex(new Index(null, index));
+    public static CreateIndexBuilder createIndex(String indexName) {
+        return createIndex(new Index(indexName));
     }
 
     public static CreateIndexBuilder createIndex(Index index) {
@@ -43,7 +43,7 @@ public class Query {
     }
 
     public static DropQueryBuilder dropTable(String tableName) {
-        return dropTable(new Table(null, tableName));
+        return dropTable(new Table(tableName));
     }
 
     public static DropQueryBuilder dropTable(Table table) {
@@ -59,7 +59,7 @@ public class Query {
     }
 
     public static DropQueryBuilder dropIndex(String indexName) {
-        return dropIndex(new Index(null, indexName));
+        return dropIndex(new Index(indexName));
     }
 
     public static DropQueryBuilder dropIndex(Index database) {
@@ -67,7 +67,7 @@ public class Query {
     }
 
     public static QueryBuilder into(String tableName, Object... args) {
-        return into(new Table(null, tableName), args);
+        return into(new Table(tableName), args);
     }
 
     public static QueryBuilder into(Table table, Object... args) {
@@ -75,7 +75,7 @@ public class Query {
     }
 
     public static QueryBuilder with(String tableName, String name, Object... args) {
-        return with(new Table(null, tableName), name, args);
+        return with(new Table(tableName), name, args);
     }
 
     public static QueryBuilder with(Selectable table, String name, Object... args) {
@@ -87,7 +87,7 @@ public class Query {
     }
 
     public static QueryBuilder update(String tableName, Object... args) {
-        return update(new Table(null, tableName), args);
+        return update(new Table(tableName), args);
     }
 
     public static QueryBuilder update(Table table, Object... args) {
