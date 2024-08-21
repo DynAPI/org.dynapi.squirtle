@@ -9,11 +9,7 @@ public class SQLiteValueWrapper extends ValueWrapper {
     }
 
     public SQLiteValueWrapper(Object value) {
-        this(null, value);
-    }
-
-    public SQLiteValueWrapper(String alias, Object value) {
-        super(alias, value);
+        super(value);
     }
 
     @Override

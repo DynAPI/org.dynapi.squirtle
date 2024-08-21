@@ -18,12 +18,12 @@ public class AtTimezone extends Term implements SqlAble {
         this.interval = original.interval;
     }
 
-    public AtTimezone(Field field, String zone, boolean interval, String alias) {
-        super(alias);
+    public AtTimezone(Field field, String zone, boolean interval) {
         this.field = field;
         this.zone = zone;
         this.interval = interval;
     }
+
 
     public String getSql(SqlAbleConfig config) {
         String sql = String.format(

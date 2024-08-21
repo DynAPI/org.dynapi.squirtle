@@ -11,8 +11,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Ascii(String alias, Term term) {
-            super(alias, "ASCII", term);
+        public Ascii(Term term) {
+            super("ASCII", term);
         }
     }
 
@@ -21,8 +21,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public NullIf(String alias, Term term, Condition condition) {
-            super(alias, "NULLIF", term, condition);
+        public NullIf(Term term, Condition condition) {
+            super("NULLIF", term, condition);
         }
     }
 
@@ -31,8 +31,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Bin(String alias, Term term) {
-            super(alias, "BIN", term);
+        public Bin(Term term) {
+            super("BIN", term);
         }
     }
 
@@ -41,8 +41,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Concat(String alias, Term... terms) {
-            super(alias, "CONCAT", (Object[]) terms);
+        public Concat(Term... terms) {
+            super("CONCAT", (Object[]) terms);
         }
     }
 
@@ -51,8 +51,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Insert(String alias, Term term, Integer start, Integer stop, Term subterm) {
-            super(alias, "INSERT", term, start, start, subterm);
+        public Insert(Term term, Integer start, Integer stop, Term subterm) {
+            super("INSERT", term, start, start, subterm);
         }
     }
 
@@ -61,8 +61,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Length(String alias, Term term) {
-            super(alias, "LENGTH", term);
+        public Length(Term term) {
+            super("LENGTH", term);
         }
     }
 
@@ -71,8 +71,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Upper(String alias, Term term) {
-            super(alias, "UPPER", term);
+        public Upper(Term term) {
+            super("UPPER", term);
         }
     }
 
@@ -81,8 +81,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Lower(String alias, Term term) {
-            super(alias, "LOWER", term);
+        public Lower(Term term) {
+            super("LOWER", term);
         }
     }
 
@@ -91,8 +91,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Substring(String alias, Term term, Integer start, Integer stop) {
-            super(alias, "SUBSTRING", term, start, stop);
+        public Substring(Term term, Integer start, Integer stop) {
+            super("SUBSTRING", term, start, stop);
         }
     }
 
@@ -101,8 +101,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Reverse(String alias, Term term) {
-            super(alias, "REVERSE", term);
+        public Reverse(Term term) {
+            super("REVERSE", term);
         }
     }
 
@@ -111,8 +111,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Trim(String alias, Term term) {
-            super(alias, "TRIM", term);
+        public Trim(Term term) {
+            super("TRIM", term);
         }
     }
 
@@ -121,8 +121,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public SplitPart(String alias, Term term, String delimiter, Integer index) {
-            super(alias, "SPLIT_PART", term, delimiter, index);
+        public SplitPart(Term term, String delimiter, Integer index) {
+            super("SPLIT_PART", term, delimiter, index);
         }
     }
 
@@ -131,8 +131,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public RegexpMatches(String alias, Term term, String pattern, String modifiers) {
-            super(alias, "REGEXP_MATCHES", term, pattern, modifiers);
+        public RegexpMatches(Term term, String pattern, String modifiers) {
+            super("REGEXP_MATCHES", term, pattern, modifiers);
         }
     }
 
@@ -141,8 +141,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public RegexpLike(String alias, Term term, String pattern, String modifiers) {
-            super(alias, "REGEXP_LIKE", term, pattern, modifiers);
+        public RegexpLike(Term term, String pattern, String modifiers) {
+            super("REGEXP_LIKE", term, pattern, modifiers);
         }
     }
 
@@ -151,8 +151,8 @@ public class StringFunctions {
             super(original);
         }
 
-        public Replace(String alias, Term term, String findString, String replaceWith) {
-            super(alias, "REPLACE", term, findString, replaceWith);
+        public Replace(Term term, String findString, String replaceWith) {
+            super("REPLACE", term, findString, replaceWith);
         }
     }
 }

@@ -14,11 +14,10 @@ public class Values extends Term {
     }
 
     public Values(String fieldName) {
-        this(new Field(null, fieldName));
+        this(new Field(fieldName));
     }
 
     public Values(Field field) {
-        super((String) null);
         this.field = field;
     }
 

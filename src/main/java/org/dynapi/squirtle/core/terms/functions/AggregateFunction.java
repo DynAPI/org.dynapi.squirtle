@@ -25,8 +25,8 @@ public class AggregateFunction extends Function implements FunctionSqlAble {
         this.filters = CloneUtils.copyConstructorCloneCollection(original.filters);
     }
 
-    public AggregateFunction(String alias, String name, Object... args) {
-        super(alias, name, args);
+    public AggregateFunction(String name, Object... args) {
+        super(name, args);
         this.filters = new ArrayList<>();
         this.include_filter = false;
     }

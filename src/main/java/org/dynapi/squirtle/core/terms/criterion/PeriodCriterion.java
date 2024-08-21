@@ -9,8 +9,8 @@ public class PeriodCriterion extends RangeCriterion {
         super(original);
     }
 
-    public PeriodCriterion(String alias, Term term, Term start, Term end) {
-        super(alias, term, start, end);
+    public PeriodCriterion(Term term, Term start, Term end) {
+        super(term, start, end);
     }
 
     @Override

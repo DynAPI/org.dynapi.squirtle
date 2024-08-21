@@ -14,8 +14,7 @@ public class ExistsCriterion extends Criterion {
         this.isNegated = original.isNegated;
     }
 
-    public ExistsCriterion(String alias, Term container) {
-        super(alias);
+    public ExistsCriterion(Term container) {
         this.container = container;
         this.isNegated = false;
     }

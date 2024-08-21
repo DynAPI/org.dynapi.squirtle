@@ -10,7 +10,7 @@ public class Rollup extends Function {
     }
 
     public Rollup(Term... terms) {
-        super(null, "ROLLUP", (Object[]) terms);
+        super("ROLLUP", (Object[]) terms);
     }
 
     public Rollup addArgs(Term... terms) {

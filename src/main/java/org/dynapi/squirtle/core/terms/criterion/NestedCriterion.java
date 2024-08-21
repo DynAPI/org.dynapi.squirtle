@@ -29,8 +29,7 @@ public class NestedCriterion extends Criterion {
 
     // xxx: comparator is of type Comparator(enum)
 
-    public NestedCriterion(String alias, Comparator comparator, ComplexCriterion nestedComparator, Term left, Term right, Term nested) {
-        super(alias);
+    public NestedCriterion(Comparator comparator, ComplexCriterion nestedComparator, Term left, Term right, Term nested) {
         this.comparator = comparator;
         this.nestedComparator = nestedComparator;
         this.left = left;

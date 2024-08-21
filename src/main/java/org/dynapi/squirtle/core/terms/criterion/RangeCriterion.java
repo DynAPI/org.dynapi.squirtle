@@ -21,8 +21,7 @@ public class RangeCriterion extends Criterion {
         this.isNegated = original.isNegated;
     }
 
-    public RangeCriterion(String alias, Term term, Term start, Term end) {
-        super(alias);
+    public RangeCriterion(Term term, Term start, Term end) {
         this.term = term;
         this.start = start;
         this.end = end;

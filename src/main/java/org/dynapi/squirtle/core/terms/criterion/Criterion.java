@@ -11,9 +11,7 @@ public class Criterion extends Term implements CriterionOperations, SqlAble {
         super(original);
     }
 
-    public Criterion(String alias) {
-        super(alias);
-    }
+    public Criterion() {}
 
     @Override
     public Criterion replaceTable(Table currentTable, Table newTable) {
@@ -21,15 +19,15 @@ public class Criterion extends Term implements CriterionOperations, SqlAble {
     }
 
     public ComplexCriterion and(Term other) {
-        return new ComplexCriterion(null, BooleanComparison.AND, this, other);
+        return new ComplexCriterion(BooleanComparison.AND, this, other);
     }
 
     public ComplexCriterion or(Term other) {
-        return new ComplexCriterion(null, BooleanComparison.OR, this, other);
+        return new ComplexCriterion(BooleanComparison.OR, this, other);
     }
 
     public  ComplexCriterion xor(Term other) {
-        return new ComplexCriterion(null, BooleanComparison.XOR, this, other);
+        return new ComplexCriterion(BooleanComparison.XOR, this, other);
     }
 
     @Override

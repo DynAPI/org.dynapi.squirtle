@@ -11,8 +11,8 @@ public class ComplexCriterion extends BasicCriterion {
         super(original);
     }
 
-    public ComplexCriterion(String alias, Comparator comparator, Term left, Term right) {
-        super(alias, comparator, left, right);
+    public ComplexCriterion(Comparator comparator, Term left, Term right) {
+        super(comparator, left, right);
     }
 
     public String getValue() {

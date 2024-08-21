@@ -14,9 +14,7 @@ public class EmptyCriterion extends Criterion {
         super(original);
     }
 
-    public EmptyCriterion(String alias) {
-        super(alias);
-    }
+    public EmptyCriterion() {}
 
     @Override
     public Set<Table> getTables() {

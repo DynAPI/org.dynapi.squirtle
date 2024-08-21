@@ -80,7 +80,7 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
         if (onConflictDoNothing)
             throw new QueryException("Can not have two conflict handlers");
 
-        this.onConflictDoUpdates.add(new OnConflictDoUpdateEntry(updateField, updateValue == null ? null : new ValueWrapper(null, updateValue)));
+        this.onConflictDoUpdates.add(new OnConflictDoUpdateEntry(updateField, updateValue == null ? null : new ValueWrapper(updateValue)));
         return this;
     }
 
@@ -121,7 +121,7 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
 
     protected Field conflictFieldStr(String term) {
         if (insertTable != null)
-            return new Field(null, term, insertTable);
+            return new Field(term, insertTable);
         return null;
     }
 
@@ -155,7 +155,7 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
             if (forUpdateOf != null)
                 sql += String.format(
                         " OF %s",
-                        String.join(", ", forUpdateOf.stream().map(item -> new Table(null, item).getSql(config)).toList())
+                        String.join(", ", forUpdateOf.stream().map(item -> new Table(item).getSql(config)).toList())
                 );
             if (forUpdateNowait)
                 sql += " NOWAIT";
@@ -268,11 +268,11 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
         }
 
         if (insertTable != null)
-            returnField(new Field(null, string, insertTable));
+            returnField(new Field(string, insertTable));
         else if (updateTable != null)
-            returnField(new Field(null, string, updateTable));
+            returnField(new Field(string, updateTable));
         else if (deleteFrom != null)
-            returnField(new Field(null, string, from.get(0)));
+            returnField(new Field(string, from.get(0)));
         else
             throw new QueryException("Returning can't be used in this query");
     }

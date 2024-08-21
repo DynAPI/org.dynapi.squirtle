@@ -5,7 +5,7 @@ public class SystemTimeValue extends LiteralValue {
         super(original);
     }
 
-    public SystemTimeValue(String alias) {
-        super(alias, "SYSTEM_TIME");
+    public SystemTimeValue() {
+        super("SYSTEM_TIME");
     }
 }

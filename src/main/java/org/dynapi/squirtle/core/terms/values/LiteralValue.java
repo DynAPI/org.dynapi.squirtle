@@ -12,8 +12,7 @@ public class LiteralValue extends Term {
         this.literalValue = original.literalValue;
     }
 
-    public LiteralValue(String alias, String literalValue) {
-        super(alias);
+    public LiteralValue(String literalValue) {
         this.literalValue = literalValue;
     }
 

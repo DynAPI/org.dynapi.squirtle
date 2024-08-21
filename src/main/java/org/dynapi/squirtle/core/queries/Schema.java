@@ -38,11 +38,7 @@ public class Schema implements SqlAble {
     }
 
     public Table table(String name) {
-        return new Table(null, name, this);
-    }
-
-    public Table table(String name, String alias) {
-        return new Table(alias, name, this);
+        return new Table(name, this);
     }
 
     @Override

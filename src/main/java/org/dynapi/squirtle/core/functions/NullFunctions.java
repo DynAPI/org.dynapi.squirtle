@@ -11,8 +11,8 @@ public class NullFunctions {
             super(original);
         }
 
-        public IsNull(String alias, Term term) {
-            super(alias, "ISNULL", term);
+        public IsNull(Term term) {
+            super("ISNULL", term);
         }
     }
 
@@ -21,8 +21,8 @@ public class NullFunctions {
             super(original);
         }
 
-        public Coalesce(String alias, Term term, Object... defaultValues) {
-            super(alias, "COALESCE", term, defaultValues);
+        public Coalesce(Term term, Object... defaultValues) {
+            super("COALESCE", term, defaultValues);
         }
     }
 
@@ -31,8 +31,8 @@ public class NullFunctions {
             super(original);
         }
 
-        public IfNull(String alias, Condition condition, Term term) {
-            super(alias, "IFNULL", condition, term);
+        public IfNull(Condition condition, Term term) {
+            super("IFNULL", condition, term);
         }
     }
 
@@ -41,8 +41,8 @@ public class NullFunctions {
             super(original);
         }
 
-        public NVL(String alias, Condition condition, Term term) {
-            super(alias, "NVL", condition, term);
+        public NVL(Condition condition, Term term) {
+            super("NVL", condition, term);
         }
     }
 }

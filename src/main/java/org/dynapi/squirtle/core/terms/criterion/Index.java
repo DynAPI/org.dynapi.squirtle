@@ -12,8 +12,7 @@ public class Index extends Term {
         this.name = original.name;
     }
 
-    public Index(String alias, String name) {
-        super(alias);
+    public Index(String name) {
         this.name = name;
     }
 

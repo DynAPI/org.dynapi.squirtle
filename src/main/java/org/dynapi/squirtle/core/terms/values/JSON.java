@@ -20,8 +20,11 @@ public class JSON extends Term {
         this.value = CloneUtils.copyConstructorClone(original.value);
     }
 
-    public JSON(String alias, Object value) {
-        super(alias);
+    public JSON() {
+        this((Object) null);
+    }
+
+    public JSON(Object value) {
         this.value = value;
     }
 
@@ -66,46 +69,46 @@ public class JSON extends Term {
     }
 
     public BasicCriterion getJsonValue(String key) {
-        return new BasicCriterion(null, JSONOperator.GET_JSON_VALUE, this, wrapConstant(key));
+        return new BasicCriterion(JSONOperator.GET_JSON_VALUE, this, wrapConstant(key));
     }
 
     public BasicCriterion getJsonValue(Integer index) {
-        return new BasicCriterion(null, JSONOperator.GET_JSON_VALUE, this, wrapConstant(index));
+        return new BasicCriterion(JSONOperator.GET_JSON_VALUE, this, wrapConstant(index));
     }
 
     public BasicCriterion getTextValue(String key) {
-        return new BasicCriterion(null, JSONOperator.GET_TEXT_VALUE, this, wrapConstant(key));
+        return new BasicCriterion(JSONOperator.GET_TEXT_VALUE, this, wrapConstant(key));
     }
 
     public BasicCriterion getTextValue(Integer index) {
-        return new BasicCriterion(null, JSONOperator.GET_TEXT_VALUE, this, wrapConstant(index));
+        return new BasicCriterion(JSONOperator.GET_TEXT_VALUE, this, wrapConstant(index));
     }
 
     public BasicCriterion getPathJsonValue(String pathJson) {
-        return new BasicCriterion(null, JSONOperator.GET_PATH_JSON_VALUE, this, wrapConstant(pathJson));
+        return new BasicCriterion(JSONOperator.GET_PATH_JSON_VALUE, this, wrapConstant(pathJson));
     }
 
     public BasicCriterion getPathTextValue(String pathJson) {
-        return new BasicCriterion(null, JSONOperator.GET_PATH_TEXT_VALUE, this, wrapConstant(pathJson));
+        return new BasicCriterion(JSONOperator.GET_PATH_TEXT_VALUE, this, wrapConstant(pathJson));
     }
 
     public BasicCriterion hasKey(String key) {
-        return new BasicCriterion(null, JSONOperator.HAS_KEY, this, wrapConstant(key));
+        return new BasicCriterion(JSONOperator.HAS_KEY, this, wrapConstant(key));
     }
 
     public BasicCriterion contains(Object other) {
-        return new BasicCriterion(null, JSONOperator.HAS_KEY, this, (Term) wrapJson(other));
+        return new BasicCriterion(JSONOperator.HAS_KEY, this, (Term) wrapJson(other));
     }
 
     public BasicCriterion containedBy(Object other) {
-        return new BasicCriterion(null, JSONOperator.HAS_KEY, this, (Term) wrapJson(other));
+        return new BasicCriterion(JSONOperator.HAS_KEY, this, (Term) wrapJson(other));
     }
 
     public BasicCriterion hasKeys(Object... other) {
-        return new BasicCriterion(null, JSONOperator.HAS_KEYS, this, new Array(other));
+        return new BasicCriterion(JSONOperator.HAS_KEYS, this, new Array(other));
     }
 
     public BasicCriterion hasAnyKeys(Object... other) {
-        return new BasicCriterion(null, JSONOperator.HAS_ANY_KEYS, this, new Array(other));
+        return new BasicCriterion(JSONOperator.HAS_ANY_KEYS, this, new Array(other));
     }
 }

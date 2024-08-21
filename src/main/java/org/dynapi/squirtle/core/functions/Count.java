@@ -7,8 +7,8 @@ public class Count extends DistinctOptionFunction {
         super(original);
     }
 
-    public Count(Object param, String alias) {
-        super(alias, "COUNT", isStar(param) ? new Star() : param);
+    public Count(Object param) {
+        super("COUNT", isStar(param) ? new Star() : param);
     }
 
     private static boolean isStar(Object param) {

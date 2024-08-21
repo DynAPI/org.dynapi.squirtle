@@ -9,8 +9,8 @@ public class NotNullCriterion extends NullCriterion {
         super(original);
     }
 
-    public NotNullCriterion(String alias, Term term) {
-        super(alias, term);
+    public NotNullCriterion(Term term) {
+        super(term);
     }
 
     @Override

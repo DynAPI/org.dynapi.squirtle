@@ -12,7 +12,6 @@ public class PseudoColumn extends Term implements SqlAble {
     }
 
     public PseudoColumn(String name) {
-        super((String) null);
         this.name = name;
     }
 

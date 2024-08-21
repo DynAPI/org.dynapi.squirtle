@@ -10,8 +10,8 @@ public class IgnoreNullsAnalyticFunction extends AnalyticFunction {
         this.ignoreNulls = original.ignoreNulls;
     }
 
-    public IgnoreNullsAnalyticFunction(String alias, String name, Object... values) {
-        super(alias, name, values);
+    public IgnoreNullsAnalyticFunction(String name, Object... values) {
+        super(name, values);
         this.ignoreNulls = false;
     }
 

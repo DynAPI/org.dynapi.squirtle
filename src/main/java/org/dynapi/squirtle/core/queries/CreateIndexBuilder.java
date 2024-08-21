@@ -30,7 +30,7 @@ public class CreateIndexBuilder implements SqlAble {
     public CreateIndexBuilder() {}
 
     public CreateIndexBuilder createIndex(String indexName) {
-        return createIndex(new Index(null, indexName));
+        return createIndex(new Index(indexName));
     }
 
     public CreateIndexBuilder createIndex(Index index) {
@@ -48,7 +48,7 @@ public class CreateIndexBuilder implements SqlAble {
     }
 
     public CreateIndexBuilder on(String tableName) {
-        return on(new Table(null, tableName));
+        return on(new Table(tableName));
     }
 
     public CreateIndexBuilder on(Table table) {
