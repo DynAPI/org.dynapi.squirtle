@@ -1,4 +1,4 @@
-name: Publish Build to Github Releases
+name: Verify Code with Build
 
 on:
   push:
@@ -11,9 +11,7 @@ on:
   workflow_dispatch:  # manual trigger
 
 jobs:
-  publish-release:
-    permissions:
-      contents: write  # allow to create a release
+  verify-with-build:
     runs-on: ubuntu-latest
 
     steps:
