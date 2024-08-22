@@ -48,26 +48,18 @@ public class Term implements Node, SqlAble, AliasAble {
     }
 
     public static Term wrapConstant(Object value, Class<? extends ValueWrapper> wrapperClass) {
-        switch (value) {
-            case null -> {
-                return new NullValue();
-            }
-            case Node node -> {
-                return (Term) value;
-            }
-            // kinda confusing that List=>Array and array=>Tuple
-            case List<?> list -> {  // List -> mutable -> Array
-                return new Array(list);
-            }
-            case Collection<?> tuple -> {
-                return new Array(tuple);
-            }
+        if (value == null)
+            return new NullValue();
+        if (value instanceof Node)
+            return (Term) value;
+        // kinda confusing that List=>Array and array=>Tuple
+        if (value instanceof List<?> list)  // mutable
+            return new Array(list);
+        if (value instanceof Collection<?> tuple)
+            return new Array(tuple);
 //        value.getClass().isArray()  // marked
-            case Object[] tuple -> {  // array -> immutable -> Tuple
-                return new Tuple(tuple);
-            }
-            default -> {}
-        }
+        if (value instanceof Object[] tuple)  // immutable
+            return new Tuple(tuple);
 
         if (wrapperClass == null)
             wrapperClass = ValueWrapper.class;
@@ -79,21 +71,14 @@ public class Term implements Node, SqlAble, AliasAble {
     }
 
     public static Node wrapJson(Object value, Class<? extends ValueWrapper> wrapperClass) {
-        switch (value) {
-            case null -> {
-                return new NullValue();
-            }
-            case Term term -> {
-                return term;
-            }
-//            case QueryBuilder builder -> {
-//                return builder;
-//            }
-            case Interval interval -> {
-                return interval;
-            }
-            default -> {}
-        }
+        if (value == null)
+            return new NullValue();
+        if (value instanceof Term term)
+            return term;
+//        if (value instanceof QueryBuilder builder)
+//            return builder;
+        if (value instanceof Interval interval)
+            return interval;
         if (value instanceof String || value instanceof Integer || value instanceof Boolean)
             return Utils.newInstance(wrapperClass, new Object[]{ value });
 
