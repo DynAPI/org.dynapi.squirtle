@@ -10,6 +10,11 @@ repositories {
     mavenCentral()
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 dependencies {
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly 'org.projectlombok:lombok:1.18.34'
@@ -19,6 +24,10 @@ dependencies {
     // default
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+javadoc {
+  options.addStringOption('tag', 'apiNote:a:API Note:')
 }
 
 tasks.test {
