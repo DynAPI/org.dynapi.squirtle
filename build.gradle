@@ -4,10 +4,15 @@ plugins {
 }
 
 group = "org.dynapi"
-version = "0.4.1"
+version = "0.4.2"
 
 repositories {
     mavenCentral()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
@@ -19,6 +24,10 @@ dependencies {
     // default
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+javadoc {
+  options.addStringOption('tag', 'apiNote:a:API Note:')
 }
 
 tasks.test {
