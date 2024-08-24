@@ -6,7 +6,8 @@ import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
 
 public class PostgreSQLQuery extends Query {
-    protected static QueryBuilder newBuilder(Object... args) {
+    @Override
+    protected QueryBuilder newBuilder(Object... args) {
         return Utils.newInstance(PostgreSQLQueryBuilder.class, args);
     }
 }
