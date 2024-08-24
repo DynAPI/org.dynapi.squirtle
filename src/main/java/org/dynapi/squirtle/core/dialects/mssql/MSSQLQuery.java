@@ -5,6 +5,7 @@ import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
 
 public class MSSQLQuery extends Query {
+    @Override
     protected QueryBuilder newBuilder(Object... args) {
         return Utils.newInstance(MSSQLQueryBuilder.class, args);
     }

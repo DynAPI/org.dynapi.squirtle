@@ -4,14 +4,17 @@ import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.queries.*;
 
 public class ClickHouseQuery extends Query {
+    @Override
     protected QueryBuilder newBuilder(Object... args) {
         return Utils.newInstance(ClickHouseQueryBuilder.class, args);
     }
 
+    @Override
     public ClickHouseDropQueryBuilder dropDatabase(Database database) {
         return (ClickHouseDropQueryBuilder) new ClickHouseDropQueryBuilder().dropDatabase(database);
     }
 
+    @Override
     public ClickHouseDropQueryBuilder dropTable(Table table) {
         return (ClickHouseDropQueryBuilder) new ClickHouseDropQueryBuilder().dropTable(table);
     }
@@ -24,10 +27,12 @@ public class ClickHouseQuery extends Query {
         return new ClickHouseDropQueryBuilder().dropQuota(quotaName);
     }
 
+    @Override
     public ClickHouseDropQueryBuilder dropUser(String userName) {
         return (ClickHouseDropQueryBuilder) new ClickHouseDropQueryBuilder().dropUser(userName);
     }
 
+    @Override
     public ClickHouseDropQueryBuilder dropView(String viewName) {
         return (ClickHouseDropQueryBuilder) new ClickHouseDropQueryBuilder().dropView(viewName);
     }

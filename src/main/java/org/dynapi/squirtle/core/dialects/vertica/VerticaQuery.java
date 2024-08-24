@@ -6,6 +6,7 @@ import org.dynapi.squirtle.core.queries.QueryBuilder;
 import org.dynapi.squirtle.core.queries.Table;
 
 public class VerticaQuery extends Query {
+    @Override
     protected QueryBuilder newBuilder(Object... args) {
         return Utils.newInstance(QueryBuilder.class, args);
     }
