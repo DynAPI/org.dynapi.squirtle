@@ -14,8 +14,8 @@ public class SQLiteValueWrapper extends ValueWrapper {
 
     @Override
     public String getValueSql(Object value, SqlAbleConfig config) {
-        if (value instanceof Boolean) {
-            return (boolean) value ? "1" : "0";
+        if (value instanceof Boolean booleanValue) {
+            return booleanValue ? "1" : "0";
         }
         return super.getValueSql(value, config);
     }

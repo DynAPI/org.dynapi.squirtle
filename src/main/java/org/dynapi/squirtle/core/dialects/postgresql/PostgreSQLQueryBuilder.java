@@ -51,8 +51,15 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
         this.forUpdateOf = new HashSet<>(original.forUpdateOf);
     }
 
-    public PostgreSQLQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.POSTGRESQL, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public PostgreSQLQueryBuilder() {
+        this(Config.builder().build());
+    }
+
+    public PostgreSQLQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.POSTGRESQL)
+                .build()
+        );
     }
 
     public PostgreSQLQueryBuilder distinctOn(Term... fields) {

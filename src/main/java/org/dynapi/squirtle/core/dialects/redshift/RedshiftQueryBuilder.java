@@ -12,7 +12,14 @@ public class RedshiftQueryBuilder extends QueryBuilder {
         super(original);
     }
 
-    public RedshiftQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.REDSHIFT, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public RedshiftQueryBuilder() {
+        this(Config.builder().build());
+    }
+
+    public RedshiftQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.REDSHIFT)
+                .build()
+        );
     }
 }

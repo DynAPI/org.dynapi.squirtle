@@ -19,8 +19,16 @@ public class SQLiteQueryBuilder extends QueryBuilder {
         this.insertOrReplace = original.insertOrReplace;
     }
 
-    public SQLiteQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.SQLITE, wrapSetOperationQueries, wrapperClass == null ? SQLiteValueWrapper.class : wrapperClass, immutable, asKeyword);
+    public SQLiteQueryBuilder() {
+        this(Config.builder().build());
+    }
+
+    public SQLiteQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.SQLITE)
+                .wrapperClass(config.getWrapperClass() == ValueWrapper.class ? SQLiteValueWrapper.class : config.getWrapperClass())
+                .build()
+        );
     }
 
     public SQLiteQueryBuilder insertOrReplace(Object... terms) {

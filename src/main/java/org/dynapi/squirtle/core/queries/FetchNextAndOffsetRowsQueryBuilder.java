@@ -1,16 +1,18 @@
 package org.dynapi.squirtle.core.queries;
 
-import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class FetchNextAndOffsetRowsQueryBuilder extends QueryBuilder {
     public FetchNextAndOffsetRowsQueryBuilder(FetchNextAndOffsetRowsQueryBuilder original) {
         super(original);
     }
 
-    public FetchNextAndOffsetRowsQueryBuilder(Dialects dialect, Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(dialect, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public FetchNextAndOffsetRowsQueryBuilder() {
+        this(Config.builder().build());
+    }
+
+    public FetchNextAndOffsetRowsQueryBuilder(Config config) {
+        super(config);
     }
 
     protected String limitSql(SqlAbleConfig ignored) {

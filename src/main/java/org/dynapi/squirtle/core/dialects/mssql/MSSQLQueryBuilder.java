@@ -21,8 +21,15 @@ public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
         this.topPercent = original.topPercent;
     }
 
-    public MSSQLQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.MSSQL, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public MSSQLQueryBuilder() {
+        this(Config.builder().build());
+    }
+
+    public MSSQLQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.MSSQL)
+                .build()
+        );
     }
 
     public MSSQLQueryBuilder top(int value, boolean percent, boolean withTies) {

@@ -36,8 +36,15 @@ public class MySQLQueryBuilder extends QueryBuilder {
         this.forUpdateOf = new HashSet<>(original.forUpdateOf);
     }
 
-    public MySQLQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.MYSQL, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public MySQLQueryBuilder() {
+        this(Config.builder().build());
+    }
+
+    public MySQLQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.MYSQL)
+                .build()
+        );
     }
 
     public MySQLQueryBuilder forUpdate(boolean noWait, boolean skipLocked, Collection<String> of) {
