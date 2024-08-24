@@ -6,7 +6,6 @@ import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
-import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.criterion.Criterion;
 import org.dynapi.squirtle.core.terms.criterion.PeriodCriterion;
 
@@ -14,10 +13,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class Table implements Selectable, SqlAble {
-    protected static Schema initSchema(String... names) {
-        Schema schema =  new Schema(names[0], null);
-        for (int i = 1; i < names.length; i++) {
-            schema = new Schema(names[i], schema);
+    protected static Schema initSchema(String... schemaNames) {
+        if (schemaNames == null) return null;
+        if (schemaNames.length == 0) throw new IllegalArgumentException("Schema names cannot be empty");
+        Schema schema =  new Schema(schemaNames[0], null);
+        for (int i = 1; i < schemaNames.length; i++) {
+            schema = new Schema(schemaNames[i], schema);
         }
         return schema;
     }
@@ -39,22 +40,34 @@ public class Table implements Selectable, SqlAble {
         this.forPortion = CloneUtils.copyConstructorCloneNoFail(original.forPortion);
     }
 
-    public Table(String name) {
-        this(name, null, null);
+    public Table(String tableName) {
+        this(tableName, (Schema) null, null);
     }
 
-    public Table(String name, Object schema) {
-        this(name, schema, null);
+    public Table(String tableName, String schemaName) {
+        this(tableName, new String[]{schemaName}, null);
     }
 
-    public Table(String name, Object schema, Class<? extends Query> queryClass) {
+    public Table(String tableName, String[] schemaNames) {
+        this(tableName, schemaNames, null);
+    }
+
+    public Table(String tableName, Schema schema) {
+        this(tableName, schema, null);
+    }
+
+    public Table(String tableName, String schemaName, Class<? extends Query> queryClass) {
+        this(tableName, new String[]{schemaName}, queryClass);
+    }
+
+    public Table(String tableName, String[] schemaNames, Class<? extends Query> queryClass) {
+        this(tableName, initSchema(schemaNames), queryClass);
+    }
+
+    public Table(String name, Schema schema, Class<? extends Query> queryClass) {
         this.tableName = name;
-        this.schema = (schema == null)
-                ? null
-                : (schema instanceof Schema)
-                ? (Schema) schema
-                : initSchema((String) schema);
-        this.queryClass = queryClass;
+        this.schema = schema;
+        this.queryClass = queryClass != null ? queryClass : Query.class;
         this.for_ = null;
         this.forPortion = null;
     }
