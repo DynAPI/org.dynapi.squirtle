@@ -6,17 +6,36 @@ import org.dynapi.squirtle.core.terms.criterion.Index;
 import java.util.Collection;
 
 public class Query {
-    protected QueryBuilder newBuilder(Object... args) {
-        return Utils.newInstance(QueryBuilder.class, args);
+    protected Class<? extends QueryBuilder> getQueryBuilderClass() { return QueryBuilder.class; }
+
+    public final QueryBuilder newQueryBuilder() {
+        return newQueryBuilder(null);
     }
 
-    public QueryBuilder from(String tableName, Object... args) {
-        return from(new Table(tableName), args);
+    public final QueryBuilder newQueryBuilder(QueryBuilder.Config config) {
+        Object[] args = config == null ? new Object[]{} : new Object[]{config};
+        return Utils.newInstance(getQueryBuilderClass(), args);
     }
 
-    public QueryBuilder from(Selectable table, Object... args) {
-        return newBuilder(args).from(table);
+    //
+
+    public QueryBuilder from(String tableName) {
+        return from(tableName, null);
     }
+
+    public QueryBuilder from(String tableName, QueryBuilder.Config config) {
+        return from(new Table(tableName), config);
+    }
+
+    public QueryBuilder from(Selectable table) {
+        return from(table, null);
+    }
+
+    public QueryBuilder from(Selectable table, QueryBuilder.Config config) {
+        return newQueryBuilder(config).from(table);
+    }
+
+    //
 
     public CreateQueryBuilder createTable(String tableName) {
         return createTable(new Table(tableName));
@@ -26,6 +45,8 @@ public class Query {
         return new CreateQueryBuilder().createTable(table);
     }
 
+    //
+
     public CreateIndexBuilder createIndex(String indexName) {
         return createIndex(new Index(indexName));
     }
@@ -33,6 +54,8 @@ public class Query {
     public CreateIndexBuilder createIndex(Index index) {
         return new CreateIndexBuilder().createIndex(index);
     }
+
+    //
 
     public DropQueryBuilder dropDatabase(String databaseName) {
         return dropDatabase(new Database(databaseName));
@@ -42,6 +65,8 @@ public class Query {
         return new DropQueryBuilder().dropDatabase(database);
     }
 
+    //
+
     public DropQueryBuilder dropTable(String tableName) {
         return dropTable(new Table(tableName));
     }
@@ -50,13 +75,18 @@ public class Query {
         return new DropQueryBuilder().dropTable(table);
     }
 
+    //
+
     public DropQueryBuilder dropUser(String username) {
         return new DropQueryBuilder().dropUser(username);
     }
 
+    //
+
     public DropQueryBuilder dropView(String view) {
         return new DropQueryBuilder().dropView(view);
     }
+
 
     public DropQueryBuilder dropIndex(String indexName) {
         return dropIndex(new Index(indexName));
@@ -66,31 +96,67 @@ public class Query {
         return new DropQueryBuilder().dropIndex(database);
     }
 
-    public QueryBuilder into(String tableName, Object... args) {
-        return into(new Table(tableName), args);
+    //
+
+    public QueryBuilder into(String tableName) {
+        return into(tableName, null);
     }
 
-    public QueryBuilder into(Table table, Object... args) {
-        return newBuilder(args).into(table);
+    public QueryBuilder into(String tableName, QueryBuilder.Config config) {
+        return into(new Table(tableName), config);
     }
 
-    public QueryBuilder with(String tableName, String name, Object... args) {
-        return with(new Table(tableName), name, args);
+    public QueryBuilder into(Table table) {
+        return into(table, null);
     }
 
-    public QueryBuilder with(Selectable table, String name, Object... args) {
-        return newBuilder(args).with(table, name);
+    public QueryBuilder into(Table table, QueryBuilder.Config config) {
+        return newQueryBuilder(config).into(table);
     }
 
-    public QueryBuilder select(Collection<Object> terms, Object... args) {
-        return newBuilder(args).select(terms.toArray());
+    //
+
+    public QueryBuilder with(String tableName, String name) {
+        return with(tableName, name, null);
     }
 
-    public QueryBuilder update(String tableName, Object... args) {
-        return update(new Table(tableName), args);
+    public QueryBuilder with(String tableName, String name, QueryBuilder.Config config) {
+        return with(new Table(tableName), name, config);
     }
 
-    public QueryBuilder update(Table table, Object... args) {
-        return newBuilder(args).update(table);
+    public QueryBuilder with(Selectable table, String name) {
+        return with(table, name, null);
+    }
+
+    public QueryBuilder with(Selectable table, String name, QueryBuilder.Config config) {
+        return newQueryBuilder(config).with(table, name);
+    }
+
+    //
+
+    public QueryBuilder select(Collection<Object> terms) {
+        return select(terms, null);
+    }
+
+    public QueryBuilder select(Collection<Object> terms, QueryBuilder.Config config) {
+        return newQueryBuilder(config).select(terms.toArray());
+    }
+
+    //
+
+    public QueryBuilder update(String tableName) {
+        return update(tableName, null);
+    }
+
+    public QueryBuilder update(String tableName, QueryBuilder.Config config) {
+        return update(new Table(tableName), config);
+    }
+
+    public QueryBuilder update(Table table) {
+        return update(table, null);
+    }
+
+    public QueryBuilder update(Table table, QueryBuilder.Config config) {
+        return newQueryBuilder(config).update(table);
     }
 }

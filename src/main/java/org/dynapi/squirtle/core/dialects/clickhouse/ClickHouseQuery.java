@@ -1,13 +1,10 @@
 package org.dynapi.squirtle.core.dialects.clickhouse;
 
-import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.queries.*;
 
 public class ClickHouseQuery extends Query {
     @Override
-    protected QueryBuilder newBuilder(Object... args) {
-        return Utils.newInstance(ClickHouseQueryBuilder.class, args);
-    }
+    protected Class<? extends QueryBuilder> getQueryBuilderClass() { return ClickHouseQueryBuilder.class; }
 
     @Override
     public ClickHouseDropQueryBuilder dropDatabase(Database database) {

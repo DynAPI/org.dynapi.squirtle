@@ -1,13 +1,10 @@
 package org.dynapi.squirtle.core.dialects.snowflake;
 
-import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.queries.*;
 
 public class SnowflakeQuery extends Query {
     @Override
-    protected QueryBuilder newBuilder(Object... args) {
-        return Utils.newInstance(SnowflakeQueryBuilder.class, args);
-    }
+    public Class<? extends QueryBuilder> getQueryBuilderClass() { return SnowflakeQueryBuilder.class; }
 
     @Override
     public CreateQueryBuilder createTable(Table table) {
