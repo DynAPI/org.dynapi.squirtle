@@ -51,6 +51,10 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
         this.forUpdateOf = new HashSet<>(original.forUpdateOf);
     }
 
+    public PostgreSQLQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public PostgreSQLQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.POSTGRESQL)

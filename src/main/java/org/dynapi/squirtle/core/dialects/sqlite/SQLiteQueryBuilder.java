@@ -19,10 +19,14 @@ public class SQLiteQueryBuilder extends QueryBuilder {
         this.insertOrReplace = original.insertOrReplace;
     }
 
+    public SQLiteQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public SQLiteQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.SQLITE)
-                .wrapperClass(config.getWrapperClass() == null ? SQLiteValueWrapper.class : config.getWrapperClass())
+                .wrapperClass(config.getWrapperClass() == ValueWrapper.class ? SQLiteValueWrapper.class : config.getWrapperClass())
                 .build()
         );
     }

@@ -14,6 +14,10 @@ public class OracleQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
         super(original);
     }
 
+    public OracleQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public OracleQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.ORACLE)

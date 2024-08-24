@@ -21,6 +21,10 @@ public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
         this.topPercent = original.topPercent;
     }
 
+    public MSSQLQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public MSSQLQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.MSSQL)

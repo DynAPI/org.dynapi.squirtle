@@ -36,6 +36,10 @@ public class MySQLQueryBuilder extends QueryBuilder {
         this.forUpdateOf = new HashSet<>(original.forUpdateOf);
     }
 
+    public MySQLQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public MySQLQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.MYSQL)

@@ -15,6 +15,10 @@ public class SnowflakeQueryBuilder extends QueryBuilder {
         super(original);
     }
 
+    public SnowflakeQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public SnowflakeQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.SNOWFLAKE)

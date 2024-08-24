@@ -12,6 +12,10 @@ public class RedshiftQueryBuilder extends QueryBuilder {
         super(original);
     }
 
+    public RedshiftQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public RedshiftQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.REDSHIFT)

@@ -22,6 +22,10 @@ public class ClickHouseQueryBuilder extends QueryBuilder {
         this.sampleOffset = original.sampleOffset;
     }
 
+    public ClickHouseQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public ClickHouseQueryBuilder(Config config) {
         super(config.toBuilder()
                 .dialect(Dialects.CLICKHOUSE)

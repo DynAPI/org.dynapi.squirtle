@@ -7,6 +7,10 @@ public class FetchNextAndOffsetRowsQueryBuilder extends QueryBuilder {
         super(original);
     }
 
+    public FetchNextAndOffsetRowsQueryBuilder() {
+        this(Config.builder().build());
+    }
+
     public FetchNextAndOffsetRowsQueryBuilder(Config config) {
         super(config);
     }
