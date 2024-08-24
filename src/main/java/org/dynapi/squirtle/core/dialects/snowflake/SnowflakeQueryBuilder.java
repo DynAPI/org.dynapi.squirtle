@@ -15,7 +15,10 @@ public class SnowflakeQueryBuilder extends QueryBuilder {
         super(original);
     }
 
-    public SnowflakeQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.SNOWFLAKE, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public SnowflakeQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.SNOWFLAKE)
+                .build()
+        );
     }
 }

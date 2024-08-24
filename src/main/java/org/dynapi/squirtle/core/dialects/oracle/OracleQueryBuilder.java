@@ -14,8 +14,11 @@ public class OracleQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
         super(original);
     }
 
-    public OracleQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.ORACLE, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public OracleQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.ORACLE)
+                .build()
+        );
     }
 
     @Override

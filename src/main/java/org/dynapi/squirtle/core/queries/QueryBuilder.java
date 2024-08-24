@@ -1,6 +1,9 @@
 package org.dynapi.squirtle.core.queries;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
+import lombok.With;
 import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.enums.Dialects;
@@ -127,15 +130,15 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder() {
-        this(null, null, null, null, null);
+        this(Config.builder().build());
     }
 
-    public QueryBuilder(Dialects dialect, Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        this.dialect = dialect;
-        this.asKeyword = asKeyword == null ? false : asKeyword;
-        this.wrapSetOperationQueries = wrapSetOperationQueries == null ? true : wrapSetOperationQueries;
-        this.wrapperClass = wrapperClass;
-        this.immutable = immutable == null ? true : immutable;
+    public QueryBuilder(Config config) {
+        this.dialect = config.getDialect();
+        this.asKeyword = config.getAsKeyword();
+        this.wrapSetOperationQueries = config.getWrapSetOperationQueries();
+        this.wrapperClass = config.getWrapperClass();
+        this.immutable = config.getImmutable();
     }
 
     // xxx: __copy__
@@ -892,4 +895,21 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
 
     public record OrderByEntry(Term field, Order order) {}
     public record UpdateEntry(Field field, SqlAble value) {}
+
+    @With
+    @Getter
+    @ToString
+    @Builder(toBuilder = true)
+    public static class Config {
+        @Builder.Default
+        private final Dialects dialect = null;
+        @Builder.Default
+        private final Boolean wrapSetOperationQueries = true;
+        @Builder.Default
+        private final Class<? extends ValueWrapper> wrapperClass = ValueWrapper.class;
+        @Builder.Default
+        private final Boolean immutable = true;
+        @Builder.Default
+        private final Boolean asKeyword = false;
+    }
 }

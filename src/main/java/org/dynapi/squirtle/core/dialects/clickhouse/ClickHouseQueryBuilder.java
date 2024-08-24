@@ -22,8 +22,13 @@ public class ClickHouseQueryBuilder extends QueryBuilder {
         this.sampleOffset = original.sampleOffset;
     }
 
-    public ClickHouseQueryBuilder(Boolean ignoredWrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean ignoredAsKeyword) {
-        super(Dialects.CLICKHOUSE, false, wrapperClass, immutable, true);
+    public ClickHouseQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.CLICKHOUSE)
+                .wrapSetOperationQueries(false)
+                .asKeyword(true)
+                .build()
+        );
     }
 
     public ClickHouseQueryBuilder sample(@NonNull Integer sample, Integer offset) {

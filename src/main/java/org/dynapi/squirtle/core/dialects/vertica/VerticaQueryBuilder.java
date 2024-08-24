@@ -16,8 +16,11 @@ public class VerticaQueryBuilder extends QueryBuilder {
         this.hint = original.hint;
     }
 
-    public VerticaQueryBuilder(Boolean wrapSetOperationQueries, Class<? extends ValueWrapper> wrapperClass, Boolean immutable, Boolean asKeyword) {
-        super(Dialects.VERTICA, wrapSetOperationQueries, wrapperClass, immutable, asKeyword);
+    public VerticaQueryBuilder(Config config) {
+        super(config.toBuilder()
+                .dialect(Dialects.VERTICA)
+                .build()
+        );
     }
 
     public VerticaQueryBuilder hint(String label) {
