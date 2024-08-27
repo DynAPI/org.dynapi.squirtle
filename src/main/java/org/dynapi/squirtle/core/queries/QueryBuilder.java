@@ -141,6 +141,11 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         this.immutable = config.getImmutable();
     }
 
+    public QueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     // xxx: __copy__
 
     public QueryBuilder from(String tableName) {

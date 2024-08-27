@@ -11,6 +11,12 @@ public class FormatParameter extends Parameter {
         super("");
     }
 
+    public FormatParameter as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return "%s";

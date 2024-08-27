@@ -14,6 +14,11 @@ public class BetweenCriterion extends RangeCriterion {
         super(term, start, end);
     }
 
+    public BetweenCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public BetweenCriterion replaceTable(Table currentTable, Table newTable) {
         term = term.replaceTable(currentTable, newTable);

@@ -8,4 +8,9 @@ public class SystemTimeValue extends LiteralValue {
     public SystemTimeValue() {
         super("SYSTEM_TIME");
     }
+
+    public SystemTimeValue as(String alias) {
+        this.alias = alias;
+        return this;
+    }
 }

@@ -16,6 +16,12 @@ public class Negative extends Term {
         this.term = term;
     }
 
+    public Negative as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     // todo: property isAggregate <- term.isAggregate
 
     @Override

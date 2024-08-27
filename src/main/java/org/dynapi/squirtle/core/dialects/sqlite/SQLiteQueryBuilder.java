@@ -4,7 +4,6 @@ import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
-import org.dynapi.squirtle.core.terms.Term;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 import java.util.List;
@@ -29,6 +28,11 @@ public class SQLiteQueryBuilder extends QueryBuilder {
                 .wrapperClass(config.getWrapperClass() == ValueWrapper.class ? SQLiteValueWrapper.class : config.getWrapperClass())
                 .build()
         );
+    }
+
+    public SQLiteQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
     }
 
     public SQLiteQueryBuilder insertOrReplace(Object... terms) {

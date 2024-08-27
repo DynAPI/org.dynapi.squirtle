@@ -41,6 +41,11 @@ public class AnalyticFunction extends AggregateFunction implements FunctionSqlAb
         this.includeOver = false;
     }
 
+    public AnalyticFunction as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     public AnalyticFunction over(Object... terms) {
         includeOver = true;
         partition.addAll(List.of(terms));

@@ -17,6 +17,11 @@ public class DistinctOptionFunction extends AggregateFunction implements Functio
         this.distinct = false;
     }
 
+    public DistinctOptionFunction as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     public String getFunctionSql(SqlAbleConfig config) {
         String s = super.getFunctionSql(config);
 

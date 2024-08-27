@@ -27,6 +27,11 @@ public class ContainsCriterion extends Criterion {
         isNegated = false;
     }
 
+    public ContainsCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

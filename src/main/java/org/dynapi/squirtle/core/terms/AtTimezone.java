@@ -1,8 +1,8 @@
 package org.dynapi.squirtle.core.terms;
 
 import org.dynapi.squirtle.core.CloneUtils;
-import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.Utils;
+import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.criterion.Field;
 
@@ -24,6 +24,10 @@ public class AtTimezone extends Term implements SqlAble {
         this.interval = interval;
     }
 
+    public AtTimezone as(String alias) {
+        this.alias = alias;
+        return this;
+    }
 
     public String getSql(SqlAbleConfig config) {
         String sql = String.format(

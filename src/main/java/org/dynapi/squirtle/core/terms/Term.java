@@ -7,12 +7,12 @@ import org.dynapi.squirtle.core.enums.ArithmeticOperation;
 import org.dynapi.squirtle.core.enums.Enumerator;
 import org.dynapi.squirtle.core.enums.Equality;
 import org.dynapi.squirtle.core.enums.Matching;
+import org.dynapi.squirtle.core.functions.Arithmetic;
 import org.dynapi.squirtle.core.interfaces.AliasAble;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.criterion.*;
-import org.dynapi.squirtle.core.functions.Arithmetic;
 import org.dynapi.squirtle.core.terms.values.JSON;
 import org.dynapi.squirtle.core.terms.values.NullValue;
 import org.dynapi.squirtle.core.terms.values.ValueWrapper;
@@ -34,6 +34,11 @@ public class Term implements Node, SqlAble, AliasAble {
     }
 
     public Term() {}
+
+    public Term as(String alias) {
+        this.alias = alias;
+        return this;
+    }
 
     public Set<Table> getTables() {
         return new HashSet<>(find(Table.class));

@@ -17,6 +17,11 @@ public class DateAndTimeFunctions {
         public Now() {
             super("NOW");
         }
+
+        public Now as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class UtcTimestamp extends Function {
@@ -26,6 +31,11 @@ public class DateAndTimeFunctions {
 
         public UtcTimestamp() {
             super("UTC_TIMESTAMP");
+        }
+
+        public UtcTimestamp as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -51,6 +61,11 @@ public class DateAndTimeFunctions {
 
         public CurrentDate() {
             super("CURRENT_DATE");
+        }
+
+        public CurrentDate as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 

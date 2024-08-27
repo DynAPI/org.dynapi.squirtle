@@ -15,6 +15,12 @@ public class FetchNextAndOffsetRowsQueryBuilder extends QueryBuilder {
         super(config);
     }
 
+    public FetchNextAndOffsetRowsQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     protected String limitSql(SqlAbleConfig ignored) {
         return String.format(" FETCH NEXT %d ROWS ONLY", limit);
     }

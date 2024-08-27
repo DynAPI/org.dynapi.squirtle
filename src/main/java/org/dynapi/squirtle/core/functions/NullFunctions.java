@@ -14,6 +14,11 @@ public class NullFunctions {
         public IsNull(Term term) {
             super("ISNULL", term);
         }
+
+        public IsNull as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Coalesce extends Function {
@@ -23,6 +28,11 @@ public class NullFunctions {
 
         public Coalesce(Term term, Object... defaultValues) {
             super("COALESCE", term, defaultValues);
+        }
+
+        public Coalesce as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -43,6 +53,11 @@ public class NullFunctions {
 
         public NVL(Condition condition, Term term) {
             super("NVL", condition, term);
+        }
+
+        public NVL as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 }

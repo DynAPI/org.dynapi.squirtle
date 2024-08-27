@@ -13,6 +13,11 @@ public class PeriodCriterion extends RangeCriterion {
         super(term, start, end);
     }
 
+    public PeriodCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         String sql = String.format(

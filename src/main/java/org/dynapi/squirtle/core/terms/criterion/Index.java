@@ -16,6 +16,12 @@ public class Index extends Term {
         this.name = name;
     }
 
+    public Index as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return Utils.formatQuotes(name, config.getQuoteChar());

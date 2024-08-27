@@ -1,6 +1,9 @@
 package org.dynapi.squirtle.core.dialects.clickhouse;
 
-import org.dynapi.squirtle.core.queries.*;
+import org.dynapi.squirtle.core.queries.Database;
+import org.dynapi.squirtle.core.queries.Query;
+import org.dynapi.squirtle.core.queries.QueryBuilder;
+import org.dynapi.squirtle.core.queries.Table;
 
 public class ClickHouseQuery extends Query {
     @Override

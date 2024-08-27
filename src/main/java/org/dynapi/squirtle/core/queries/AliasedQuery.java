@@ -27,6 +27,11 @@ public class AliasedQuery implements Selectable, SqlAble {
         this.query = query;
     }
 
+    public AliasedQuery as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         if (query == null)

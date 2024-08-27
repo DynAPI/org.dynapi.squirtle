@@ -28,6 +28,12 @@ public class JSON extends Term {
         this.value = value;
     }
 
+    public JSON as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     private String getRecursiveSql(Object value, SqlAbleConfig config) {
         if (value instanceof Map<?,?> map)
             return getMappingSql(map, config);

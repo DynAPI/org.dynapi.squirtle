@@ -22,6 +22,11 @@ public class Parameter extends Term implements SqlAble {
         this.placeholder = placeholder;
     }
 
+    public Parameter as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return placeholder;

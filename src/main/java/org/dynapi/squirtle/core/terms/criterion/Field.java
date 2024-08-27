@@ -33,6 +33,12 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
         this.table = table;
     }
 
+    public Field as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

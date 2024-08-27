@@ -25,6 +25,11 @@ public class BitwiseAndCriterion extends Criterion {
         this.value = value;
     }
 
+    public BitwiseAndCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

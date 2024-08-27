@@ -3,7 +3,6 @@ package org.dynapi.squirtle.core.dialects.snowflake;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class SnowflakeQueryBuilder extends QueryBuilder {
     public String sqlAbleQuoteChar() { return null; }
@@ -24,5 +23,10 @@ public class SnowflakeQueryBuilder extends QueryBuilder {
                 .dialect(Dialects.SNOWFLAKE)
                 .build()
         );
+    }
+
+    public SnowflakeQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
     }
 }

@@ -42,6 +42,11 @@ public class SetOperation extends Term implements Selectable, SqlAble {
         this.wrapperClass = wrapperClass;
     }
 
+    public SetOperation as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     public SetOperation orderBy(Field... fields) {
         return orderBy((OrderByEntry[]) Arrays.stream(fields).map(field -> new OrderByEntry(field, null)).toArray());
     }

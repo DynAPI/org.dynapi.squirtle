@@ -16,6 +16,12 @@ public class LiteralValue extends Term {
         this.literalValue = literalValue;
     }
 
+    public LiteralValue as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return Utils.formatAliasSql(literalValue, alias, config);

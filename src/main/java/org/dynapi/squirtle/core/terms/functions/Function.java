@@ -5,7 +5,6 @@ import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.FunctionSqlAble;
 import org.dynapi.squirtle.core.interfaces.SpecialParamsSqlAble;
-import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Schema;
 import org.dynapi.squirtle.core.queries.Table;
@@ -38,6 +37,12 @@ public class Function extends Criterion implements SpecialParamsSqlAble, Functio
         this.args = Arrays.stream(args).map(arg -> wrapConstant(arg, null)).toList();
         this.schema = schema;
     }
+
+    public Function as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
 
     @Override
     public List<Node> nodes() {

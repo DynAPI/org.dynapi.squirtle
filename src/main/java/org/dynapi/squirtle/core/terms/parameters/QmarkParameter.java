@@ -11,6 +11,11 @@ public class QmarkParameter extends Parameter {
         super("");
     }
 
+    public QmarkParameter as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return "?";

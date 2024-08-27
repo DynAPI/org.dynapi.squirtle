@@ -12,6 +12,11 @@ public class SQLiteValueWrapper extends ValueWrapper {
         super(value);
     }
 
+    public SQLiteValueWrapper as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getValueSql(Object value, SqlAbleConfig config) {
         if (value instanceof Boolean booleanValue) {

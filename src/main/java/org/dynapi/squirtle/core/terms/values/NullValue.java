@@ -8,4 +8,9 @@ public class NullValue extends LiteralValue {
     public NullValue() {
         super("NULL");
     }
+
+    public NullValue as(String alias) {
+        this.alias = alias;
+        return this;
+    }
 }

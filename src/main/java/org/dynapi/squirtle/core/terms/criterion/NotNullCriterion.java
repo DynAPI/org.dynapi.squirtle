@@ -13,6 +13,11 @@ public class NotNullCriterion extends NullCriterion {
         super(term);
     }
 
+    public NotNullCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         String sql = String.format(

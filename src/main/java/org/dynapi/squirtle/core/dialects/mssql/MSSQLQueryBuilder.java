@@ -4,7 +4,6 @@ import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.FetchNextAndOffsetRowsQueryBuilder;
 import org.dynapi.squirtle.core.queries.Query;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 import org.dynapi.squirtle.errors.QueryException;
 
 public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
@@ -31,6 +30,12 @@ public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
                 .build()
         );
     }
+
+    public MSSQLQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
 
     public MSSQLQueryBuilder top(int value, boolean percent, boolean withTies) {
         if (percent && !(0 <= value && value <= 100))

@@ -15,6 +15,11 @@ public class PseudoColumn extends Term implements SqlAble {
         this.name = name;
     }
 
+    public PseudoColumn as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return name;

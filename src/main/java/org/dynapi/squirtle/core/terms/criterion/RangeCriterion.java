@@ -27,6 +27,11 @@ public class RangeCriterion extends Criterion {
         this.end = end;
     }
 
+    public RangeCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();
