@@ -387,7 +387,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder orderBy(OrderByEntry... orderByEntries) {
-        return orderBy(List.of(orderByEntries), null);
+        return orderBy(List.of(orderByEntries));
     }
 
     public QueryBuilder orderBy(List<OrderByEntry> fields) {
