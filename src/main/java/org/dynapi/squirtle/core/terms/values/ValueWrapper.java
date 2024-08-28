@@ -26,6 +26,11 @@ public class ValueWrapper extends Term implements SqlAble {
         this.value = value;
     }
 
+    public ValueWrapper as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     public String getValueSql(Object value, SqlAbleConfig config) {
         return getFormattedValue(value, config);
     }

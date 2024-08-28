@@ -15,6 +15,12 @@ public class IgnoreNullsAnalyticFunction extends AnalyticFunction {
         this.ignoreNulls = false;
     }
 
+    public IgnoreNullsAnalyticFunction as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     public IgnoreNullsAnalyticFunction ignoreNulls() {
         return ignoreNulls(true);
     }

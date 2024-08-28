@@ -29,6 +29,11 @@ public class BasicCriterion extends Criterion {
         this.right = right;
     }
 
+    public BasicCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

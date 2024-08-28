@@ -1,6 +1,8 @@
 package org.dynapi.squirtle.core.dialects.mysql;
 
-import org.dynapi.squirtle.core.queries.*;
+import org.dynapi.squirtle.core.queries.Query;
+import org.dynapi.squirtle.core.queries.QueryBuilder;
+import org.dynapi.squirtle.core.queries.Table;
 
 public class MySQLQuery extends Query {
     @Override

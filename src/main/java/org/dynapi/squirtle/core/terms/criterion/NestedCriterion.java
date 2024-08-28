@@ -37,6 +37,11 @@ public class NestedCriterion extends Criterion {
         this.nested = nested;
     }
 
+    public NestedCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

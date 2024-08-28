@@ -13,6 +13,11 @@ public class Criterion extends Term implements CriterionOperations, SqlAble {
 
     public Criterion() {}
 
+    public Criterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public Criterion replaceTable(Table currentTable, Table newTable) {
         return (Criterion) super.replaceTable(currentTable, newTable);

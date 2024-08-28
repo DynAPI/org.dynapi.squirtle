@@ -19,6 +19,12 @@ public class ExistsCriterion extends Criterion {
         this.isNegated = false;
     }
 
+    public ExistsCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return String.format(

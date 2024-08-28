@@ -13,6 +13,11 @@ public class Rollup extends Function {
         super("ROLLUP", (Object[]) terms);
     }
 
+    public Rollup as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     public Rollup addArgs(Term... terms) {
         this.args.addAll(List.of(terms));
         return this;

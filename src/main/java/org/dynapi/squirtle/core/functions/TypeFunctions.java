@@ -23,6 +23,11 @@ public class TypeFunctions {
             this.asType = asType;
         }
 
+        public Cast as(String alias) {
+            this.alias = alias;
+            return this;
+        }
+
         @Override
         public String getSpecialParamsSql(SqlAbleConfig config) {
             String typeSql = (asType instanceof SqlAble)
@@ -45,6 +50,11 @@ public class TypeFunctions {
             this.encoding = encoding;
         }
 
+        public Convert as(String alias) {
+            this.alias = alias;
+            return this;
+        }
+
         @Override
         public String getSpecialParamsSql(SqlAbleConfig config) {
             return String.format("USING %s", encoding);
@@ -59,6 +69,11 @@ public class TypeFunctions {
         public ToChar(Term term, Object asType) {
             super("TO_CHAR", term, asType);
         }
+
+        public ToChar as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Signed extends Cast {
@@ -68,6 +83,11 @@ public class TypeFunctions {
 
         public Signed(Term term) {
             super(term, SqlType.SIGNED);
+        }
+
+        public Signed as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -79,6 +99,11 @@ public class TypeFunctions {
         public UnSigned(Term term) {
             super(term, SqlType.UNSIGNED);
         }
+
+        public UnSigned as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Date extends Function {
@@ -88,6 +113,11 @@ public class TypeFunctions {
 
         public Date(Term term) {
             super("DATE", term);
+        }
+
+        public Date as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -99,6 +129,11 @@ public class TypeFunctions {
         public DateDiff(Interval interval, String startDate, String endDate) {
             super("DATEDIFF", interval, startDate, endDate);
         }
+
+        public DateDiff as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class TimeDiff extends Function {
@@ -108,6 +143,11 @@ public class TypeFunctions {
 
         public TimeDiff(Interval interval, String startTime, String endTime) {
             super("DATEDIFF", interval, startTime, endTime);
+        }
+
+        public TimeDiff as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -119,6 +159,11 @@ public class TypeFunctions {
         public DateAdd(String datePart, Interval interval, Term term) {
             super("DATE_ADD", new LiteralValue(datePart), interval, term);
         }
+
+        public DateAdd as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class ToDate extends Function {
@@ -128,6 +173,11 @@ public class TypeFunctions {
 
         public ToDate(Object value, String formatMask) {
             super("TO_DATE", value, formatMask);
+        }
+
+        public ToDate as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -139,6 +189,11 @@ public class TypeFunctions {
         public Timestamp(Term term) {
             super("TIMESTAMP", term);
         }
+
+        public Timestamp as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class TimestampAdd extends Function {
@@ -148,6 +203,11 @@ public class TypeFunctions {
 
         public TimestampAdd(String datePart, Interval interval, String term) {
             super("TIMESTAMPADD", new LiteralValue(datePart), interval, term);
+        }
+
+        public TimestampAdd as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 }

@@ -11,6 +11,12 @@ public class NamedParameter extends Parameter {
         super(placeholder);
     }
 
+    public NamedParameter as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return String.format(":%s", placeholder);

@@ -72,6 +72,11 @@ public class Table implements Selectable, SqlAble {
         this.forPortion = null;
     }
 
+    public Table as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getTableName() {
         return alias != null ? alias : tableName;
@@ -116,8 +121,7 @@ public class Table implements Selectable, SqlAble {
         if (!(o instanceof Table table)) return false;
         if (!Objects.equals(tableName, table.tableName)) return false;
         if (!Objects.equals(schema, table.schema)) return false;
-        if (!Objects.equals(alias, table.alias)) return false;
-        return true;
+        return Objects.equals(alias, table.alias);
     }
 
     @Override

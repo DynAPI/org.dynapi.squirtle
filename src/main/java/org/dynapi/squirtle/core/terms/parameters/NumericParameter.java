@@ -11,6 +11,11 @@ public class NumericParameter extends Parameter {
         super(placeholder);
     }
 
+    public NumericParameter as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return String.format(":%s", placeholder);

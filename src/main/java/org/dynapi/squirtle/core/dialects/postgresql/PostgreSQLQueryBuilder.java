@@ -62,6 +62,11 @@ public class PostgreSQLQueryBuilder extends QueryBuilder {
         );
     }
 
+    public PostgreSQLQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     public PostgreSQLQueryBuilder distinctOn(Term... fields) {
         this.distinctOn.addAll(List.of(fields));
         return this;

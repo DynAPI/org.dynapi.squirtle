@@ -21,6 +21,11 @@ public class Values extends Term {
         this.field = field;
     }
 
+    public Values as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return String.format("VALUES(%s)", field.getSql(config));

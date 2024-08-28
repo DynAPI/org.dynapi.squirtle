@@ -11,6 +11,8 @@ public interface Selectable extends SqlAble, Node, AliasAble {
         return new Field(name, this);
     }
 
+    Selectable as(String alias);
+
     default Star asStar() {
         return new Star(this);
     }

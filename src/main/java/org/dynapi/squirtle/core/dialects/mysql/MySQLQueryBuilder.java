@@ -1,6 +1,5 @@
 package org.dynapi.squirtle.core.dialects.mysql;
 
-import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
@@ -8,7 +7,6 @@ import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.criterion.Field;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 import org.dynapi.squirtle.errors.QueryException;
 
 import java.util.*;
@@ -46,6 +44,12 @@ public class MySQLQueryBuilder extends QueryBuilder {
                 .build()
         );
     }
+
+    public MySQLQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
 
     public MySQLQueryBuilder forUpdate(boolean noWait, boolean skipLocked, Collection<String> of) {
         this.forUpdate = true;

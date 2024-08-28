@@ -22,6 +22,11 @@ public class Not extends Criterion {
         this.term = term;
     }
 
+    public Not as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

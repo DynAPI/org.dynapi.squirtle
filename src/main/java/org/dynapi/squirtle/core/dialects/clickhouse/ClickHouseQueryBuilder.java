@@ -5,7 +5,6 @@ import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,11 @@ public class ClickHouseQueryBuilder extends QueryBuilder {
                 .asKeyword(true)
                 .build()
         );
+    }
+
+    public ClickHouseQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
     }
 
     public ClickHouseQueryBuilder sample(@NonNull Integer sample, Integer offset) {

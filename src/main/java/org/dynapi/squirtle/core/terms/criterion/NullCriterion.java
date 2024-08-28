@@ -22,6 +22,11 @@ public class NullCriterion extends Criterion {
         this.term = term;
     }
 
+    public NullCriterion as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

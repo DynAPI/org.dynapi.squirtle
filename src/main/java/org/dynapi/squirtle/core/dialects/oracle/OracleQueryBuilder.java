@@ -4,7 +4,6 @@ import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.FetchNextAndOffsetRowsQueryBuilder;
 import org.dynapi.squirtle.core.queries.Query;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class OracleQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
     public String sqlAbleQuoteChar() { return null; }
@@ -23,6 +22,11 @@ public class OracleQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
                 .dialect(Dialects.ORACLE)
                 .build()
         );
+    }
+
+    public OracleQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
     }
 
     @Override

@@ -10,4 +10,9 @@ public class Bracket extends Tuple {
     public Bracket(Term term) {
         super(term);
     }
+
+    public Bracket as(String alias) {
+        this.alias = alias;
+        return this;
+    }
 }

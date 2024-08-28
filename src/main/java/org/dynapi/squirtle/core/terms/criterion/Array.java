@@ -19,6 +19,11 @@ public class Array extends Tuple {
         super(values);
     }
 
+    public Array as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         String argList = String.join(",", values.stream().map(value -> value.getSql(config)).toList());

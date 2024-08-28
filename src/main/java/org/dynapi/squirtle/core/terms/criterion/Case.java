@@ -26,6 +26,11 @@ public class Case extends Criterion {
         otherwise = null;
     }
 
+    public Case as(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();

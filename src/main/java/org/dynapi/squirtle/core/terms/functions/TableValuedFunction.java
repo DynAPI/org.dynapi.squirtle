@@ -22,4 +22,9 @@ public class TableValuedFunction extends Function implements Selectable {
     public TableValuedFunction(@NonNull String name, Schema schema, Object... args) {
         super(name, schema, args);
     }
+
+    public TableValuedFunction as(String alias) {
+        this.alias = alias;
+        return this;
+    }
 }

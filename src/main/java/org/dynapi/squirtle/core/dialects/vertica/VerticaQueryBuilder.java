@@ -4,7 +4,6 @@ import org.dynapi.squirtle.core.enums.Dialects;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.queries.Query;
 import org.dynapi.squirtle.core.queries.QueryBuilder;
-import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 
 public class VerticaQueryBuilder extends QueryBuilder {
     public Class<? extends Query> sqlAbleQueryClass() { return VerticaQuery.class; }
@@ -25,6 +24,11 @@ public class VerticaQueryBuilder extends QueryBuilder {
                 .dialect(Dialects.VERTICA)
                 .build()
         );
+    }
+
+    public VerticaQueryBuilder as(String alias) {
+        this.alias = alias;
+        return this;
     }
 
     public VerticaQueryBuilder hint(String label) {

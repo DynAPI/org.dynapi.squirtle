@@ -14,6 +14,11 @@ public class Arithmetic {
         public Sum(Object term) {
             super("SUM", term);
         }
+
+        public Sum as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Pow extends Function {
@@ -23,6 +28,11 @@ public class Arithmetic {
 
         public Pow(Term term, float exponent) {
             super("POW", term, exponent);
+        }
+
+        public Pow as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -34,6 +44,11 @@ public class Arithmetic {
         public Mod(Term term, float modulus) {
             super("MOD", term, modulus);
         }
+
+        public Mod as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Avg extends AggregateFunction {
@@ -43,6 +58,11 @@ public class Arithmetic {
 
         public Avg(Object term) {
             super("AVG", term);
+        }
+
+        public Avg as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -54,6 +74,11 @@ public class Arithmetic {
         public Min(Object term) {
             super("MIN", term);
         }
+
+        public Min as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Max extends AggregateFunction {
@@ -63,6 +88,11 @@ public class Arithmetic {
 
         public Max(Object term) {
             super("MAX", term);
+        }
+
+        public Max as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -74,6 +104,11 @@ public class Arithmetic {
         public Std(Object term) {
             super("STD", term);
         }
+
+        public Std as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class StdDev extends AggregateFunction {
@@ -83,6 +118,11 @@ public class Arithmetic {
 
         public StdDev(Object term) {
             super("STDDEV", term);
+        }
+
+        public StdDev as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -94,6 +134,11 @@ public class Arithmetic {
         public Abs(Object term) {
             super("ABS", term);
         }
+
+        public Abs as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class First extends AggregateFunction {
@@ -103,6 +148,11 @@ public class Arithmetic {
 
         public First(Object term) {
             super("FIRST", term);
+        }
+
+        public First as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -114,6 +164,11 @@ public class Arithmetic {
         public Last(Object term) {
             super("LAST", term);
         }
+
+        public Last as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Sqrt extends Function {
@@ -124,6 +179,11 @@ public class Arithmetic {
         public Sqrt(Object term) {
             super("SQRT", term);
         }
+
+        public Sqrt as(String alias) {
+            this.alias = alias;
+            return this;
+        }
     }
 
     public static class Floor extends Function {
@@ -133,6 +193,11 @@ public class Arithmetic {
 
         public Floor(Object term) {
             super("FLOOR", term);
+        }
+
+        public Floor as(String alias) {
+            this.alias = alias;
+            return this;
         }
     }
 
@@ -147,6 +212,11 @@ public class Arithmetic {
         public ApproximatePercentile(Term term, float percentile) {
             super("APPROXIMATE_PERCENTILE", term);
             this.percentile = percentile;
+        }
+
+        public ApproximatePercentile as(String alias) {
+            this.alias = alias;
+            return this;
         }
 
         @Override
