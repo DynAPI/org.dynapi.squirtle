@@ -364,6 +364,14 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return this;
     }
 
+    public QueryBuilder orderBy(String... fieldNames) {
+        return orderBy(fieldNames, null);
+    }
+
+    public QueryBuilder orderBy(Field... fields) {
+        return orderBy(fields, null);
+    }
+
     public QueryBuilder orderBy(Object... fields) {
         return orderBy(fields, null);
     }
@@ -376,6 +384,10 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
                         .map(field -> new OrderByEntry(field, order))
                         .toList()
         );
+    }
+
+    public QueryBuilder orderBy(OrderByEntry... orderByEntries) {
+        return orderBy(List.of(orderByEntries), null);
     }
 
     public QueryBuilder orderBy(List<OrderByEntry> fields) {
