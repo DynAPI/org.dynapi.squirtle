@@ -868,9 +868,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
                     : entry.field.getSql(config)
             );
 
-            clauses.add(
-                    String.format("%s %s", termSql, entry.order.value)
-            );
+            clauses.add(entry.order == null ? termSql : String.format("%s %s", termSql, entry.order.value));
         }
 
         return " ORDER BY " + String.join(",", clauses);
