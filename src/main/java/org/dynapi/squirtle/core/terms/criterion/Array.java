@@ -28,7 +28,8 @@ public class Array extends Tuple {
     public String getSql(SqlAbleConfig config) {
         String argList = String.join(",", values.stream().map(value -> value.getSql(config)).toList());
         String sql = String.format("[%s]", argList);
-        if (List.of(Dialects.POSTGRESQL, Dialects.REDSHIFT).contains(config.getDialect()))
+        Dialects dialect = config.getDialect();
+        if (dialect != null && List.of(Dialects.POSTGRESQL, Dialects.REDSHIFT).contains(dialect))
             sql = !values.isEmpty() ? String.format("ARRAY[%s]", argList) : "'{}'";
         return Utils.formatAliasSql(sql, alias, config);
     }
