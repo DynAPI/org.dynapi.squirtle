@@ -35,24 +35,15 @@ public class Utils {
 
     public static String formatQuotes(String value, String quote_char) {
         if (quote_char == null) return value;
-
-        return String.format("%s%s%s", quote_char, value, quote_char);
+        final String escapedValue = value.replace(quote_char, quote_char+quote_char);
+        return quote_char + escapedValue + quote_char;
     }
 
-    public static String formatAliasSql(
-            String sql,
-            String alias,
-            SqlAbleConfig config
-    ) {
+    public static String formatAliasSql(String sql, String alias, SqlAbleConfig config) {
         if (alias == null) return sql;
-
-        String aliasQuoteChar = config.getAliasQuoteChar();
-        return String.format(
-                "%s%s%s",
-                sql,
-                config.isAsKeyword() ? " AS " : " ",
-                formatQuotes(alias, aliasQuoteChar != null ? aliasQuoteChar : config.getQuoteChar())
-                );
+        final String asWord = config.isAsKeyword() ? " AS " : " ";
+        final String aliasWord = formatQuotes(alias, Objects.requireNonNullElse(config.getAliasQuoteChar(), config.getQuoteChar()));
+        return sql + asWord + aliasWord;
     }
 
     /**
