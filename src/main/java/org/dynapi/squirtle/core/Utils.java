@@ -33,12 +33,25 @@ public class Utils {
         return null;
     }
 
+    /**
+     * adds {@code quote_char} around {@code value} while also escaping {@code value} by doubling {@code quote_char} occurrences
+     * @param value string-value to quote
+     * @param quote_char quote-char to surround value with
+     * @return quoted value
+     */
     public static String formatQuotes(String value, String quote_char) {
         if (quote_char == null) return value;
         final String escapedValue = value.replace(quote_char, quote_char+quote_char);
         return quote_char + escapedValue + quote_char;
     }
 
+    /**
+     *
+     * @param sql sql-string
+     * @param alias (optional) alias to add
+     * @param config {@link SqlAbleConfig} to know how to format it
+     * @return alias-slq
+     */
     public static String formatAliasSql(String sql, String alias, SqlAbleConfig config) {
         if (alias == null) return sql;
         final String asWord = config.isAsKeyword() ? " AS " : " ";
@@ -70,8 +83,8 @@ public class Utils {
      * @return instance of {@code type}
      */
     public static<T> T newInstance(Class<T> type, Object[] initArgs) {
-        Class<?>[] argTypes = (Class<?>[]) Arrays.stream(initArgs).map(Object::getClass).toList().toArray(new Class[0]);
-        return newInstance(type, initArgs, argTypes);
+        Class<?>[] signature = (Class<?>[]) Arrays.stream(initArgs).map(Object::getClass).toList().toArray(new Class[0]);
+        return newInstance(type, initArgs, signature);
     }
 
     /**
