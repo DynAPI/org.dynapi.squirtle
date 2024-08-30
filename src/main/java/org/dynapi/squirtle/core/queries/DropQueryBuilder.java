@@ -78,10 +78,10 @@ public class DropQueryBuilder implements QueryBuilderAttributes, SqlAble {
         config = getSqlAbleConfigWithDefaults(config);
 
         String ifExistsSql = ifExists ? "IF EXISTS " : "";
-        String targetName = "";
+        String targetName;
 
-        if (dropTarget instanceof SqlAble)
-            targetName = ((SqlAble) dropTarget).getSql(config);
+        if (dropTarget instanceof SqlAble sqlAble)
+            targetName = sqlAble.getSql(config);
         else
             targetName = Utils.formatQuotes(dropTarget.toString(), config.getQuoteChar());
 

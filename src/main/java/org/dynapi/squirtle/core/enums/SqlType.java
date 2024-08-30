@@ -26,6 +26,13 @@ public class SqlType extends Enumerator implements SqlAble {
         super(value);
     }
 
+    /**
+     * gets the basic type. eg {@code VARCHAR} for {@code VARCHAR(10)} if it's of type {@link SqlTypeWithLength}
+     */
+    public String getType() {
+        return value;
+    }
+
     @Override
     public String getSql(SqlAbleConfig config) {
         return value;
