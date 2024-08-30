@@ -39,8 +39,8 @@ public class JSON extends Term {
             return getMappingSql(map, config);
         if (value instanceof List<?> list)
             return getListSql(list, config);
-        if (value instanceof String string)
-            return getStringSql(string, config);
+        if (value instanceof CharSequence charSequence)
+            return getStringSql(charSequence, config);
         return value.toString();
     }
 
@@ -64,8 +64,8 @@ public class JSON extends Term {
         return joiner.toString();
     }
 
-    private String getStringSql(String value, SqlAbleConfig config) {
-        return Utils.formatQuotes(value, config.getQuoteChar());
+    private String getStringSql(CharSequence value, SqlAbleConfig config) {
+        return Utils.formatQuotes(value.toString(), config.getQuoteChar());
     }
 
     @Override
