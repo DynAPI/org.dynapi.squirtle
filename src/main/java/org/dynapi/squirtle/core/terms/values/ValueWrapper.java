@@ -6,10 +6,10 @@ import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 import org.dynapi.squirtle.core.terms.Term;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.TimeZone;
 import java.util.UUID;
 
 public class ValueWrapper extends Term implements SqlAble {
@@ -38,23 +38,28 @@ public class ValueWrapper extends Term implements SqlAble {
     public static String getFormattedValue(Object value, SqlAbleConfig config) {
         String quoteChar = config.getSecondaryQuoteChar();
 
-        if (value instanceof Term)
-            return ((Term) value).getSql(config);
-        if (value instanceof Enum<?>)
-            return getFormattedValue(value.toString(), config);
-        if (value instanceof Date) {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset)
-            df.setTimeZone(TimeZone.getTimeZone("UTC"));
-            return getFormattedValue(df.format(value), config);
-        }
-        if (value instanceof String)
-            return Utils.formatQuotes(((String) value).replace(quoteChar, quoteChar+quoteChar), quoteChar);
-        if (value instanceof Boolean)
-            return (boolean) value ? "true" : "false";
-        if (value instanceof UUID)
-            return getFormattedValue(value.toString(), config);
         if (value == null)
             return "null";
+        if (value instanceof Term term)
+            return term.getSql(config);
+        // date and time
+        if (value instanceof LocalDateTime localDateTime)
+            return getFormattedValue(DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(localDateTime), config);
+        if (value instanceof Date date)
+            return getFormattedValue(DateTimeFormatter.ISO_INSTANT.format(date.toInstant()), config);
+        if (value instanceof Instant instant)
+            return getFormattedValue(DateTimeFormatter.ISO_INSTANT.format(instant), config);
+        // basic types
+        if (value instanceof CharSequence charSequence)
+            return Utils.formatQuotes(charSequence.toString(), quoteChar);
+        if (value instanceof Character character)
+            return Utils.formatQuotes(character.toString(), quoteChar);
+        if (value instanceof Boolean booleanValue)
+            return booleanValue ? "true" : "false";
+        if (value instanceof UUID uuid)
+            return getFormattedValue(uuid.toString(), config);
+        if (value instanceof Enum<?> enumValue)
+            return getFormattedValue(enumValue.toString(), config);
 
         return value.toString();
     }
