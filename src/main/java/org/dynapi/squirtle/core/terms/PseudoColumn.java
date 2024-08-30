@@ -3,6 +3,9 @@ package org.dynapi.squirtle.core.terms;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
+/**
+ * @see org.dynapi.squirtle.core.PseudoColumns
+ */
 public class PseudoColumn extends Term implements SqlAble {
     private final String name;
 

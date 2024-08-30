@@ -5,6 +5,12 @@ import org.dynapi.squirtle.core.terms.criterion.Index;
 
 import java.util.Collection;
 
+/**
+ * @see QueryBuilder
+ * @see CreateIndexBuilder
+ * @see CreateQueryBuilder
+ * @see DropQueryBuilder
+ */
 public class Query {
     protected Class<? extends QueryBuilder> getQueryBuilderClass() { return QueryBuilder.class; }
 

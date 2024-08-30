@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * internally used Utility methods
+ */
 public class Utils {
-
     /**
      * Resolves the is_aggregate flag for an expression that contains multiple terms.  This works like a voter system,
      * each term votes True or False or abstains with None.

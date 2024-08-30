@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * internally used Utility methods for cloning with the copy-constructor
+ */
 public class CloneUtils {
     /**
      * clones an instance with the copy-constructor of the class. <br>

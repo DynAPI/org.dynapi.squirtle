@@ -2,6 +2,10 @@ package org.dynapi.squirtle.core.queries;
 
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
+/**
+ * internal specialized class
+ * @see QueryBuilder
+ */
 public class FetchNextAndOffsetRowsQueryBuilder extends QueryBuilder {
     public FetchNextAndOffsetRowsQueryBuilder(FetchNextAndOffsetRowsQueryBuilder original) {
         super(original);

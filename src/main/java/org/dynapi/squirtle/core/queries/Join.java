@@ -7,6 +7,10 @@ import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
 import java.util.Collection;
 
+/**
+ * @see JoinOn
+ * @see JoinUsing
+ */
 public class Join implements SqlAble {
     protected Selectable item;
     protected JoinType how;
