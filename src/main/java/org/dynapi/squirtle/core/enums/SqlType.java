@@ -3,7 +3,7 @@ package org.dynapi.squirtle.core.enums;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
 
-public class SqlType extends Enumerator {
+public class SqlType extends Enumerator implements SqlAble {
     public final static SqlType BOOLEAN = new SqlType("BOOLEAN");
     public final static SqlType INTEGER = new SqlType("INTEGER");
     public final static SqlType FLOAT = new SqlType("FLOAT");
@@ -26,6 +26,11 @@ public class SqlType extends Enumerator {
         super(value);
     }
 
+    @Override
+    public String getSql(SqlAbleConfig config) {
+        return value;
+    }
+
     public static class SqlTypesLengthAble extends SqlType implements SqlAble {
         public SqlTypesLengthAble(String value) {
             super(value);
@@ -34,13 +39,7 @@ public class SqlType extends Enumerator {
         public SqlTypeWithLength withLength(int length) {
             return new SqlTypeWithLength(value, length);
         }
-
-        @Override
-        public String getSql(SqlAbleConfig config) {
-            return value;
-        }
     }
-
 
     public static class SqlTypeWithLength extends SqlType implements SqlAble {
         protected final int length;
