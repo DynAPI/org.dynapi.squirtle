@@ -41,6 +41,7 @@ public class MSSQLQueryBuilder extends FetchNextAndOffsetRowsQueryBuilder {
         if (percent && !(0 <= value && value <= 100))
             throw new QueryException("TOP value must be between 0 and 100 when `pecent` is specified");
 
+        this.top = value;
         this.topPercent = percent;
         this.topWithTies = withTies;
         return this;

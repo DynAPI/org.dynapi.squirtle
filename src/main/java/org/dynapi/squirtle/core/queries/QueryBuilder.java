@@ -156,11 +156,10 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         this.from.add(selectable);
 
         if ((selectable instanceof QueryBuilder) || (selectable instanceof SetOperation) && selectable.getAlias() == null) {
-            int subQueryCount;
-            if (selectable instanceof QueryBuilder) subQueryCount = ((QueryBuilder) selectable).subqueryCount;
-            else subQueryCount = 0;
-
-            subQueryCount = Math.max(this.subqueryCount, subQueryCount);
+            int subQueryCount = Math.max(
+                    this.subqueryCount,
+                    (selectable instanceof QueryBuilder queryBuilder) ? queryBuilder.subqueryCount : 0
+            );
             selectable.setAlias(String.format("sq%d", subQueryCount));
             this.subqueryCount = subQueryCount;
         }
