@@ -57,7 +57,9 @@ public class Utils {
     public static String formatAliasSql(String sql, String alias, SqlAbleConfig config) {
         if (alias == null) return sql;
         final String asWord = config.isAsKeyword() ? " AS " : " ";
-        final String aliasWord = formatQuotes(alias, Objects.requireNonNullElse(config.getAliasQuoteChar(), config.getQuoteChar()));
+        final String aliasQuoteChar = config.getAliasQuoteChar();
+        final String quoteChar = (aliasQuoteChar != null) ? aliasQuoteChar : config.getQuoteChar();
+        final String aliasWord = formatQuotes(alias, quoteChar);
         return sql + asWord + aliasWord;
     }
 
