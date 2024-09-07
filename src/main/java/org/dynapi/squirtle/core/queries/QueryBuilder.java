@@ -21,6 +21,7 @@ import org.dynapi.squirtle.core.terms.values.ValueWrapper;
 import org.dynapi.squirtle.errors.QueryException;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class QueryBuilder extends Term implements QueryBuilderAttributes, Selectable, FinalSqlAble {
     public String sqlAbleQuoteChar() { return "\""; }
@@ -229,43 +230,55 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return this;
     }
 
-    public QueryBuilder columns(Object... terms) {
+    public QueryBuilder columns(String... fieldNames) {
+        return columns(Stream.of(fieldNames).map(fieldName -> (SqlAble) new Field(fieldName, insertTable)).toList());
+    }
+
+    public QueryBuilder columns(SqlAble... terms) {
+        return columns(Arrays.asList(terms));
+    }
+
+    public QueryBuilder columns(Collection<SqlAble> terms) {
         if (insertTable != null)
             throw new RuntimeException("'columns' method is no longer available");
 
-        for (Object term : terms) {
-            if (term instanceof String fieldName)
-                term = new Field(fieldName, insertTable);
-            columns.add((SqlAble) term);
-        }
+        columns.addAll(terms);
         return this;
     }
 
     public QueryBuilder insert(Object... terms) {
-        applyTerm(List.of(terms));
+        return insert(Arrays.asList(terms));
+    }
+
+    public QueryBuilder insert(Collection<Object> terms) {
+        applyTerm(terms);
         replace = false;
         return this;
     }
 
-    public QueryBuilder forceIndex(Object... terms) {
-        for (Object term : terms) {
-            if (term instanceof Index index) {
-                forceIndexes.add(index);
-            } else if (term instanceof String indexName) {
-                forceIndexes.add(new Index(indexName));
-            }
-        }
+    public QueryBuilder forceIndex(String... indexNames) {
+        return forceIndex(Stream.of(indexNames).map(Index::new).toList());
+    }
+
+    public QueryBuilder forceIndex(Index... indices) {
+        return forceIndex(Arrays.asList(indices));
+    }
+
+    public QueryBuilder forceIndex(Collection<Index> indices) {
+        forceIndexes.addAll(indices);
         return this;
     }
 
-    public QueryBuilder useIndex(Object... terms) {
-        for (Object term : terms) {
-            if (term instanceof Index index) {
-                useIndexes.add(index);
-            } else if (term instanceof String indexName) {
-                useIndexes.add(new Index(indexName));
-            }
-        }
+    public QueryBuilder useIndex(String... indexNames) {
+        return useIndex(Stream.of(indexNames).map(Index::new).toList());
+    }
+
+    public QueryBuilder useIndex(Index... indices) {
+        return useIndex(Arrays.asList(indices));
+    }
+
+    public QueryBuilder useIndex(Collection<Index> indices) {
+        useIndexes.addAll(indices);
         return this;
     }
 
@@ -321,15 +334,21 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return this;
     }
 
-    public QueryBuilder groupBy(Object... terms) {
-        for (Object term : terms) {
-            if (term instanceof String fieldName)
-                term = new Field(fieldName, from.get(0));
-            else if (term instanceof Integer fieldIndex)
-                term = Term.wrapConstant(fieldIndex);
+    public QueryBuilder groupBy(String... fieldNames) {
+        Selectable table = from.get(0);
+        return groupBy(Stream.of(fieldNames).map(name -> (Term) new Field(name, table)).toList());
+    }
 
-            groupBys.add((Term) term);
-        }
+    public QueryBuilder groupBy(Integer... fieldIndices) {
+        return groupBy(Stream.of(fieldIndices).map(Term::wrapConstant).toList());
+    }
+
+    public QueryBuilder groupBy(Term... terms) {
+        return groupBy(Arrays.asList(terms));
+    }
+
+    public QueryBuilder groupBy(Collection<Term> terms) {
+        groupBys.addAll(terms);
         return this;
     }
 
@@ -354,7 +373,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
                 throw new RuntimeException("At least one group is required. Call Query.groupby(term) or pass as parameter to rollup.");
 
             mySqlRollup = true;
-            groupBys.addAll(List.of(terms));
+            groupBys.addAll(Arrays.asList(terms));
         } else if (!groupBys.isEmpty() && groupBys.get(groupBys.size()-1) instanceof Rollup rollup) {
             rollup.addArgs(terms);
         } else {
@@ -376,20 +395,28 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder orderBy(Object[] fields, Order order) {
+        return orderBy(Arrays.asList(fields), order);
+    }
+
+    public QueryBuilder orderBy(Collection<Object> fields, Order order) {
         return orderBy(
-                Arrays
-                        .stream(fields)
-                        .map(field -> field instanceof String fieldName ? new Field(fieldName, from.get(0)) : wrapConstant(field))
-                        .map(field -> new OrderByEntry(field, order))
+                fields
+                        .stream()
+                        .map(field -> new OrderByEntry(
+                                field instanceof String fieldName
+                                        ? new Field(fieldName, from.get(0))
+                                        : wrapConstant(field),
+                                order
+                        ))
                         .toList()
         );
     }
 
     public QueryBuilder orderBy(OrderByEntry... orderByEntries) {
-        return orderBy(List.of(orderByEntries));
+        return orderBy(Arrays.asList(orderByEntries));
     }
 
-    public QueryBuilder orderBy(List<OrderByEntry> fields) {
+    public QueryBuilder orderBy(Collection<OrderByEntry> fields) {
         orderBys.addAll(fields);
         return this;
     }
@@ -560,7 +587,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         subqueryCount += 1;
     }
 
-    protected void applyTerm(List<Object> values) {
+    protected void applyTerm(Collection<Object> values) {
         if (insertTable == null)
             throw new RuntimeException("this is currently not available");
 
@@ -872,10 +899,11 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         for (Term s : selects)
             selectedAliases.add(s.getAlias());
 
+        String aliasQuoteChar = config.getAliasQuoteChar();
         for (OrderByEntry entry : orderBys) {
             String termSql = (
                     config.isOrderByAlias() && entry.field.getAlias() != null && selectedAliases.contains(entry.field.getAlias())
-                    ? Utils.formatQuotes(entry.field.getAlias(), config.getAliasQuoteChar() != null ? config.getAliasQuoteChar() : config.getQuoteChar())
+                    ? Utils.formatQuotes(entry.field.getAlias(), aliasQuoteChar != null ? aliasQuoteChar : config.getQuoteChar())
                     : entry.field.getSql(config)
             );
 
