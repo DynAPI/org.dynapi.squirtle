@@ -231,14 +231,18 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
     }
 
     public QueryBuilder columns(String... fieldNames) {
-        return columns(Stream.of(fieldNames).map(fieldName -> (SqlAble) new Field(fieldName, insertTable)).toList());
+        return columns(
+                Stream.of(fieldNames)
+                        .map(fieldName -> new Field(fieldName, insertTable))
+                        .toList()
+        );
     }
 
     public QueryBuilder columns(SqlAble... terms) {
         return columns(Arrays.asList(terms));
     }
 
-    public QueryBuilder columns(Collection<SqlAble> terms) {
+    public QueryBuilder columns(Collection<? extends SqlAble> terms) {
         if (insertTable != null)
             throw new RuntimeException("'columns' method is no longer available");
 
@@ -347,7 +351,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return groupBy(Arrays.asList(terms));
     }
 
-    public QueryBuilder groupBy(Collection<Term> terms) {
+    public QueryBuilder groupBy(Collection<? extends Term> terms) {
         groupBys.addAll(terms);
         return this;
     }
@@ -502,7 +506,7 @@ public class QueryBuilder extends Term implements QueryBuilderAttributes, Select
         return this;
     }
 
-    protected List<String> listAliases(Collection<Field> fieldSet, String quoteChar) {
+    protected List<String> listAliases(Collection<? extends Field> fieldSet, String quoteChar) {
         SqlAbleConfig config = SqlAbleConfig.builder().quoteChar(quoteChar).build();
         return fieldSet.stream().map(field -> field.getAlias() != null ? field.getAlias() : field.getSql(config)).toList();
     }
