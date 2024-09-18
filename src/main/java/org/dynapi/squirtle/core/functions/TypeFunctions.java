@@ -18,6 +18,10 @@ public class TypeFunctions {
             this.asType = original.asType;
         }
 
+        public Cast(Term term, String asType) {
+            this(term, new SqlType(asType));
+        }
+
         public Cast(Term term, SqlType asType) {
             super("CAST", term);
             this.asType = asType;
@@ -30,10 +34,7 @@ public class TypeFunctions {
 
         @Override
         public String getSpecialParamsSql(SqlAbleConfig config) {
-            String typeSql = (asType instanceof SqlAble)
-                ? ((SqlAble) asType).getSql(config)
-                : asType.toString().toUpperCase();
-            return String.format("AS %s", typeSql);
+            return "AS " + asType.getSql(config);
         }
     }
 
