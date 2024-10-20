@@ -5,6 +5,7 @@ import org.dynapi.squirtle.core.CloneUtils;
 import org.dynapi.squirtle.core.Utils;
 import org.dynapi.squirtle.core.interfaces.SqlAble;
 import org.dynapi.squirtle.core.interfaces.SqlAbleConfig;
+import org.dynapi.squirtle.core.queries.ArrayAccess;
 import org.dynapi.squirtle.core.queries.Selectable;
 import org.dynapi.squirtle.core.queries.Table;
 import org.dynapi.squirtle.core.terms.Node;
@@ -38,7 +39,6 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
         return this;
     }
 
-
     @Override
     public List<Node> nodes() {
         List<Node> nodes = new ArrayList<>();
@@ -53,6 +53,21 @@ public class Field extends JSON implements CriterionOperations, SqlAble {
         if (table == currentTable)
             table = newTable;
         return this;
+    }
+
+    /**
+     * <pre>{@code
+     * String sql = table.field("name")
+     *      .arrayAccess()
+     *      .all()
+     *      .subArrayAccess()
+     *      .sliced(2, 3);
+     *      .getSql();  // array[:][2:3]
+     * }</pre>
+     * @return {@link ArrayAccess} to access elements of an array
+     */
+    public ArrayAccess arrayAccess() {
+        return new ArrayAccess(this);
     }
 
     @Override

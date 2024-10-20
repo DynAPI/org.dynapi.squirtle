@@ -21,7 +21,6 @@ public class Index extends Term {
         return this;
     }
 
-
     @Override
     public String getSql(SqlAbleConfig config) {
         return Utils.formatQuotes(name, config.getQuoteChar());
